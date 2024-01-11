@@ -1,0 +1,61 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body {
+  background-color: #f5f7fa;
+}
+
+.nav--container {
+  font-family: "Montserrat";
+}
+
+.navbar-brand-aria {
+  font-weight: 800;
+  font-size: 3rem;
+}
+
+.nav-item {
+  /* margin-right: 5vw; */
+  font-family: "DM Sans";
+  cursor: pointer;
+}
+
+.navbar-toggler-icon {
+  color: "white";
+}
+
+.nav-link {
+  font-size: 2rem;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+li {
+  margin: 5px;
+}
+
+.error {
+  animation: shake 0.2s ease-in-out 0s 2;
+  box-shadow: 0 0 1em red;
+}
+
+@keyframes shake {
+  0% {
+    margin-left: 0rem;
+  }
+  25% {
+    margin-left: 0.5rem;
+  }
+  75% {
+    margin-left: -0.5rem;
+  }
+  100% {
+    margin-left: 0rem;
+  }
+}
