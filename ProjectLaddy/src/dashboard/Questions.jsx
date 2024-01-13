@@ -1,33 +1,40 @@
 import {
+  Button,
   FormControl,
   FormControlLabel,
   Radio,
   RadioGroup,
   Divider,
+  TextField,
 } from "@mui/material";
 import { useState } from "react";
 
 export default function Questions() {
   const [consentAnswer, setGivenConsent] = useState("yes");
-  const [commStyle, setCommStyle] = useState("");
-  const [feedbackGiving, setFeedbackGiving] = useState("");
-  const [feedbackReceiving, setFeedbackReceiving] = useState("");
-  const [workingHours, setWorkingHours] = useState("");
-  const [meetingHours, setMeetingHours] = useState("");
-  const [workingApproach, setWorkingApproach] = useState("");
-  const [manageDeadlines, setManageDeadlines] = useState("");
-  const [workConsistency, setWorkConsistency] = useState("");
-  const [timeCommittment, setTimeCommittment] = useState("");
-  const [meetingStyle, setMeetingStyle] = useState("");
-  const [meetingFrequency, setMeetingFrequency] = useState("");
-  const [mistakeHandling, setMistakeHandling] = useState("");
-  const [adaptingComfort, setAdaptingComfort] = useState("");
-  const [effectiveCommunication, setEffectiveCommunication] = useState("");
-  const [initiatingConvo, setInitiatingConvo] = useState("");
-  const [initiatingFrequency, setInitiatingFrequency] = useState("");
-  const [challengePreference, setChallengePreference] = useState("");
-  const [exploringComfort, setExploringComfort] = useState("");
-  const [conflictManagement, setConflictManagement] = useState("");
+  const [gender, setGender] = useState(null);
+  const [commStyle, setCommStyle] = useState(0);
+  const [feedbackGiving, setFeedbackGiving] = useState(null);
+  const [feedbackReceiving, setFeedbackReceiving] = useState(null);
+  const [workingHours, setWorkingHours] = useState(null);
+  const [meetingHours, setMeetingHours] = useState(null);
+  const [workingApproach, setWorkingApproach] = useState(null);
+  const [manageDeadlines, setManageDeadlines] = useState(null);
+  const [workConsistency, setWorkConsistency] = useState(null);
+  const [timeCommittment, setTimeCommittment] = useState(null);
+  const [meetingStyle, setMeetingStyle] = useState(null);
+  const [meetingFrequency, setMeetingFrequency] = useState(null);
+  const [mistakeHandling, setMistakeHandling] = useState(null);
+  const [adaptingComfort, setAdaptingComfort] = useState(null);
+  const [effectiveCommunication, setEffectiveCommunication] = useState(null);
+  const [initiatingConvo, setInitiatingConvo] = useState(null);
+  const [initiatingFrequency, setInitiatingFrequency] = useState(null);
+  const [challengePreference, setChallengePreference] = useState(null);
+  const [exploringComfort, setExploringComfort] = useState(null);
+  const [conflictManagement, setConflictManagement] = useState(null);
+
+  function submitQuestionnaire(e) {
+    e.preventDefault();
+  }
 
   return (
     <div
@@ -43,24 +50,6 @@ export default function Questions() {
           LADDY's Impact Experience Project on Group Matchmaking?{" "}
         </div>
         <br />
-        {/* <fieldset>
-          <legend>Select a maintenance drone:</legend>
-
-          <div>
-            <input type="radio" id="huey" name="drone" value="huey" checked />
-            <label for="huey">Huey</label>
-          </div>
-
-          <div>
-            <input type="radio" id="dewey" name="drone" value="dewey" />
-            <label for="dewey">Dewey</label>
-          </div>
-
-          <div>
-            <input type="radio" id="louie" name="drone" value="louie" />
-            <label for="louie">Louie</label>
-          </div>
-        </fieldset> */}
         <FormControl>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
@@ -92,6 +81,56 @@ export default function Questions() {
       <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
       <br />
       <div style={{ textAlign: "left" }}>
+        <div>Major</div>
+        <br />
+        <TextField id="userMajor" fullWidth />
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>Gender</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue={commStyle}
+            name="Question 3"
+          >
+            <FormControlLabel
+              checked={gender == 0}
+              onClick={(e) => {
+                setGender(e.target.value);
+              }}
+              value={0}
+              control={<Radio />}
+              label="Male"
+            />
+            <FormControlLabel
+              checked={gender == 1}
+              onClick={(e) => {
+                setGender(e.target.value);
+              }}
+              value={1}
+              control={<Radio />}
+              label="Female"
+            />
+            <FormControlLabel
+              checked={gender == 0.5}
+              onClick={(e) => {
+                setGender(e.target.value);
+              }}
+              value={0.5}
+              control={<Radio />}
+              label="Other"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
         <FormControl>
           <div>
             What is your preferred communication style within a professional
@@ -104,29 +143,29 @@ export default function Questions() {
             name="Question 2"
           >
             <FormControlLabel
-              checked={commStyle == "assertive"}
+              checked={commStyle == 0}
               onClick={(e) => {
                 setCommStyle(e.target.value);
               }}
-              value="assertive"
+              value={0}
               control={<Radio />}
               label="Assertive"
             />
             <FormControlLabel
-              checked={commStyle == "collaborative"}
+              checked={commStyle == 0.5}
               onClick={(e) => {
                 setCommStyle(e.target.value);
               }}
-              value="collaborative"
+              value={0.5}
               control={<Radio />}
               label="Collaborative"
             />
             <FormControlLabel
-              checked={commStyle == "avoidant"}
+              checked={commStyle == 1}
               onClick={(e) => {
                 setCommStyle(e.target.value);
               }}
-              value="avoidant"
+              value={1}
               control={<Radio />}
               label="Avoidant"
             />
@@ -151,20 +190,20 @@ export default function Questions() {
             name="Question 3"
           >
             <FormControlLabel
-              checked={feedbackGiving == "negative"}
+              checked={feedbackGiving == 0}
               onClick={(e) => {
                 setFeedbackGiving(e.target.value);
               }}
-              value="negative"
+              value={0}
               control={<Radio />}
               label="Negative feedback"
             />
             <FormControlLabel
-              checked={feedbackGiving == "positive"}
+              checked={feedbackGiving == 1}
               onClick={(e) => {
                 setFeedbackGiving(e.target.value);
               }}
-              value="positive"
+              value={1}
               control={<Radio />}
               label="Positive feedback"
             />
@@ -193,20 +232,20 @@ export default function Questions() {
             name="Question 4"
           >
             <FormControlLabel
-              checked={feedbackReceiving == "negative"}
+              checked={feedbackReceiving == 0}
               onClick={(e) => {
                 setFeedbackReceiving(e.target.value);
               }}
-              value="negative"
+              value={0}
               control={<Radio />}
               label="Negative feedback"
             />
             <FormControlLabel
-              checked={feedbackReceiving == "positive"}
+              checked={feedbackReceiving == 1}
               onClick={(e) => {
                 setFeedbackReceiving(e.target.value);
               }}
-              value="positive"
+              value={1}
               control={<Radio />}
               label="Positive feedback"
             />
@@ -235,20 +274,20 @@ export default function Questions() {
             name="Question 5"
           >
             <FormControlLabel
-              checked={workingHours == "early_bird"}
+              checked={workingHours == 0}
               onClick={(e) => {
                 setWorkingHours(e.target.value);
               }}
-              value="early_bird"
+              value={0}
               control={<Radio />}
               label="Early Bird"
             />
             <FormControlLabel
-              checked={workingHours == "night_owl"}
+              checked={workingHours == 1}
               onClick={(e) => {
                 setWorkingHours(e.target.value);
               }}
-              value="night_owl"
+              value={1}
               control={<Radio />}
               label="Night owl"
             />
@@ -270,20 +309,20 @@ export default function Questions() {
             name="Question 6"
           >
             <FormControlLabel
-              checked={meetingHours == "morning"}
+              checked={meetingHours == 0}
               onClick={(e) => {
                 setMeetingHours(e.target.value);
               }}
-              value="morning"
+              value={0}
               control={<Radio />}
               label="Morning"
             />
             <FormControlLabel
-              checked={meetingHours == "evening_night"}
+              checked={meetingHours == 1}
               onClick={(e) => {
                 setMeetingHours(e.target.value);
               }}
-              value="evening_night"
+              value={1}
               control={<Radio />}
               label="Evening / Night"
             />
@@ -305,20 +344,20 @@ export default function Questions() {
             name="Question 7"
           >
             <FormControlLabel
-              checked={workingApproach == "do_first"}
+              checked={workingApproach == 0}
               onClick={(e) => {
                 setWorkingApproach(e.target.value);
               }}
-              value="do_first"
+              value={0}
               control={<Radio />}
               label="Do first, think later"
             />
             <FormControlLabel
-              checked={workingApproach == "plan_first"}
+              checked={workingApproach == 1}
               onClick={(e) => {
                 setWorkingApproach(e.target.value);
               }}
-              value="plan_first"
+              value={1}
               control={<Radio />}
               label="Plan first, do later"
             />
@@ -341,47 +380,47 @@ export default function Questions() {
             name="Question 8"
           >
             <FormControlLabel
-              checked={manageDeadlines == "very_poor"}
+              checked={manageDeadlines == 0}
               onClick={(e) => {
                 setManageDeadlines(e.target.value);
               }}
-              value="very_poor"
+              value={0}
               control={<Radio />}
               label="1 - Very poor"
             />
             <FormControlLabel
-              checked={manageDeadlines == "poor"}
+              checked={manageDeadlines == 0.25}
               onClick={(e) => {
                 setManageDeadlines(e.target.value);
               }}
-              value="poor"
+              value={0.25}
               control={<Radio />}
               label="2 - Poor"
             />
             <FormControlLabel
-              checked={manageDeadlines == "average"}
+              checked={manageDeadlines == 0.5}
               onClick={(e) => {
                 setManageDeadlines(e.target.value);
               }}
-              value="average"
+              value={0.5}
               control={<Radio />}
               label="3 - Average"
             />
             <FormControlLabel
-              checked={manageDeadlines == "very_good"}
+              checked={manageDeadlines == 0.75}
               onClick={(e) => {
                 setManageDeadlines(e.target.value);
               }}
-              value="very_good"
+              value={0.75}
               control={<Radio />}
               label="4 - Very good"
             />
             <FormControlLabel
-              checked={manageDeadlines == "excellent"}
+              checked={manageDeadlines == 1}
               onClick={(e) => {
                 setManageDeadlines(e.target.value);
               }}
-              value="excellent"
+              value={1}
               control={<Radio />}
               label="5 - Excellent"
             />
@@ -400,20 +439,20 @@ export default function Questions() {
             name="Question 9"
           >
             <FormControlLabel
-              checked={workConsistency == "consistent"}
+              checked={workConsistency == 0}
               onClick={(e) => {
                 setWorkConsistency(e.target.value);
               }}
-              value="consistent"
+              value={0}
               control={<Radio />}
               label="Work consistently"
             />
             <FormControlLabel
-              checked={workConsistency == "burst"}
+              checked={workConsistency == 1}
               onClick={(e) => {
                 setWorkConsistency(e.target.value);
               }}
-              value="burst"
+              value={1}
               control={<Radio />}
               label="Bursts of effort"
             />
@@ -435,56 +474,56 @@ export default function Questions() {
             name="Question 10"
           >
             <FormControlLabel
-              checked={timeCommittment == "less_than_2"}
+              checked={timeCommittment == 0}
               onClick={(e) => {
                 setTimeCommittment(e.target.value);
               }}
-              value="less_than_2"
+              value={0}
               control={<Radio />}
               label="Less than 2 hours"
             />
             <FormControlLabel
-              checked={timeCommittment == "two_four"}
+              checked={timeCommittment == 0.2}
               onClick={(e) => {
                 setTimeCommittment(e.target.value);
               }}
-              value="two_four"
+              value={0.2}
               control={<Radio />}
               label="2-4 hours"
             />
             <FormControlLabel
-              checked={timeCommittment == "four_six"}
+              checked={timeCommittment == 0.4}
               onClick={(e) => {
                 setTimeCommittment(e.target.value);
               }}
-              value="four_six"
+              value={0.4}
               control={<Radio />}
               label="4-6 hours"
             />
             <FormControlLabel
-              checked={timeCommittment == "six_eight"}
+              checked={timeCommittment == 0.6}
               onClick={(e) => {
                 setTimeCommittment(e.target.value);
               }}
-              value="six_eight"
+              value={0.6}
               control={<Radio />}
               label="6-8 hours"
             />
             <FormControlLabel
-              checked={timeCommittment == "eight_ten"}
+              checked={timeCommittment == 0.8}
               onClick={(e) => {
                 setTimeCommittment(e.target.value);
               }}
-              value="eight_ten"
+              value={0.8}
               control={<Radio />}
               label="8-10 hours"
             />
             <FormControlLabel
-              checked={timeCommittment == "more_than_ten"}
+              checked={timeCommittment == 1}
               onClick={(e) => {
                 setTimeCommittment(e.target.value);
               }}
-              value="more_than_ten"
+              value={1}
               control={<Radio />}
               label="More than 10 hours"
             />
@@ -503,29 +542,29 @@ export default function Questions() {
             name="Question 11"
           >
             <FormControlLabel
-              checked={meetingStyle == "in_person"}
+              checked={meetingStyle == 0}
               onClick={(e) => {
                 setMeetingStyle(e.target.value);
               }}
-              value="in_person"
+              value={0}
               control={<Radio />}
               label="In Person meetings"
             />
             <FormControlLabel
-              checked={meetingStyle == "online"}
+              checked={meetingStyle == 1}
               onClick={(e) => {
                 setMeetingStyle(e.target.value);
               }}
-              value="online"
+              value={1}
               control={<Radio />}
               label="Online meetings"
             />
             <FormControlLabel
-              checked={meetingStyle == "hybrid"}
+              checked={meetingStyle == 0.5}
               onClick={(e) => {
                 setMeetingStyle(e.target.value);
               }}
-              value="hybrid"
+              value={0.5}
               control={<Radio />}
               label="Hybrid meetings"
             />
@@ -544,47 +583,47 @@ export default function Questions() {
             name="Question 12"
           >
             <FormControlLabel
-              checked={meetingFrequency == "minimal"}
+              checked={meetingFrequency == 0}
               onClick={(e) => {
                 setMeetingFrequency(e.target.value);
               }}
-              value="minimal"
+              value={0}
               control={<Radio />}
               label="As minimal as possible"
             />
             <FormControlLabel
-              checked={meetingFrequency == "weekly"}
+              checked={meetingFrequency == 0.25}
               onClick={(e) => {
                 setMeetingFrequency(e.target.value);
               }}
-              value="weekly"
+              value={0.25}
               control={<Radio />}
               label="Once every week"
             />
             <FormControlLabel
-              checked={meetingFrequency == "biweekly"}
+              checked={meetingFrequency == 0.5}
               onClick={(e) => {
                 setMeetingFrequency(e.target.value);
               }}
-              value="biweekly"
+              value={0.5}
               control={<Radio />}
               label="Once every 2 weeks"
             />
             <FormControlLabel
-              checked={meetingFrequency == "twice_a_week"}
+              checked={meetingFrequency == 0.75}
               onClick={(e) => {
                 setMeetingFrequency(e.target.value);
               }}
-              value="twice_a_week"
+              value={0.75}
               control={<Radio />}
               label="Twice a week"
             />
             <FormControlLabel
-              checked={meetingFrequency == "more_than_twice"}
+              checked={meetingFrequency == 1}
               onClick={(e) => {
                 setMeetingFrequency(e.target.value);
               }}
-              value="more_than_twice"
+              value={1}
               control={<Radio />}
               label="More than twice a week"
             />
@@ -603,47 +642,47 @@ export default function Questions() {
             name="Question 13"
           >
             <FormControlLabel
-              checked={mistakeHandling == "private"}
+              checked={mistakeHandling == 0}
               onClick={(e) => {
                 setMistakeHandling(e.target.value);
               }}
-              value="private"
+              value={0}
               control={<Radio />}
               label="Keep it to yourself"
             />
             <FormControlLabel
-              checked={mistakeHandling == "pm"}
+              checked={mistakeHandling == 0.25}
               onClick={(e) => {
                 setMistakeHandling(e.target.value);
               }}
-              value="pm"
+              value={0.25}
               control={<Radio />}
               label="PM the person who made the mistake"
             />
             <FormControlLabel
-              checked={mistakeHandling == "pm_third"}
+              checked={mistakeHandling == 0.5}
               onClick={(e) => {
                 setMistakeHandling(e.target.value);
               }}
-              value="pm_third"
+              value={0.5}
               control={<Radio />}
               label="PM someone who you trust to correct the mistake"
             />
             <FormControlLabel
-              checked={mistakeHandling == "openly_positive"}
+              checked={mistakeHandling == 0.75}
               onClick={(e) => {
                 setMistakeHandling(e.target.value);
               }}
-              value="openly_positive"
+              value={0.75}
               control={<Radio />}
               label="Openly point it out in the form of constructive criticism"
             />
             <FormControlLabel
-              checked={mistakeHandling == "openly_negative"}
+              checked={mistakeHandling == 1}
               onClick={(e) => {
                 setMistakeHandling(e.target.value);
               }}
-              value="openly_negative"
+              value={1}
               control={<Radio />}
               label="Openly point out the mistake and charge the person to rectify it immediately"
             />
@@ -707,47 +746,47 @@ export default function Questions() {
             name="Question 14"
           >
             <FormControlLabel
-              checked={adaptingComfort == "very_uncomfortable"}
+              checked={adaptingComfort == 0}
               onClick={(e) => {
                 setAdaptingComfort(e.target.value);
               }}
-              value="very_uncomfortable"
+              value={0}
               control={<Radio />}
               label="1 - Very uncomfortable"
             />
             <FormControlLabel
-              checked={adaptingComfort == "mildly_uncomfortable"}
+              checked={adaptingComfort == 0.25}
               onClick={(e) => {
                 setAdaptingComfort(e.target.value);
               }}
-              value="mildly_uncomfortable"
+              value={0.25}
               control={<Radio />}
               label="2 - Mildly uncomfortable"
             />
             <FormControlLabel
-              checked={adaptingComfort == "more_than_comfortable"}
+              checked={adaptingComfort == 0.5}
               onClick={(e) => {
                 setAdaptingComfort(e.target.value);
               }}
-              value="more_than_comfortable"
+              value={0.5}
               control={<Radio />}
               label="3 - More than comfortable"
             />
             <FormControlLabel
-              checked={adaptingComfort == "very_comfortable"}
+              checked={adaptingComfort == 0.75}
               onClick={(e) => {
                 setAdaptingComfort(e.target.value);
               }}
-              value="very_comfortable"
+              value={0.75}
               control={<Radio />}
               label="4 - Very comfortable"
             />
             <FormControlLabel
-              checked={adaptingComfort == "extremely_comfortable"}
+              checked={adaptingComfort == 1}
               onClick={(e) => {
                 setAdaptingComfort(e.target.value);
               }}
-              value="extremely_comfortable"
+              value={1}
               control={<Radio />}
               label="5 - Extremely comfortable"
             />
@@ -769,47 +808,47 @@ export default function Questions() {
             name="Question 15"
           >
             <FormControlLabel
-              checked={effectiveCommunication == "independent"}
+              checked={effectiveCommunication == 0}
               onClick={(e) => {
                 setEffectiveCommunication(e.target.value);
               }}
-              value="independent"
+              value={0}
               control={<Radio />}
               label="1 - Each person just independently does what they're assigned"
             />
             <FormControlLabel
-              checked={effectiveCommunication == "rare_communication"}
+              checked={effectiveCommunication == 0.25}
               onClick={(e) => {
                 setEffectiveCommunication(e.target.value);
               }}
-              value="rare_communication"
+              value={0.25}
               control={<Radio />}
               label="2 - Rare communication"
             />
             <FormControlLabel
-              checked={effectiveCommunication == "occasional_communication"}
+              checked={effectiveCommunication == 0.5}
               onClick={(e) => {
                 setEffectiveCommunication(e.target.value);
               }}
-              value="occasional_communication"
+              value={0.5}
               control={<Radio />}
               label="3 - Occasional communication"
             />
             <FormControlLabel
-              checked={effectiveCommunication == "frequent_communication"}
+              checked={effectiveCommunication == 0.75}
               onClick={(e) => {
                 setEffectiveCommunication(e.target.value);
               }}
-              value="frequent_communication"
+              value={0.75}
               control={<Radio />}
               label="4 -Frequent communication"
             />
             <FormControlLabel
-              checked={effectiveCommunication == "constant_communication"}
+              checked={effectiveCommunication == 1}
               onClick={(e) => {
                 setEffectiveCommunication(e.target.value);
               }}
-              value="constant_communication"
+              value={1}
               control={<Radio />}
               label="5 - Constant communication throughout duration of project"
             />
@@ -831,47 +870,47 @@ export default function Questions() {
             name="Question 16"
           >
             <FormControlLabel
-              checked={initiatingConvo == "very_uncomfortable"}
+              checked={initiatingConvo == 0}
               onClick={(e) => {
                 setInitiatingConvo(e.target.value);
               }}
-              value="very_uncomfortable"
+              value={0}
               control={<Radio />}
               label="1 - Very uncomfortable"
             />
             <FormControlLabel
-              checked={initiatingConvo == "mildly_uncomfortable"}
+              checked={initiatingConvo == 0.25}
               onClick={(e) => {
                 setInitiatingConvo(e.target.value);
               }}
-              value="mildly_uncomfortable"
+              value={0.25}
               control={<Radio />}
               label="2 - Mildly uncomfortable"
             />
             <FormControlLabel
-              checked={initiatingConvo == "more_than_comfortable"}
+              checked={initiatingConvo == 0.5}
               onClick={(e) => {
                 setInitiatingConvo(e.target.value);
               }}
-              value="more_than_comfortable"
+              value={0.5}
               control={<Radio />}
               label="3 - More than comfortable"
             />
             <FormControlLabel
-              checked={initiatingConvo == "very_comfortable"}
+              checked={initiatingConvo == 0.75}
               onClick={(e) => {
                 setInitiatingConvo(e.target.value);
               }}
-              value="very_comfortable"
+              value={0.75}
               control={<Radio />}
               label="4 - Very comfortable"
             />
             <FormControlLabel
-              checked={initiatingConvo == "extremely_comfortable"}
+              checked={initiatingConvo == 1}
               onClick={(e) => {
                 setInitiatingConvo(e.target.value);
               }}
-              value="extremely_comfortable"
+              value={1}
               control={<Radio />}
               label="5 - Extremely comfortable"
             />
@@ -893,47 +932,47 @@ export default function Questions() {
             name="Question 17"
           >
             <FormControlLabel
-              checked={initiatingFrequency == "not_at_all"}
+              checked={initiatingFrequency == 0}
               onClick={(e) => {
                 setInitiatingFrequency(e.target.value);
               }}
-              value="not_at_all"
+              value={0}
               control={<Radio />}
               label="1 - Not at all"
             />
             <FormControlLabel
-              checked={initiatingFrequency == "rarely"}
+              checked={initiatingFrequency == 0.25}
               onClick={(e) => {
                 setInitiatingFrequency(e.target.value);
               }}
-              value="rarely"
+              value={0.25}
               control={<Radio />}
               label="2 - Rarely"
             />
             <FormControlLabel
-              checked={initiatingFrequency == "more_often_than_not"}
+              checked={initiatingFrequency == 0.5}
               onClick={(e) => {
                 setInitiatingFrequency(e.target.value);
               }}
-              value="more_often_than_not"
+              value={0.5}
               control={<Radio />}
               label="3 - More often than not"
             />
             <FormControlLabel
-              checked={initiatingFrequency == "frequently"}
+              checked={initiatingFrequency == 0.75}
               onClick={(e) => {
                 setInitiatingFrequency(e.target.value);
               }}
-              value="frequently"
+              value={0.75}
               control={<Radio />}
               label="4 - Frequently"
             />
             <FormControlLabel
-              checked={initiatingFrequency == "always_open"}
+              checked={initiatingFrequency == 1}
               onClick={(e) => {
                 setInitiatingFrequency(e.target.value);
               }}
-              value="always_open"
+              value={1}
               control={<Radio />}
               label="5 - Always open"
             />
@@ -955,20 +994,20 @@ export default function Questions() {
             name="Question 18"
           >
             <FormControlLabel
-              checked={challengePreference == "repetitive_easy"}
+              checked={challengePreference == 0}
               onClick={(e) => {
                 setChallengePreference(e.target.value);
               }}
-              value="repetitive_easy"
+              value={0}
               control={<Radio />}
               label="Rather do repetitive work that I find easier"
             />
             <FormControlLabel
-              checked={challengePreference == "challenging"}
+              checked={challengePreference == 1}
               onClick={(e) => {
                 setChallengePreference(e.target.value);
               }}
-              value="challenging"
+              value={1}
               control={<Radio />}
               label="Give me a challenge"
             />
@@ -990,47 +1029,47 @@ export default function Questions() {
             name="Question 19"
           >
             <FormControlLabel
-              checked={exploringComfort == "not_open_at_all"}
+              checked={exploringComfort == 0}
               onClick={(e) => {
                 setExploringComfort(e.target.value);
               }}
-              value="not_open_at_all"
+              value={0}
               control={<Radio />}
               label="1 - Not open at all"
             />
             <FormControlLabel
-              checked={exploringComfort == "rarely_open"}
+              checked={exploringComfort == 0.25}
               onClick={(e) => {
                 setExploringComfort(e.target.value);
               }}
-              value="rarely_open"
+              value={0.25}
               control={<Radio />}
               label="2 - Rarely open"
             />
             <FormControlLabel
-              checked={exploringComfort == "more_often_than_not"}
+              checked={exploringComfort == 0.5}
               onClick={(e) => {
                 setExploringComfort(e.target.value);
               }}
-              value="more_often_than_not"
+              value={0.5}
               control={<Radio />}
               label="3 - More often than not open"
             />
             <FormControlLabel
-              checked={exploringComfort == "frequently_open"}
+              checked={exploringComfort == 0.75}
               onClick={(e) => {
                 setExploringComfort(e.target.value);
               }}
-              value="frequently_open"
+              value={0.75}
               control={<Radio />}
               label="4 - Frequently open"
             />
             <FormControlLabel
-              checked={exploringComfort == "always_open"}
+              checked={exploringComfort == 1}
               onClick={(e) => {
                 setExploringComfort(e.target.value);
               }}
-              value="always_open"
+              value={1}
               control={<Radio />}
               label="5 - Always open"
             />
@@ -1052,26 +1091,40 @@ export default function Questions() {
             name="Question 20"
           >
             <FormControlLabel
-              checked={conflictManagement == "uncomfortable_deescalating"}
+              checked={conflictManagement == 0}
               onClick={(e) => {
                 setConflictManagement(e.target.value);
               }}
-              value="uncomfortable_deescalating"
+              value={0}
               control={<Radio />}
               label="Conflict avoidant"
             />
             <FormControlLabel
-              checked={conflictManagement == "comfortable_deescalating"}
+              checked={conflictManagement == 1}
               onClick={(e) => {
                 setConflictManagement(e.target.value);
               }}
-              value="comfortable_deescalating"
+              value={1}
               control={<Radio />}
               label="Conflict Confrontational"
             />
           </RadioGroup>
         </FormControl>
       </div>
+      <br />
+      <Button
+        variant="contained"
+        onClick={submitQuestionnaire}
+        sx={{
+          borderRadius: 20,
+          fontSize: 10,
+          padding: 1.5,
+          fontWeight: "bold",
+          backgroundImage: "linear-gradient(#B27FC6, #E98356)",
+        }}
+      >
+        Submit Questionnaire
+      </Button>
     </div>
   );
 }

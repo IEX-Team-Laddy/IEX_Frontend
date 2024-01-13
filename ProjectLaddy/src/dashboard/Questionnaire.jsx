@@ -111,24 +111,6 @@ export default function Questionnaire() {
             }}
           >
             <Questions />
-            <br />
-            <Button
-              variant="contained"
-              onClick={(e) => {
-                e.preventDefault();
-                submitQuestionnaire(true);
-              }}
-              sx={{
-                borderRadius: 20,
-                fontSize: 10,
-                padding: 1.5,
-                fontWeight: "bold",
-                backgroundImage: "linear-gradient(#B27FC6, #E98356)",
-                marginLeft: "auto",
-              }}
-            >
-              Submit Questionnaire
-            </Button>
           </Box>
         </>
       ) : (
