@@ -2,14 +2,16 @@ import { Routes, Route, NavLink } from "react-router-dom";
 import { Button, Backdrop, Stack, Paper } from "@mui/material";
 import Landing from "../landing/Landing";
 import Auth from "../auth/Auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dashboard from "../dashboard/Dashboard";
+import { supabase } from "../supabase";
 
 export default function NavBar() {
   const [dashboard, renderDashboard] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState(<div>English 🇺🇸</div>);
-  const [currentSession, setCurrentSession] = useState(null);
+  // const [currentSession, setCurrentSession] = useState(null);
+  // const [loginEmail, setLoginEmail] = useState("");
 
   function changeLang(elem) {
     setCurrentLang(elem);
@@ -22,16 +24,31 @@ export default function NavBar() {
     setOpen(true);
   };
 
+  // console.log(currentLang.props.children);
+
   function renderDashboardOnSignIn(session) {
     // e.preventDefault();
-    setCurrentSession(session);
-    renderDashboard(session !== null);
+    // setCurrentSession(session);
+    // setLoginEmail(loginEmail);
+    renderDashboard(session === null);
+    console.log(session);
+    console.log(dashboard);
   }
 
   function hideDashboard(e) {
     e.preventDefault();
     renderDashboard(false);
   }
+
+  async function retrieveSession() {
+    const { data, error } = await supabase.auth.getSession();
+    renderDashboard(data.session !== null);
+    console.log(data.session);
+  }
+
+  useEffect(() => {
+    retrieveSession();
+  }, []);
 
   const languageOptions = [
     <div>English 🇺🇸</div>,
@@ -43,7 +60,7 @@ export default function NavBar() {
   return (
     <>
       {dashboard ? (
-        <Dashboard hideDashboard={hideDashboard} />
+        <></>
       ) : (
         <>
           <div>
@@ -83,7 +100,7 @@ export default function NavBar() {
                 id="navbarSupportedContent"
               >
                 <ul className="navbar-nav ml-auto">
-                  <li>
+                  {/* <li>
                     <div id="navbar-gpa" className="nav-item nav-link">
                       <NavLink
                         id="gpa-nav-link"
@@ -95,8 +112,8 @@ export default function NavBar() {
                         Home
                       </NavLink>
                     </div>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <div id="navbar-gpa" className="nav-item nav-link">
                       <NavLink
                         id="gpa-nav-link"
@@ -121,7 +138,7 @@ export default function NavBar() {
                         Blog
                       </NavLink>
                     </div>
-                  </li>
+                  </li> */}
                   {/* <li>
                 <div id="navbar-gpa" className="nav-item nav-link">
                   <NavLink
@@ -157,7 +174,7 @@ export default function NavBar() {
                 </div>
               </li> */}
                   <li>
-                    <div id="navbar-username" className="nav-item nav-link">
+                    <div id="currentLang" className="nav-item nav-link">
                       <Button
                         variant="contained"
                         onClick={handleOpen}
@@ -247,22 +264,22 @@ export default function NavBar() {
               </div>
             </nav>
           </div>
-          <Routes>
-            <Route exact path="/" element={<Landing />} />
-            {/* <Route exact path="/about" element={<About />} /> */}
-            <Route exact path="/blog" element={<Landing />} />
-            {/* <Route exact path="/services" element={<Landing />} />
-        <Route exact path="/pricing" element={<Landing />} /> */}
-            <Route exact path="/languages" element={<Landing />} />
-            <Route
-              exact
-              path="/auth"
-              element={<Auth renderDashboard={renderDashboardOnSignIn} />}
-            />
-            <Route exact path="*" element={<Landing />} />
-          </Routes>
         </>
       )}
+      <Routes>
+        <Route exact path="/" element={<Landing />} />
+        {/* <Route exact path="/about" element={<About />} /> */}
+        {/* <Route exact path="/blog" element={<Landing />} /> */}
+        {/* <Route exact path="/services" element={<Landing />} />
+        <Route exact path="/pricing" element={<Landing />} /> */}
+        <Route exact path="/languages" element={<Landing />} />
+        <Route
+          exact
+          path="/auth"
+          element={<Auth renderDashboard={renderDashboardOnSignIn} />}
+        />
+        <Route exact path="*" element={<Landing />} />
+      </Routes>
     </>
   );
 }

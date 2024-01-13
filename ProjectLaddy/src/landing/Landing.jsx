@@ -38,8 +38,8 @@ export default function Landing() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <iframe
-              width="560vw"
-              height="315vw"
+              width="500vw"
+              height="300vw"
               src={IEXVideo}
               title="YouTube video player"
               frameborder="0"

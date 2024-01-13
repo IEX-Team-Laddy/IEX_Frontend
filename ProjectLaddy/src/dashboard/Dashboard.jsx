@@ -22,7 +22,8 @@ import HomeScreen from "./HomeScreen";
 import Questionnaire from "./Questionnaire";
 import Teams from "./Teams";
 import Account from "./Account";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "../supabase";
 
 export default function Dashboard({ hideDashboard }) {
   const [sideBarOpen, openSideBar] = useState(false);
@@ -30,6 +31,21 @@ export default function Dashboard({ hideDashboard }) {
   const [questionnaireOpen, openQuestionnaire] = useState(false);
   const [teamsOpen, openTeams] = useState(false);
   const [accountOpen, openAccount] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
+
+  async function retrieveCurrentUser() {
+    const { data, error } = await supabase.auth.getUser();
+    setLoginEmail(data.user.email);
+  }
+
+  async function signOut(e) {
+    e.preventDefault();
+    const { data, error } = await supabase.auth.signOut();
+  }
+
+  useEffect(() => {
+    retrieveCurrentUser();
+  });
 
   const list = (anchor) => (
     <Box sx={{ width: "auto" }} role="presentation">
@@ -40,6 +56,7 @@ export default function Dashboard({ hideDashboard }) {
               < />
             </ListItemIcon> */}
             <Button
+              onClick={signOut}
               endIcon={<ExitToApp />}
               variant="outlined"
               sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}
@@ -114,7 +131,7 @@ export default function Dashboard({ hideDashboard }) {
               e.preventDefault();
               openSideBar(false);
               openHome(false);
-              sideBarOpen(false);
+              openSideBar(false);
               openQuestionnaire(false);
               openTeams(false);
               openAccount(true);
@@ -168,7 +185,7 @@ export default function Dashboard({ hideDashboard }) {
         {homeOpen && <HomeScreen />}
         {questionnaireOpen && <Questionnaire />}
         {teamsOpen && <Teams />}
-        {accountOpen && <Account />}
+        {accountOpen && <Account loginEmail={loginEmail} />}
       </div>
       {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
       <Drawer anchor="left" open={sideBarOpen} hideBackdrop>

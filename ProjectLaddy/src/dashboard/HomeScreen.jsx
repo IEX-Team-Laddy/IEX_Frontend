@@ -1,6 +1,13 @@
-import { Avatar, Button, Container, Grid, Paper, Stack } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Container,
+  Grid,
+  Paper,
+  Stack,
+  TextField,
+} from "@mui/material";
 import pfp from "../images/mepfp.JPG";
-import { Edit } from "@mui/icons-material";
 
 export default function HomeScreen() {
   return (
@@ -10,7 +17,7 @@ export default function HomeScreen() {
           <Avatar src={pfp} style={{ width: 100, height: 100 }} />
           <Stack>
             <p style={{ fontFamily: "Montserrat", fontWeight: 600 }}>
-              Yashwit Polapragada <Edit fontSize="small" />
+              Yashwit Polapragada
             </p>
             <p
               style={{
@@ -19,13 +26,15 @@ export default function HomeScreen() {
                 textAlign: "left",
               }}
             >
-              CS | NUS <Edit fontSize="small" />
+              CS | NUS
             </p>
           </Stack>
         </Stack>
       </Grid>
-      <Grid item xs={4}>
-        <Container sx={{ backgroundColor: "white", padding: 2 }}>
+      <Grid item xs={12}>
+        <Container
+          sx={{ backgroundColor: "white", padding: 2, borderRadius: 3 }}
+        >
           <h5>
             <u>Current Classes / Projects</u>
           </h5>
