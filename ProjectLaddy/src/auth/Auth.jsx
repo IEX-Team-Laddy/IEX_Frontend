@@ -499,9 +499,11 @@ export default function Auth({ renderDashboard }) {
                         color: "#7F7F7F",
                         fontSize: 10,
                       }}
-                      label=<div id="termsAndConditionsMessage">
+                      label={
+                      <div id="termsAndConditionsMessage">
                         "I agree to the Terms and Conditions"
                       </div>
+                      }
                     />
                   </Stack>
                   <br />

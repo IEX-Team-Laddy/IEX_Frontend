@@ -8,11 +8,12 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Questions() {
   const [consentAnswer, setGivenConsent] = useState("yes");
   const [gender, setGender] = useState(null);
-  const [commStyle, setCommStyle] = useState(0);
+  const [commStyle, setCommStyle] = useState(null);
   const [feedbackGiving, setFeedbackGiving] = useState(null);
   const [feedbackReceiving, setFeedbackReceiving] = useState(null);
   const [workingHours, setWorkingHours] = useState(null);
@@ -32,8 +33,33 @@ export default function Questions() {
   const [exploringComfort, setExploringComfort] = useState(null);
   const [conflictManagement, setConflictManagement] = useState(null);
 
+  const URL = "http://localhost:3001"
+
   function submitQuestionnaire(e) {
     e.preventDefault();
+    const config = {
+      headers: {
+          'Authorization': 'Bearer YOUR_TOKEN'
+      }
+    };
+
+    const arr = [consentAnswer, document.getElementById("userMajor").value, gender, commStyle, feedbackGiving,
+           feedbackReceiving, workingHours, meetingHours, workingApproach, manageDeadlines, workConsistency,
+           timeCommittment, meetingStyle, meetingFrequency, mistakeHandling, adaptingComfort, effectiveCommunication,
+           initiatingConvo, initiatingFrequency, challengePreference, exploringComfort, conflictManagement]
+
+    arr.includes(null)
+    ? alert("Please answer all questions") 
+    : axios.post(URL + "/questiondata", arr, config).then(response => {
+      console.log(response)
+      if (response.status == 200) {
+        alert("Questionnaire submitted successfully");
+      } else {
+        alert("Questionnaire submission failed");
+      }
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   return (
