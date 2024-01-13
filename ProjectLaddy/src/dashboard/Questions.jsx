@@ -133,51 +133,6 @@ export default function Questions() {
       <div style={{ textAlign: "left" }}>
         <FormControl>
           <div>
-            What is your preferred communication style within a professional
-            team or project group?
-          </div>
-          <br />
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue={commStyle}
-            name="Question 2"
-          >
-            <FormControlLabel
-              checked={commStyle == 0}
-              onClick={(e) => {
-                setCommStyle(e.target.value);
-              }}
-              value={0}
-              control={<Radio />}
-              label="Assertive"
-            />
-            <FormControlLabel
-              checked={commStyle == 0.5}
-              onClick={(e) => {
-                setCommStyle(e.target.value);
-              }}
-              value={0.5}
-              control={<Radio />}
-              label="Collaborative"
-            />
-            <FormControlLabel
-              checked={commStyle == 1}
-              onClick={(e) => {
-                setCommStyle(e.target.value);
-              }}
-              value={1}
-              control={<Radio />}
-              label="Avoidant"
-            />
-          </RadioGroup>
-        </FormControl>
-      </div>
-      <br />
-      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-      <br />
-      <div style={{ textAlign: "left" }}>
-        <FormControl>
-          <div>
             How do you typically give feedback to others?
             {/* (feedforward entails
             providing corrective feedback based on future behavior or
@@ -598,7 +553,7 @@ export default function Questions() {
               }}
               value={0.25}
               control={<Radio />}
-              label="Once every week"
+              label="Once every 2 weeks"
             />
             <FormControlLabel
               checked={meetingFrequency == 0.5}
@@ -607,7 +562,7 @@ export default function Questions() {
               }}
               value={0.5}
               control={<Radio />}
-              label="Once every 2 weeks"
+              label="Once every week"
             />
             <FormControlLabel
               checked={meetingFrequency == 0.75}
@@ -799,6 +754,51 @@ export default function Questions() {
       <div style={{ textAlign: "left" }}>
         <FormControl>
           <div>
+            What is your preferred communication style within a professional
+            team or project group?
+          </div>
+          <br />
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue={commStyle}
+            name="Question 2"
+          >
+            <FormControlLabel
+              checked={commStyle == 0}
+              onClick={(e) => {
+                setCommStyle(e.target.value);
+              }}
+              value={0}
+              control={<Radio />}
+              label="Assertive"
+            />
+            <FormControlLabel
+              checked={commStyle == 0.5}
+              onClick={(e) => {
+                setCommStyle(e.target.value);
+              }}
+              value={0.5}
+              control={<Radio />}
+              label="Collaborative"
+            />
+            <FormControlLabel
+              checked={commStyle == 1}
+              onClick={(e) => {
+                setCommStyle(e.target.value);
+              }}
+              value={1}
+              control={<Radio />}
+              label="Avoidant"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>
             How important is effective communication within a project group to
             you?
           </div>
@@ -841,7 +841,7 @@ export default function Questions() {
               }}
               value={0.75}
               control={<Radio />}
-              label="4 -Frequent communication"
+              label="4 - Frequent communication"
             />
             <FormControlLabel
               checked={effectiveCommunication == 1}
@@ -894,7 +894,7 @@ export default function Questions() {
               }}
               value={0.5}
               control={<Radio />}
-              label="3 - More than comfortable"
+              label="3 - Generally comfortable"
             />
             <FormControlLabel
               checked={initiatingConvo == 0.75}
@@ -956,7 +956,7 @@ export default function Questions() {
               }}
               value={0.5}
               control={<Radio />}
-              label="3 - More often than not"
+              label="3 - Generally"
             />
             <FormControlLabel
               checked={initiatingFrequency == 0.75}
@@ -1053,7 +1053,7 @@ export default function Questions() {
               }}
               value={0.5}
               control={<Radio />}
-              label="3 - More often than not open"
+              label="3 - Generally open"
             />
             <FormControlLabel
               checked={exploringComfort == 0.75}
@@ -1106,7 +1106,7 @@ export default function Questions() {
               }}
               value={1}
               control={<Radio />}
-              label="Conflict Confrontational"
+              label="Conflict confrontational"
             />
           </RadioGroup>
         </FormControl>
