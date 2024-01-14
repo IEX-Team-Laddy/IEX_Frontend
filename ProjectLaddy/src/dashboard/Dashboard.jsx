@@ -48,7 +48,7 @@ export default function Dashboard({ hideDashboard }) {
 
   useEffect(() => {
     retrieveCurrentUser();
-  });
+  }, []);
 
   const list = (anchor) => (
     <Box sx={{ width: "auto" }} role="presentation">
