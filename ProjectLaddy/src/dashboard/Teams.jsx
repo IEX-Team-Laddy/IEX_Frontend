@@ -63,6 +63,8 @@ export default function Teams({ userData }) {
 
   function setGroup() {
     const group = groupings.filter((group) => group.includes(userData.id));
+    console.log(groupings);
+    console.log(group);
     for (let i = 0; i < group.length; i++) {
       findMembers(group[i]);
     }
