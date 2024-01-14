@@ -60,8 +60,7 @@ export default function Teams({ userData }) {
       });
   }
 
-  function setGroup(e) {
-    e.preventDefault();
+  function setGroup() {
     const group = groupings.filter((group) => group.includes(userData.id));
     for (let i = 0; i < group.length; i++) {
       findMembers(group[i]);
