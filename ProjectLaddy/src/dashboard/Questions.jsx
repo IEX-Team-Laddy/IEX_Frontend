@@ -48,7 +48,34 @@ export default function Questions({
       },
     };
 
-    const arr = [
+    const heteroWeights = [
+      gender,
+      document.getElementById("userMajor").value,
+      adaptingComfort,
+      commStyle,
+      initiatingConvo,
+      initiatingFrequency,
+      mistakeHandling,
+      conflictManagement,
+    ];
+
+    const homoWeights = [
+      feedbackGiving,
+      feedbackReceiving,
+      workingHours,
+      meetingHours,
+      workingApproach,
+      manageDeadlines,
+      workConsistency,
+      timeCommittment,
+      meetingStyle,
+      meetingFrequency,
+      effectiveCommunication,
+      challengePreference,
+      exploringComfort,
+    ];
+
+    const combinedArr = [
       activeClass,
       userData.id,
       consentAnswer,
@@ -78,10 +105,16 @@ export default function Questions({
     matchingStart();
     closeQuestionnaire();
 
-    arr.includes(null)
+    combinedArr.includes(null)
       ? alert("Please answer all questions")
       : axios
-          .post(URL + "/questiondata", arr, config)
+          .post(
+            URL + "/questiondata",
+            combinedArr,
+            heteroWeights,
+            homoWeights,
+            config
+          )
           .then((response) => {
             console.log(response);
             if (response.status == 200) {
