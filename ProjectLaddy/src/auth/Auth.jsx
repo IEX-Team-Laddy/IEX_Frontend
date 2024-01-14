@@ -25,6 +25,8 @@ import { useState, useEffect } from "react";
 import { supabase } from "../supabase";
 import UniversalPopup from "../universal/UniversalPopup";
 import Dashboard from "../dashboard/Dashboard";
+import grouptable from "../images/grouptable.jpg";
+import meeting from "../images/meeting.png";
 
 export default function Auth({ renderDashboard }) {
   const [session, setSession] = useState(null);
@@ -309,27 +311,37 @@ export default function Auth({ renderDashboard }) {
           </Backdrop>
           {signUp ? (
             <Grid container spacing={0}>
-              {/* <Grid item xs={6}>
-          <Container
-            style={{
-              backgroundColor: "#E98356",
-              padding: 20,
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "Montserrat",
-                fontSize: 40,
-                color: "white",
-              }}
-            >
-              Dive right in
-            </p>
-            <img width={300} src={Auth1} />
-          </Container>
-        </Grid> */}
-              <Grid item xs={12}>
-                <Container style={{ backgroundColor: "#F0D4C4", padding: 30 }}>
+              <Grid item xs={6}>
+                <Container
+                  style={{
+                    backgroundColor: "#E98356",
+                    padding: 20,
+                    height: 740.5,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {/* <p
+                    style={{
+                      fontFamily: "Montserrat",
+                      fontSize: 40,
+                      color: "white",
+                    }}
+                  >
+                    Dive right in
+                  </p> */}
+                  <img width={300} src={meeting} />
+                </Container>
+              </Grid>
+              <Grid item xs={6}>
+                <Container
+                  style={{
+                    backgroundColor: "white",
+                    // borderRadius: 20,
+                    padding: 30,
+                  }}
+                >
                   <p
                     style={{
                       fontFamily: "Montserrat",
@@ -500,9 +512,9 @@ export default function Auth({ renderDashboard }) {
                         fontSize: 10,
                       }}
                       label={
-                      <div id="termsAndConditionsMessage">
-                        "I agree to the Terms and Conditions"
-                      </div>
+                        <div id="termsAndConditionsMessage">
+                          "I agree to the Terms and Conditions"
+                        </div>
                       }
                     />
                   </Stack>
@@ -555,128 +567,143 @@ export default function Auth({ renderDashboard }) {
             </Grid>
           ) : (
             <Grid container spacing={0}>
-              {/* <Grid item xs={6}>
-        <Container
-          style={{
-            backgroundColor: "#E98356",
-            padding: 20,
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "Montserrat",
-              fontSize: 40,
-              color: "white",
-            }}
-          >
-            Dive right in
-          </p>
-          <img width={300} src={Auth1} />
-        </Container>
-      </Grid> */}
-              <Grid item xs={12}>
-                <Container style={{ backgroundColor: "#F0D4C4", padding: 30 }}>
-                  <p
+              <Grid item xs={6}>
+                <Container
+                  style={{
+                    backgroundColor: "#E98356",
+                    padding: 20,
+                    height: 740.5,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {/* <p
                     style={{
                       fontFamily: "Montserrat",
-                      fontSize: 20,
-                      fontWeight: "bold",
+                      fontSize: 40,
                       color: "white",
-                      textAlign: "left",
                     }}
                   >
-                    <div style={{ color: "#A87FDB" }}>Welcome.</div>
-                    <div style={{ color: "#E98356" }}>Login.</div>
-                  </p>
-                  <Stack spacing={2}>
-                    <TextField
-                      fullWidth
-                      label="Email Address"
-                      id="user_login_email"
-                      style={{ backgroundColor: "white" }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Email />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <TextField
-                      fullWidth
-                      label="Password"
-                      id="user_login_password"
-                      type={passwordVisible ? "text" : "password"}
-                      style={{ backgroundColor: "white" }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Key />
-                          </InputAdornment>
-                        ),
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton onClick={toggleVisibility}>
-                              {passwordVisible ? (
-                                <Visibility />
-                              ) : (
-                                <VisibilityOff />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
+                    Dive right in
+                  </p> */}
+                  <img width={300} src={meeting} />
+                </Container>
+              </Grid>
+              <Grid item xs={6}>
+                <Container
+                  style={{
+                    backgroundColor: "white",
+                    height: 740.5,
+                    // borderRadius: 20,
+                    padding: 30,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div>
                     <p
                       style={{
                         fontFamily: "Montserrat",
-                        fontSize: 15,
-                        color: "#7F7F7F",
+                        fontSize: 20,
+                        fontWeight: "bold",
+                        color: "white",
                         textAlign: "left",
                       }}
                     >
-                      Need an account?
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setSignUp(true);
+                      <div style={{ color: "#A87FDB" }}>Welcome back!</div>
+                      <div style={{ color: "#E98356" }}>Login.</div>
+                    </p>
+                    <Stack spacing={2}>
+                      <TextField
+                        fullWidth
+                        label="Email Address"
+                        id="user_login_email"
+                        style={{ backgroundColor: "white" }}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <Email />
+                            </InputAdornment>
+                          ),
                         }}
+                      />
+                      <TextField
+                        fullWidth
+                        label="Password"
+                        id="user_login_password"
+                        type={passwordVisible ? "text" : "password"}
+                        style={{ backgroundColor: "white" }}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <Key />
+                            </InputAdornment>
+                          ),
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton onClick={toggleVisibility}>
+                                {passwordVisible ? (
+                                  <Visibility />
+                                ) : (
+                                  <VisibilityOff />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <p
                         style={{
-                          backgroundColor: "transparent",
-                          border: "none",
                           fontFamily: "Montserrat",
-                          fontWeight: "bold",
-                          color: "#553BF1",
-                          cursor: "pointer",
+                          fontSize: 15,
+                          color: "#7F7F7F",
+                          textAlign: "left",
                         }}
                       >
-                        Sign Up.
-                      </button>
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: "Montserrat",
-                        fontSize: 15,
-                        color: "#7F7F7F",
-                        textAlign: "left",
-                      }}
-                    >
-                      Forgot password?
-                      <button
-                        onClick={supabaseRecoverPassword}
+                        Need an account?
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setSignUp(true);
+                          }}
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            fontFamily: "Montserrat",
+                            fontWeight: "bold",
+                            color: "#553BF1",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Sign Up.
+                        </button>
+                      </p>
+                      <p
                         style={{
-                          backgroundColor: "transparent",
-                          border: "none",
                           fontFamily: "Montserrat",
-                          fontWeight: "bold",
-                          color: "#553BF1",
-                          cursor: "pointer",
+                          fontSize: 15,
+                          color: "#7F7F7F",
+                          textAlign: "left",
                         }}
                       >
-                        Recover.
-                      </button>
-                    </p>
-                    {/* <FormControlLabel
+                        Forgot password?
+                        <button
+                          onClick={supabaseRecoverPassword}
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            fontFamily: "Montserrat",
+                            fontWeight: "bold",
+                            color: "#553BF1",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Recover.
+                        </button>
+                      </p>
+                      {/* <FormControlLabel
                   control={
                     <Checkbox
                       sx={{
@@ -691,23 +718,24 @@ export default function Auth({ renderDashboard }) {
                   }}
                   label="Remember me"
                 /> */}
-                  </Stack>
-                  <br />
-                  {/* {accountLoginFail && <p>Login failed. Check email/password?</p>} */}
-                  <Button
-                    variant="contained"
-                    onClick={supabaseLogIn}
-                    style={{
-                      width: 200,
-                      backgroundImage: "linear-gradient(#893BE6, #F19065)",
-                      fontFamily: "Montserrat",
-                      fontWeight: "bold",
-                      fontSize: 12,
-                      borderRadius: 15,
-                    }}
-                  >
-                    Log In
-                  </Button>
+                    </Stack>
+                    <br />
+                    {/* {accountLoginFail && <p>Login failed. Check email/password?</p>} */}
+                    <Button
+                      variant="contained"
+                      onClick={supabaseLogIn}
+                      style={{
+                        width: 200,
+                        backgroundImage: "linear-gradient(#893BE6, #F19065)",
+                        fontFamily: "Montserrat",
+                        fontWeight: "bold",
+                        fontSize: 12,
+                        borderRadius: 15,
+                      }}
+                    >
+                      Log In
+                    </Button>
+                  </div>
                   {/* <br />
                   <br />
                   <Divider>OR</Divider>

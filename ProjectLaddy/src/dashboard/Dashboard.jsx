@@ -17,6 +17,7 @@ import {
   ArrowBack,
   Chat,
   ExitToApp,
+  DensityMedium,
 } from "@mui/icons-material";
 import HomeScreen from "./HomeScreen";
 import Questionnaire from "./Questionnaire";
@@ -27,14 +28,16 @@ import { supabase } from "../supabase";
 
 export default function Dashboard({ hideDashboard }) {
   const [sideBarOpen, openSideBar] = useState(false);
-  const [homeOpen, openHome] = useState(true);
+  const [homeOpen, openHome] = useState(false);
   const [questionnaireOpen, openQuestionnaire] = useState(false);
-  const [teamsOpen, openTeams] = useState(false);
+  const [teamsOpen, openTeams] = useState(true);
   const [accountOpen, openAccount] = useState(false);
+  const [userData, setUserData] = useState({});
   const [loginEmail, setLoginEmail] = useState("");
 
   async function retrieveCurrentUser() {
     const { data, error } = await supabase.auth.getUser();
+    setUserData(data.user);
     setLoginEmail(data.user.email);
   }
 
@@ -68,7 +71,7 @@ export default function Dashboard({ hideDashboard }) {
       </List>
       <Divider />
       <List>
-        <ListItem disablePadding>
+        {/* <ListItem disablePadding>
           <ListItemButton
             onClick={(e) => {
               e.preventDefault();
@@ -87,8 +90,8 @@ export default function Dashboard({ hideDashboard }) {
               sx={{ textDecoration: homeOpen ? "underline" : "none" }}
             />
           </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
+        </ListItem> */}
+        {/* <ListItem disablePadding>
           <ListItemButton
             onClick={(e) => {
               e.preventDefault();
@@ -107,7 +110,7 @@ export default function Dashboard({ hideDashboard }) {
               sx={{ textDecoration: questionnaireOpen ? "underline" : "none" }}
             />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
         <ListItem disablePadding>
           <ListItemButton
             onClick={(e) => {
@@ -172,7 +175,7 @@ export default function Dashboard({ hideDashboard }) {
           }}
           variant="contained"
         >
-          <ArrowBack />
+          <DensityMedium />
         </Button>
       )}
       <br />
@@ -184,7 +187,7 @@ export default function Dashboard({ hideDashboard }) {
       >
         {homeOpen && <HomeScreen />}
         {questionnaireOpen && <Questionnaire />}
-        {teamsOpen && <Teams />}
+        {teamsOpen && <Teams userData={userData} />}
         {accountOpen && <Account loginEmail={loginEmail} />}
       </div>
       {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}

@@ -30,22 +30,16 @@ export default function Landing() {
                 fontFamily: "Inter",
                 fontSize: 40,
                 textAlign: "left",
-                color: "#4D4D4D",
+                color: "#ED7D31",
               }}
             >
               Ready to find your perfect project partner?
             </Container>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <iframe
-              width="500vw"
-              height="300vw"
-              src={IEXVideo}
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
+            <video width="500vw" height="300vw" controls>
+              <source src={IEXVideo} type="video/mp4" />
+            </video>
           </Grid>
         </Grid>
       </Box>
@@ -177,33 +171,10 @@ export default function Landing() {
               or corporate worker, we got you.
               <br />
               <br />
-              XX% of LADDY’s users are greatly satisfied with the cohesiveness
+              XX% of LADDY's users are greatly satisfied with the cohesiveness
               of their matched teams, and have gone on to foster meaningful
               personal relationships that extend beyond the initial project.
             </Container>
-          </Grid>
-        </Grid>
-      </Box>
-      <br />
-      <br />
-      <Box style={{}}>
-        <Grid
-          container
-          spacing={2}
-          style={{ padding: 30 }}
-          // alignItems="center"
-          // justifyContent="center"
-          // style={{ minHeight: "100vh" }}
-        >
-          <Grid item xs={12}>
-            <p
-              style={{
-                fontFamily: "Inter",
-                fontSize: 40,
-              }}
-            >
-              What are you waiting for? Start matching!
-            </p>
           </Grid>
         </Grid>
       </Box>

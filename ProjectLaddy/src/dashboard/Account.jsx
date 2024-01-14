@@ -5,9 +5,11 @@ import {
   Stack,
   Avatar,
   TextField,
+  Divider,
 } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import pfp from "../images/mepfp.jpg";
+import userpfpicon from "../images/userpfpicon.png";
 import { useState, useEffect } from "react";
 import { supabase } from "../supabase";
 
@@ -28,6 +30,7 @@ export default function Account({ loginEmail }) {
   }, []);
 
   async function updateUserDetails() {
+    console.log("yoyoyo mista white");
     const { error } = await supabase
       .from("users")
       .update({
@@ -61,6 +64,7 @@ export default function Account({ loginEmail }) {
             : document.getElementById("newTelegram").value,
       })
       .eq("email", loginEmail);
+    startEditMode(false);
   }
 
   return (
@@ -70,101 +74,90 @@ export default function Account({ loginEmail }) {
       sx={{ fontFamily: "Montserrat", textAlign: "left" }}
     >
       <Grid item xs={12}></Grid>
-      <Grid item xs={12} sx={{ padding: 2, marginTop: 2 }}>
+      {/* <Grid item xs={12} sx={{ padding: 2, marginTop: 2 }}>
         <Stack direction="row" spacing={2}>
-          <Avatar src={pfp} style={{ width: 100, height: 100 }} />
-          <Stack>
-            <p style={{ fontWeight: 600 }}>{userData.display_name}</p>
-            <p
-              style={{
-                fontFamily: "Montserrat",
-                fontSize: 15,
-                textAlign: "left",
-              }}
-            >
-              {userData.major} | {userData.university}
-            </p>
-          </Stack>
+          <Avatar src={userpfpicon} style={{ width: 100, height: 100 }} />
         </Stack>
-      </Grid>
+      </Grid> */}
+      {/* {edit && (
+        <> */}
       <Grid item xs={12}>
-        <Button
-          variant="outlined"
-          onClick={(e) => {
-            e.preventDefault();
-            startEditMode(!edit);
-          }}
-          endIcon={<Edit />}
-          sx={{ borderColor: "black", color: "black" }}
+        <Container
+          sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
         >
-          Edit Profile
-        </Button>
+          <p style={{ fontWeight: "600" }}>
+            Display name:
+            <div style={{ fontWeight: "400" }}>{userData.display_name}</div>
+          </p>
+          {edit && (
+            <TextField fullWidth id="newDisplayName" label="New display name" />
+          )}
+          <br />
+          <Divider sx={{ borderBottomWidth: 1, borderBottomColor: "black" }} />
+          <br />
+          {/* </Container> */}
+          {/* </Grid>
+      <Grid item xs={12}> */}
+          {/* <Container */}
+          {/* sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}> */}
+          <p style={{ fontWeight: "600" }}>
+            Major: <div style={{ fontWeight: "400" }}>{userData.major}</div>
+          </p>
+          {edit && <TextField fullWidth id="newMajor" label="New major" />}
+          <br />
+          <Divider sx={{ borderBottomWidth: 1, borderBottomColor: "black" }} />
+          <br />
+          {/* </Container>
       </Grid>
-      {edit && (
-        <>
-          <Grid item xs={12}>
-            <Container sx={{ backgroundColor: "white", padding: 2 }}>
-              <p>
-                Display name:<div>{userData.display_name}</div>
-                {/* {edit ? (
-                  <TextField fullWidth id="newDisplayName" />
-                ) : (
-                  <div>{userData.display_name}</div>
-                )} */}
-              </p>
-            </Container>
-          </Grid>
-          <Grid item xs={12}>
-            <Container sx={{ backgroundColor: "white", padding: 2 }}>
-              <p>
-                Major:{" "}
-                {edit ? (
-                  <TextField fullWidth id="newMajor" />
-                ) : (
-                  <div>{userData.major}</div>
-                )}
-              </p>
-            </Container>
-          </Grid>
-          <Grid item xs={12}>
-            <Container sx={{ backgroundColor: "white", padding: 2 }}>
-              <p>
-                University:{" "}
-                {edit ? (
-                  <TextField fullWidth id="newUniversity" />
-                ) : (
-                  <div>{userData.university}</div>
-                )}
-              </p>
-            </Container>
-          </Grid>
-        </>
-      )}
-      <Grid item xs={12}>
-        <Container sx={{ backgroundColor: "white", padding: 2 }}>
-          <p>
+      <Grid item xs={12}> */}
+          {/* <Container
+          sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
+        > */}
+          <p style={{ fontWeight: "600" }}>
+            University:{" "}
+            <div style={{ fontWeight: "400" }}>{userData.university}</div>
+          </p>
+          {edit && (
+            <TextField fullWidth id="newUniversity" label="New university" />
+          )}
+          {/* </Container>
+      </Grid> */}
+          {/* </>
+      )} */}
+          <br />
+          <Divider sx={{ borderBottomWidth: 1, borderBottomColor: "black" }} />
+          <br />
+          {/* <Grid item xs={12}>
+        <Container
+          sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
+        > */}
+          <p style={{ fontWeight: "600" }}>
             Year of study:{" "}
-            {edit ? (
-              <TextField fullWidth id="newYearOfStudy" />
-            ) : (
-              <div>{userData.year_of_study}</div>
-            )}
+            <div style={{ fontWeight: "400" }}>{userData.year_of_study}</div>
           </p>
-        </Container>
-      </Grid>
-      <Grid item xs={12}>
-        <Container sx={{ backgroundColor: "white", padding: 2 }}>
-          <p>
-            Email:{" "}
-            {edit ? (
-              <TextField fullWidth id="newEmail" />
-            ) : (
-              <div>{userData.email}</div>
-            )}
+          {edit && (
+            <TextField
+              fullWidth
+              id="newYearOfStudy"
+              label="New year of study"
+            />
+          )}
+          {/* </Container>
+      </Grid> */}
+          <br />
+          <Divider sx={{ borderBottomWidth: 1, borderBottomColor: "black" }} />
+          <br />
+          {/* <Grid item xs={12}>
+        <Container
+          sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
+        > */}
+          <p style={{ fontWeight: "600" }}>
+            Email: <div style={{ fontWeight: "400" }}>{userData.email}</div>
           </p>
-        </Container>
-      </Grid>
-      {/* <Grid item xs={12}>
+          {edit && <TextField fullWidth id="newEmail" label="New email" />}
+          {/* </Container>
+      </Grid> */}
+          {/* <Grid item xs={12}>
         <Container
           sx={{ backgroundColor: "white", fontWeight: "bold", padding: 2 }}
         >
@@ -177,44 +170,73 @@ export default function Account({ loginEmail }) {
           </Stack>
         </Container>
       </Grid> */}
-      <Grid item xs={12}>
-        <Container sx={{ backgroundColor: "white", padding: 2 }}>
-          <p>
-            Bio:{" "}
-            {edit ? (
-              <TextField fullWidth id="newBiography" />
-            ) : (
-              <div>{userData.biography}</div>
-            )}
+          <br />
+          <Divider sx={{ borderBottomWidth: 1, borderBottomColor: "black" }} />
+          <br />
+          {/* <Grid item xs={12}>
+        <Container
+          sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
+        > */}
+          <p style={{ fontWeight: "600" }}>
+            Bio: <div style={{ fontWeight: "400" }}>{userData.biography}</div>
           </p>
-        </Container>
-      </Grid>
-      <Grid item xs={12}>
-        <Container sx={{ backgroundColor: "white", padding: 2 }}>
-          <p>
+          {edit && <TextField fullWidth id="newBiography" label="New bio" />}
+          {/* </Container>
+      </Grid> */}
+          <br />
+          <Divider sx={{ borderBottomWidth: 1, borderBottomColor: "black" }} />
+          <br />
+          {/* <Grid item xs={12}>
+        <Container
+          sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
+        > */}
+          <p style={{ fontWeight: "600" }}>
             Telegram:{" "}
-            {edit ? (
-              <TextField fullWidth id="newTelegram" />
-            ) : (
-              <div>{userData.telegram}</div>
-            )}
+            <div style={{ fontWeight: "400" }}>{userData.telegram}</div>
           </p>
+          {edit && (
+            <TextField fullWidth id="newTelegram" label="New telegram" />
+          )}
+          {/* </Container>
+      </Grid> */}
+          <br />
+          {edit && (
+            // <Grid item xs={12}>
+            <>
+              <br />
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  updateUserDetails();
+                }}
+                variant="contained"
+                sx={{ backgroundColor: "black", borderRadius: 3 }}
+              >
+                Save changes
+              </Button>
+            </>
+          )}
+          {!edit && (
+            // <Grid item xs={12}>
+            <Button
+              variant="outlined"
+              onClick={(e) => {
+                e.preventDefault();
+                startEditMode(!edit);
+              }}
+              endIcon={<Edit />}
+              sx={{
+                borderColor: "white",
+                borderRadius: 3,
+                color: "white",
+                backgroundColor: "black",
+              }}
+            >
+              Edit Profile
+            </Button>
+          )}
         </Container>
       </Grid>
-      {edit && (
-        <Grid item xs={12}>
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              updateUserDetails();
-            }}
-            variant="contained"
-            sx={{ backgroundColor: "black" }}
-          >
-            Save changes
-          </Button>
-        </Grid>
-      )}
     </Grid>
   );
 }

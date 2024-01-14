@@ -10,15 +10,23 @@ import {
   Paper,
 } from "@mui/material";
 import { useState } from "react";
+import Questionnaire from "./Questionnaire";
 
-export default function Teams() {
+export default function Teams({ userData }) {
+  const [questionnaireOpen, showQuestionnaire] = useState(false);
+  const [matchingStarted, startMatching] = useState(false);
+  const [matchingModal, setMatchingModal] = useState(false);
+  const [activeClass, setActiveClass] = useState("");
   const [open, setOpen] = useState(false);
+
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleOpen = (e) => {
     setOpen(true);
   };
+
   return (
     <Grid
       container
@@ -29,7 +37,7 @@ export default function Teams() {
         <Stack direction="row" spacing={2}>
           <TextField
             label="Search for your class or project"
-            sx={{ width: "100vw" }}
+            sx={{ width: "100vw", backgroundColor: "white", borderRadius: 3 }}
             InputLabelProps={{
               style: { fontFamily: "Montserrat", color: "#CB8909" },
             }}
@@ -44,7 +52,7 @@ export default function Teams() {
         </Stack>
       </Grid>
       <Grid item xs={4}>
-        <Box sx={{ backgroundColor: "white", padding: 2 }}>
+        <Box sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}>
           <Container
             sx={{
               backgroundColor: "#CB8909",
@@ -56,9 +64,22 @@ export default function Teams() {
               justifyContent: "space-between",
             }}
           >
-            <div>HS1501</div>
-            <div style={{ color: "black", textDecoration: "underline" }}>
-              Match me
+            <div>NPS2001A</div>
+            <div
+              onClick={(e) => {
+                e.preventDefault();
+                showQuestionnaire(true);
+                setActiveClass("NPS2001A");
+              }}
+              style={{
+                color: matchingStarted || questionnaireOpen ? "grey" : "black",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+            >
+              {matchingStarted && activeClass == "NPS2001A"
+                ? "Matching started"
+                : "Match me"}
             </div>
           </Container>
           <br />
@@ -68,7 +89,7 @@ export default function Teams() {
         </Box>
       </Grid>
       <Grid item xs={4}>
-        <Box sx={{ backgroundColor: "white", padding: 2 }}>
+        <Box sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}>
           <Container
             sx={{
               backgroundColor: "#CB8909",
@@ -79,9 +100,22 @@ export default function Teams() {
               justifyContent: "space-between",
             }}
           >
-            <div>EC3303</div>
-            <div style={{ color: "black", textDecoration: "underline" }}>
-              Match me
+            <div>NPS2001B</div>
+            <div
+              onClick={(e) => {
+                e.preventDefault();
+                showQuestionnaire(true);
+                setActiveClass("NPS2001B");
+              }}
+              style={{
+                color: matchingStarted || questionnaireOpen ? "grey" : "black",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+            >
+              {matchingStarted && activeClass == "NPS2001B"
+                ? "Matching started"
+                : "Match me"}
             </div>
           </Container>
           <br />
@@ -90,7 +124,25 @@ export default function Teams() {
           <p>Group 2</p>
         </Box>
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={12}>
+        {questionnaireOpen && (
+          <>
+            <Questionnaire
+              matchingStart={() => {
+                // e.preventDefault();
+                startMatching(true);
+                setMatchingModal(true);
+              }}
+              closeQuestionnaire={() => {
+                showQuestionnaire(false);
+              }}
+              activeClass={activeClass}
+              userData={userData}
+            />
+          </>
+        )}
+      </Grid>
+      {/* <Grid item xs={4}>
         <Box sx={{ backgroundColor: "white", padding: 2 }}>
           <Container
             sx={{
@@ -113,7 +165,7 @@ export default function Teams() {
           <p>Group 1</p>
           <p>Group 2</p>
         </Box>
-      </Grid>
+      </Grid> */}
       <Backdrop
         sx={{
           color: "#fff",
@@ -155,6 +207,28 @@ export default function Teams() {
           >
             Join now
           </Button>
+        </Paper>
+      </Backdrop>
+      <Backdrop
+        sx={{
+          color: "#fff",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={matchingModal}
+        onClick={() => {
+          setMatchingModal(false);
+        }}
+      >
+        <Paper sx={{ padding: 5, borderRadius: 10, textAlign: "center" }}>
+          <h3 style={{ color: "#275E96" }}>You're currently being matched!</h3>
+          <h6>
+            Give us some time! Once we're ready we will add you to a group with
+            others that have similar profiles.
+          </h6>
+          <h6>
+            We will add it to your project space so that you can easily load the
+            interface!
+          </h6>
         </Paper>
       </Backdrop>
     </Grid>

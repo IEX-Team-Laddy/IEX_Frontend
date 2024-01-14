@@ -1,10 +1,10 @@
 import { Routes, Route, NavLink } from "react-router-dom";
-import { Button, Backdrop, Stack, Paper } from "@mui/material";
+import { Button, Backdrop, Stack, Paper, Avatar } from "@mui/material";
 import Landing from "../landing/Landing";
 import Auth from "../auth/Auth";
 import { useEffect, useState } from "react";
-import Dashboard from "../dashboard/Dashboard";
 import { supabase } from "../supabase";
+import dna from "../images/dna.png";
 
 export default function NavBar() {
   const [dashboard, renderDashboard] = useState(false);
@@ -68,12 +68,15 @@ export default function NavBar() {
               style={{ backgroundColor: "white" }}
               className="navbar navbar-expand-lg navbar-dark"
             >
+              <div>
+                <img src={dna} width={50} height={50} />
+              </div>
               <div id="navbar-brand" className="navbar-brand-aria">
                 <NavLink
                   id="aria-nav-link"
                   to="/"
                   style={({ isActive }) => ({
-                    color: "#9835FB",
+                    color: "#ED7D31",
                     fontFamily: "Montserrat",
                   })}
                 >

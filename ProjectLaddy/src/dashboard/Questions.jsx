@@ -10,7 +10,12 @@ import {
 import { useState } from "react";
 import axios from "axios";
 
-export default function Questions() {
+export default function Questions({
+  matchingStart,
+  closeQuestionnaire,
+  activeClass,
+  userData,
+}) {
   const [consentAnswer, setGivenConsent] = useState("yes");
   const [gender, setGender] = useState(null);
   const [commStyle, setCommStyle] = useState(null);
@@ -33,33 +38,63 @@ export default function Questions() {
   const [exploringComfort, setExploringComfort] = useState(null);
   const [conflictManagement, setConflictManagement] = useState(null);
 
-  const URL = "http://localhost:3001"
+  const URL = "http://localhost:3001";
 
   function submitQuestionnaire(e) {
     e.preventDefault();
     const config = {
       headers: {
-          'Authorization': 'Bearer YOUR_TOKEN'
-      }
+        Authorization: "Bearer YOUR_TOKEN",
+      },
     };
 
-    const arr = [consentAnswer, document.getElementById("userMajor").value, gender, commStyle, feedbackGiving,
-           feedbackReceiving, workingHours, meetingHours, workingApproach, manageDeadlines, workConsistency,
-           timeCommittment, meetingStyle, meetingFrequency, mistakeHandling, adaptingComfort, effectiveCommunication,
-           initiatingConvo, initiatingFrequency, challengePreference, exploringComfort, conflictManagement]
+    const arr = [
+      activeClass,
+      userData.id,
+      consentAnswer,
+      document.getElementById("userMajor").value,
+      gender,
+      commStyle,
+      feedbackGiving,
+      feedbackReceiving,
+      workingHours,
+      meetingHours,
+      workingApproach,
+      manageDeadlines,
+      workConsistency,
+      timeCommittment,
+      meetingStyle,
+      meetingFrequency,
+      mistakeHandling,
+      adaptingComfort,
+      effectiveCommunication,
+      initiatingConvo,
+      initiatingFrequency,
+      challengePreference,
+      exploringComfort,
+      conflictManagement,
+    ];
+
+    matchingStart();
+    closeQuestionnaire();
 
     arr.includes(null)
-    ? alert("Please answer all questions") 
-    : axios.post(URL + "/questiondata", arr, config).then(response => {
-      console.log(response)
-      if (response.status == 200) {
-        alert("Questionnaire submitted successfully");
-      } else {
-        alert("Questionnaire submission failed");
-      }
-    }).catch(err => {
-      console.log(err);
-    });
+      ? alert("Please answer all questions")
+      : axios
+          .post(URL + "/questiondata", arr, config)
+          .then((response) => {
+            console.log(response);
+            if (response.status == 200) {
+              setQuestionnaireSubmitted(true);
+              startMatching();
+              closeQuestionnaire();
+            } else {
+              setQuestionnaireError(true);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
   }
 
   return (
