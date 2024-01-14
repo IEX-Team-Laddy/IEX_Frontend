@@ -60,7 +60,7 @@ export default function NavBar() {
 
   return (
     <>
-      {dashboard ? (
+      {false ? (
         <></>
       ) : (
         <>
