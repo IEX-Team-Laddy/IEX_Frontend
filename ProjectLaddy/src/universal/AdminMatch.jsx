@@ -9,12 +9,14 @@ export default function AdminMatch() {
 
     const config = {
       headers: {
-        Authorization: "Bearer YOUR_TOKEN",
+        // Authorization: "Bearer YOUR_TOKEN",
+        // "Content-Type": "text/plain",
       },
     };
 
+    const className = ["NPS2001A"];
     axios
-      .post(URL + "/matches", "NPS2001A", config)
+      .post(URL + "/matches", className, config)
       .then((response) => {
         console.log(response);
         if (response.status == 200) {
