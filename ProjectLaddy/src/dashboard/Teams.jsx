@@ -55,9 +55,10 @@ export default function Teams({ userData }) {
             group.includes(userData.id)
           );
           console.log(group);
-          for (let i = 0; i < group.length; i++) {
-            findMembers(group[i]);
-          }
+          findMembers(group[0]);
+          // for (let i = 0; i < group.length; i++) {
+          //   findMembers(group[i]);
+          // }
           // setGroup();
         } else {
           console.log(response);
