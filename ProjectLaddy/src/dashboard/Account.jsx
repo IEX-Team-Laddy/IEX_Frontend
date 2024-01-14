@@ -8,8 +8,6 @@ import {
   Divider,
 } from "@mui/material";
 import { Edit } from "@mui/icons-material";
-import pfp from "../images/mepfp.jpg";
-import userpfpicon from "../images/userpfpicon.png";
 import { useState, useEffect } from "react";
 import { supabase } from "../supabase";
 

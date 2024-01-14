@@ -7,12 +7,12 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import pfp from "../images/mepfp.JPG";
+// import pfp from "../images/mepfp.JPG";
 
 export default function HomeScreen() {
   return (
     <Grid container spacing={2} sx={{ textAlign: "left" }}>
-      <Grid item xs={12} sx={{ padding: 2, marginTop: 2 }}>
+      {/* <Grid item xs={12} sx={{ padding: 2, marginTop: 2 }}>
         <Stack direction="row" spacing={2}>
           <Avatar src={pfp} style={{ width: 100, height: 100 }} />
           <Stack>
@@ -30,7 +30,7 @@ export default function HomeScreen() {
             </p>
           </Stack>
         </Stack>
-      </Grid>
+      </Grid> */}
       <Grid item xs={12}>
         <Container
           sx={{ backgroundColor: "white", padding: 2, borderRadius: 3 }}
