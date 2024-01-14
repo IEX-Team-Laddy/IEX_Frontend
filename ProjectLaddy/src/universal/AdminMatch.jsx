@@ -2,7 +2,8 @@ import { Button } from "@mui/material";
 import axios from "axios";
 
 export default function AdminMatch() {
-  const URL = "http://localhost:3001";
+  const URL = "https://iex-backend.onrender.com";
+  //   const URL = "http://localhost:3001";
 
   function startMatching(e) {
     e.preventDefault();

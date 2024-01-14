@@ -38,7 +38,8 @@ export default function Questions({
   const [exploringComfort, setExploringComfort] = useState(1);
   const [conflictManagement, setConflictManagement] = useState(0);
 
-  const URL = "http://localhost:3001";
+  const URL = "https://iex-backend.onrender.com";
+  // const URL = "http://localhost:3001";
 
   function submitQuestionnaire(e) {
     e.preventDefault();
@@ -81,21 +82,17 @@ export default function Questions({
       consentAnswer,
       document.getElementById("userMajor").value,
       homoWeights,
-      heteroWeights
+      heteroWeights,
     ];
 
-    console.log("USER_ID",  userData.id);
+    console.log("USER_ID", userData.id);
     matchingStart();
     closeQuestionnaire();
 
     combinedArr.includes(null)
       ? alert("Please answer all questions")
       : axios
-          .post(
-            URL + "/questiondata",
-            combinedArr,
-            config
-          )
+          .post(URL + "/questiondata", combinedArr, config)
           .then((response) => {
             console.log(response);
             if (response.status == 200) {
