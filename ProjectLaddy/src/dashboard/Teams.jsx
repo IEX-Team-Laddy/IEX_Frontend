@@ -1,16 +1,18 @@
 import { Add } from "@mui/icons-material";
 import {
   Container,
+  Button,
   Backdrop,
   Grid,
   Stack,
   TextField,
-  Button,
   Box,
   Paper,
 } from "@mui/material";
 import { useState } from "react";
 import Questionnaire from "./Questionnaire";
+import axios from "axios";
+import { supabase } from "../supabase";
 
 export default function Teams({ userData }) {
   const [questionnaireOpen, showQuestionnaire] = useState(false);
@@ -18,6 +20,7 @@ export default function Teams({ userData }) {
   const [matchingModal, setMatchingModal] = useState(false);
   const [activeClass, setActiveClass] = useState("");
   const [open, setOpen] = useState(false);
+  const [groupings, setGroupings] = useState([[]]);
 
   const handleClose = () => {
     setOpen(false);
@@ -26,6 +29,52 @@ export default function Teams({ userData }) {
   const handleOpen = (e) => {
     setOpen(true);
   };
+
+  const URL = "https://iex-backend.onrender.com";
+  //   const URL = "http://localhost:3001";
+
+  function seeGroups(e) {
+    e.preventDefault();
+
+    const config = {
+      headers: {
+        // Authorization: "Bearer YOUR_TOKEN",
+        // "Content-Type": "text/plain",
+      },
+    };
+
+    const className = ["NPS2001A"];
+    axios
+      .post(URL + "/matches", className, config)
+      .then((response) => {
+        console.log(response);
+        if (response.status == 200) {
+          setGroupings(response.body);
+          setGroup();
+        } else {
+          console.log(response);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function setGroup(e) {
+    e.preventDefault();
+    const group = groupings.filter((group) => group.includes(userData.id));
+    for (let i = 0; i < group.length; i++) {
+      findMembers(group[i]);
+    }
+  }
+
+  async function findMembers(userId) {
+    const { data, error } = await supabase
+      .from("users")
+      .select("username")
+      .eq("id", userId);
+    console.log(data);
+  }
 
   return (
     <>
@@ -86,9 +135,13 @@ export default function Teams({ userData }) {
               </div>
             </Container>
             <br />
-            <h5>Current groups:</h5>
-            <p>Group 1</p>
-            <p>Group 2</p>
+            <Button
+              sx={{ backgroundColor: "black", color: "white" }}
+              onClick={seeGroups}
+              variant="contained"
+            >
+              see group
+            </Button>
           </Box>
         </Grid>
         <Grid item xs={4}>
