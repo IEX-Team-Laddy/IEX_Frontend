@@ -49,7 +49,8 @@ export default function Teams({ userData }) {
       .then((response) => {
         console.log(response);
         if (response.status == 200) {
-          setGroupings(response.body);
+          console.log(response.data);
+          setGroupings(response.data);
           setGroup();
         } else {
           console.log(response);
