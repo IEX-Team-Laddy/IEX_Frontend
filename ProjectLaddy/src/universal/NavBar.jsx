@@ -2,6 +2,7 @@ import { Routes, Route, NavLink } from "react-router-dom";
 import { Button, Backdrop, Stack, Paper, Avatar } from "@mui/material";
 import Landing from "../landing/Landing";
 import Auth from "../auth/Auth";
+import AdminMatch from "./AdminMatch";
 import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import dna from "../images/dna.png";
@@ -59,7 +60,7 @@ export default function NavBar() {
 
   return (
     <>
-      {false ? (
+      {dashboard ? (
         <></>
       ) : (
         <>
@@ -281,7 +282,7 @@ export default function NavBar() {
           path="/auth"
           element={<Auth renderDashboard={renderDashboardOnSignIn} />}
         />
-        <Route exact path="*" element={<Landing />} />
+        <Route exact path="/adminmatch" element={<AdminMatch />} />
       </Routes>
     </>
   );
