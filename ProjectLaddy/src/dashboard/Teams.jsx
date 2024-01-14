@@ -49,9 +49,16 @@ export default function Teams({ userData }) {
       .then((response) => {
         console.log(response);
         if (response.status == 200) {
-          console.log(response.data);
-          setGroupings(response.data);
-          setGroup();
+          // console.log(response.data);
+          // setGroupings(response.data);
+          const group = response.data.filter((group) =>
+            group.includes(userData.id)
+          );
+          console.log(group);
+          for (let i = 0; i < group.length; i++) {
+            findMembers(group[i]);
+          }
+          // setGroup();
         } else {
           console.log(response);
         }
