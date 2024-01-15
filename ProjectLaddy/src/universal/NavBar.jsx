@@ -9,6 +9,7 @@ import dna from "../images/dna.png";
 
 export default function NavBar() {
   const [dashboard, renderDashboard] = useState(false);
+  const [navBar, navBarOpen] = useState(true);
   const [open, setOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState(<div>English 🇺🇸</div>);
   // const [currentSession, setCurrentSession] = useState(null);
@@ -36,20 +37,33 @@ export default function NavBar() {
     console.log(dashboard);
   }
 
-  function hideDashboard(e) {
-    e.preventDefault();
+  function hideDashboard() {
+    // e.preventDefault();
     renderDashboard(false);
   }
 
-  async function retrieveSession() {
-    const { data, error } = await supabase.auth.getSession();
-    renderDashboard(data.session !== null);
-    console.log(data.session);
+  function showDashboard() {
+    // e.preventDefault();
+    renderDashboard(true);
   }
 
-  useEffect(() => {
-    retrieveSession();
-  }, []);
+  // async function retrieveSession() {
+  //   const { data, error } = await supabase.auth.getSession();
+  //   renderDashboard(data.session !== null);
+  //   console.log(data.session);
+  // }
+
+  // useEffect(() => {
+  //   retrieveSession();
+  // });
+
+  // function hideNavBar() {
+  //   navBarOpen(false);
+  // }
+
+  // function showNavBar() {
+  //   navBarOpen(true);
+  // }
 
   const languageOptions = [
     <div>English 🇺🇸</div>,
@@ -60,7 +74,7 @@ export default function NavBar() {
 
   return (
     <>
-      {false ? (
+      {dashboard ? (
         <></>
       ) : (
         <>
@@ -280,7 +294,14 @@ export default function NavBar() {
         <Route
           exact
           path="/auth"
-          element={<Auth renderDashboard={renderDashboardOnSignIn} />}
+          element={
+            <Auth
+              // hideNavBar={hideNavBar}
+              // showNavBar={showNavBar}
+              showDashboard={showDashboard}
+              hideDashboard={hideDashboard}
+            />
+          }
         />
         <Route exact path="/adminmatch" element={<AdminMatch />} />
       </Routes>

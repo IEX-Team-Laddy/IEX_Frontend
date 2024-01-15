@@ -43,6 +43,7 @@ export default function Dashboard({ hideDashboard }) {
 
   async function signOut(e) {
     e.preventDefault();
+    hideDashboard();
     const { data, error } = await supabase.auth.signOut();
   }
 
@@ -54,7 +55,7 @@ export default function Dashboard({ hideDashboard }) {
     <Box sx={{ width: "auto" }} role="presentation">
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={hideDashboard}>
+          <ListItemButton>
             {/* <ListItemIcon>
               < />
             </ListItemIcon> */}
@@ -128,7 +129,7 @@ export default function Dashboard({ hideDashboard }) {
             <ListItemText primary={"Teams"} />
           </ListItemButton>
         </ListItem>
-        {/* <ListItem disablePadding>
+        <ListItem disablePadding>
           <ListItemButton
             onClick={(e) => {
               e.preventDefault();
@@ -148,7 +149,7 @@ export default function Dashboard({ hideDashboard }) {
               sx={{ textDecoration: accountOpen ? "underline" : "none" }}
             />
           </ListItemButton>
-        </ListItem> */}
+        </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
@@ -188,7 +189,7 @@ export default function Dashboard({ hideDashboard }) {
         {homeOpen && <HomeScreen />}
         {questionnaireOpen && <Questionnaire />}
         {teamsOpen && <Teams userData={userData} />}
-        {/* {accountOpen && <Account loginEmail={loginEmail} />} */}
+        {accountOpen && <Account loginEmail={loginEmail} />}
       </div>
       {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
       <Drawer anchor="left" open={sideBarOpen} hideBackdrop>

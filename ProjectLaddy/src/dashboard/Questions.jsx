@@ -17,26 +17,26 @@ export default function Questions({
   userData,
 }) {
   const [consentAnswer, setGivenConsent] = useState("yes");
-  const [gender, setGender] = useState(0);
-  const [commStyle, setCommStyle] = useState(1);
-  const [feedbackGiving, setFeedbackGiving] = useState(0);
-  const [feedbackReceiving, setFeedbackReceiving] = useState(1);
-  const [workingHours, setWorkingHours] = useState(0);
-  const [meetingHours, setMeetingHours] = useState(1);
-  const [workingApproach, setWorkingApproach] = useState(0);
-  const [manageDeadlines, setManageDeadlines] = useState(0);
-  const [workConsistency, setWorkConsistency] = useState(1);
-  const [timeCommittment, setTimeCommittment] = useState(0);
-  const [meetingStyle, setMeetingStyle] = useState(1);
-  const [meetingFrequency, setMeetingFrequency] = useState(0);
-  const [mistakeHandling, setMistakeHandling] = useState(1);
-  const [adaptingComfort, setAdaptingComfort] = useState(0);
-  const [effectiveCommunication, setEffectiveCommunication] = useState(1);
-  const [initiatingConvo, setInitiatingConvo] = useState(0);
-  const [initiatingFrequency, setInitiatingFrequency] = useState(1);
-  const [challengePreference, setChallengePreference] = useState(0);
-  const [exploringComfort, setExploringComfort] = useState(1);
-  const [conflictManagement, setConflictManagement] = useState(0);
+  const [gender, setGender] = useState(null);
+  const [commStyle, setCommStyle] = useState(null);
+  const [feedbackGiving, setFeedbackGiving] = useState(null);
+  const [feedbackReceiving, setFeedbackReceiving] = useState(null);
+  const [workingHours, setWorkingHours] = useState(null);
+  const [meetingHours, setMeetingHours] = useState(null);
+  const [workingApproach, setWorkingApproach] = useState(null);
+  const [manageDeadlines, setManageDeadlines] = useState(null);
+  const [workConsistency, setWorkConsistency] = useState(null);
+  const [timeCommittment, setTimeCommittment] = useState(null);
+  const [meetingStyle, setMeetingStyle] = useState(null);
+  const [meetingFrequency, setMeetingFrequency] = useState(null);
+  const [mistakeHandling, setMistakeHandling] = useState(null);
+  const [adaptingComfort, setAdaptingComfort] = useState(null);
+  const [effectiveCommunication, setEffectiveCommunication] = useState(null);
+  const [initiatingConvo, setInitiatingConvo] = useState(null);
+  const [initiatingFrequency, setInitiatingFrequency] = useState(null);
+  const [challengePreference, setChallengePreference] = useState(null);
+  const [exploringComfort, setExploringComfort] = useState(null);
+  const [conflictManagement, setConflictManagement] = useState(null);
 
   const URL = "https://iex-backend.onrender.com";
   // const URL = "http://localhost:3001";

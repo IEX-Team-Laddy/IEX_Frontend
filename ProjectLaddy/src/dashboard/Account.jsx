@@ -28,7 +28,6 @@ export default function Account({ loginEmail }) {
   }, []);
 
   async function updateUserDetails() {
-    console.log("yoyoyo mista white");
     const { error } = await supabase
       .from("users")
       .update({
@@ -43,11 +42,11 @@ export default function Account({ loginEmail }) {
         university:
           document.getElementById("newUniversity").value === ""
             ? userData.university
-            : document.getElementById("newUniversity").value,
+            : document.getElementById("newUniversity").value.toString(),
         year_of_study:
           document.getElementById("newYearOfStudy").value === ""
             ? userData.year_of_study
-            : document.getElementById("newYearOfStudy").valu,
+            : document.getElementById("newYearOfStudy").value,
         email:
           document.getElementById("newEmail").value === ""
             ? userData.email

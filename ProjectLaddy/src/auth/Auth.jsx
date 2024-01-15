@@ -28,12 +28,12 @@ import Dashboard from "../dashboard/Dashboard";
 import grouptable from "../images/grouptable.jpg";
 import meeting from "../images/meeting.png";
 
-export default function Auth({ renderDashboard }) {
+export default function Auth({ hideDashboard, showDashboard }) {
   const [session, setSession] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [currentLoginEmail, setLoginEmail] = useState("");
-  const [dashboardOpen, showDashboard] = useState(false);
+  const [dashboardOpen, openDashboard] = useState(false);
 
   // internal bad user input handling
   const [usernameInvalid, setUsernameInvalid] = useState(false);
@@ -56,6 +56,10 @@ export default function Auth({ renderDashboard }) {
   useEffect(() => {
     fetchUserData();
   }, []);
+
+  // useEffect(() => {
+  //   showDashboard();
+  // });
 
   function toggleVisibility(e) {
     e.preventDefault();
@@ -83,7 +87,7 @@ export default function Auth({ renderDashboard }) {
     if (error) {
       setAccountLoginFail(true);
     } else {
-      renderDashboard(session);
+      showDashboard();
     }
   }
 
@@ -204,10 +208,13 @@ export default function Auth({ renderDashboard }) {
       if (error) {
         setAccountCreationFail(true);
       } else {
+        const { data, error } = await supabase.auth.getUser();
         await supabase.from("users").insert({
           email: signUpEmail,
           username: signUpUsername,
           mobile: signUpMobile,
+          university: "NUS",
+          id: data.user.id,
         });
         setAccountCreationSuccess(true);
       }
@@ -223,7 +230,8 @@ export default function Auth({ renderDashboard }) {
 
   async function retrieveSession() {
     const { data, error } = await supabase.auth.getSession();
-    showDashboard(data.session !== null);
+    data.session !== null ? showDashboard() : hideDashboard();
+    openDashboard(data.session !== null);
   }
 
   useEffect(() => {
@@ -257,10 +265,10 @@ export default function Auth({ renderDashboard }) {
     setAccountCreationSuccess(false);
   }
 
-  function hideDashboard(e) {
-    e.preventDefault();
-    showDashboard(false);
-  }
+  // function hideDashboard() {
+  //   showNavBar();
+  //   showDashboard(false);
+  // }
 
   return (
     <>

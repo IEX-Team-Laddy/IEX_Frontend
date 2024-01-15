@@ -1,4 +1,4 @@
-import { Add } from "@mui/icons-material";
+import { Add, SetMealSharp } from "@mui/icons-material";
 import {
   Container,
   Button,
@@ -9,7 +9,7 @@ import {
   Box,
   Paper,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Questionnaire from "./Questionnaire";
 import axios from "axios";
 import { supabase } from "../supabase";
@@ -20,7 +20,14 @@ export default function Teams({ userData }) {
   const [matchingModal, setMatchingModal] = useState(false);
   const [activeClass, setActiveClass] = useState("");
   const [open, setOpen] = useState(false);
-  const [groupings, setGroupings] = useState([[]]);
+  const [groupNumber, setGroupNumber] = useState("");
+  // const [groupMembers, setGroupMembers] = useState([]);
+  const [dayToday, setDayToday] = useState(1);
+
+  useEffect(() => {
+    const d = new Date();
+    setDayToday(d.getDay());
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
@@ -30,11 +37,11 @@ export default function Teams({ userData }) {
     setOpen(true);
   };
 
-  const URL = "https://iex-backend.onrender.com";
-  //   const URL = "http://localhost:3001";
+  // const URL = "https://iex-backend.onrender.com";
+  const URL = "http://localhost:3001";
 
-  function seeGroups(e) {
-    e.preventDefault();
+  function seeGroups() {
+    // e.preventDefault();
 
     const config = {
       headers: {
@@ -47,19 +54,20 @@ export default function Teams({ userData }) {
     axios
       .post(URL + "/matches", className, config)
       .then((response) => {
-        console.log(response);
         if (response.status == 200) {
-          // console.log(response.data);
-          // setGroupings(response.data);
           const group = response.data.filter((group) =>
             group.includes(userData.id)
           );
-          console.log(group);
-          findMembers(group[0]);
-          // for (let i = 0; i < group.length; i++) {
-          //   findMembers(group[i]);
-          // }
-          // setGroup();
+          for (let i = 0; i < response.data.length; i++) {
+            if (response.data[i].includes(userData.id)) {
+              setGroupNumber(i + 1);
+            }
+          }
+          if (groupNumber !== "") {
+            for (let j = 0; j < response.data[groupNumber - 1].length; j++) {
+              findMembers(response.data[groupNumber - 1][j]);
+            }
+          }
         } else {
           console.log(response);
         }
@@ -69,26 +77,22 @@ export default function Teams({ userData }) {
       });
   }
 
-  function setGroup() {
-    const group = groupings.filter((group) => group.includes(userData.id));
-    console.log(groupings);
-    console.log(group);
-    for (let i = 0; i < group.length; i++) {
-      findMembers(group[i]);
-    }
-  }
+  useEffect(() => {
+    seeGroups();
+  });
+
+  const groupMembers = [];
 
   async function findMembers(userId) {
     const { data, error } = await supabase
       .from("users")
       .select("username")
       .eq("id", userId);
-    console.log(data);
+    groupMembers.push(data[0].username);
   }
 
   return (
     <>
-      <br />
       <Grid
         container
         spacing={2}
@@ -112,88 +116,128 @@ export default function Teams({ userData }) {
             </Button>
           </Stack>
         </Grid>
-        <Grid item xs={4}>
-          <Box sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}>
-            <Container
-              sx={{
-                backgroundColor: "#CB8909",
-                color: "white",
-                fontFamily: "Montserrat",
-                fontWeight: "bold",
-                fontSize: 20,
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <div>NPS2001A</div>
-              <div
-                onClick={(e) => {
-                  e.preventDefault();
-                  showQuestionnaire(true);
-                  setActiveClass("NPS2001A");
-                }}
-                style={{
-                  color:
-                    matchingStarted || questionnaireOpen ? "grey" : "black",
-                  textDecoration: "underline",
-                  cursor: "pointer",
+        {(dayToday === 1 || dayToday === 4) && (
+          <Grid item xs={4}>
+            <Box sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}>
+              <Container
+                sx={{
+                  backgroundColor: "#CB8909",
+                  padding: 3,
+                  color: "white",
+                  fontFamily: "Montserrat",
+                  fontWeight: "bold",
+                  fontSize: 20,
                 }}
               >
-                {matchingStarted && activeClass == "NPS2001A"
-                  ? "Matching started"
-                  : "Match me"}
-              </div>
-            </Container>
-            <br />
-            <Button
-              sx={{ backgroundColor: "black", color: "white" }}
-              onClick={seeGroups}
-              variant="contained"
-            >
-              see group
-            </Button>
-          </Box>
-        </Grid>
-        <Grid item xs={4}>
-          <Box sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}>
-            <Container
-              sx={{
-                backgroundColor: "#CB8909",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 20,
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <div>NPS2001B</div>
-              <div
-                onClick={(e) => {
-                  e.preventDefault();
-                  showQuestionnaire(true);
-                  setActiveClass("NPS2001B");
-                }}
-                style={{
-                  color:
-                    matchingStarted || questionnaireOpen ? "grey" : "black",
-                  textDecoration: "underline",
-                  cursor: "pointer",
+                <h4 style={{ fontWeight: "bold" }}>NPS2001A</h4>
+                {/* <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    showQuestionnaire(true);
+                    setActiveClass("NPS2001A");
+                  }}
+                  style={{
+                    color:
+                      matchingStarted || questionnaireOpen ? "grey" : "black",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
+                >
+                  {!questionnaireOpen && !matchingStarted && "Match me"}
+                </div> */}
+                <h6>Dr. Mikhail Filippov</h6>
+              </Container>
+              <br />
+              <p>Matrix Unplugged: Using Computer for Real-World Problems</p>
+              {
+                !questionnaireOpen && !matchingStarted ? (
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault();
+                      showQuestionnaire(true);
+                      setActiveClass("NPS2001A");
+                    }}
+                    style={{
+                      color: "black",
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Match me
+                  </div>
+                ) : (
+                  <p style={{ fontWeight: "bold" }}>
+                    Your group: {groupNumber}
+                  </p>
+                )
+                // {groupMembers.map((member, id) => {
+                //   return <p key={id}>{member}</p>;
+                // })}
+              }
+              {/* {groupMembers.map((member, id) => {
+                return <p key={id}>{member}</p>;
+              })} */}
+              {/* <Button
+                sx={{ backgroundColor: "black", color: "white" }}
+                onClick={seeGroups}
+                variant="contained"
+              >
+                see group
+              </Button> */}
+            </Box>
+          </Grid>
+        )}
+        {(dayToday === 3 || dayToday === 5) && (
+          <Grid item xs={4}>
+            <Box sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}>
+              <Container
+                sx={{
+                  backgroundColor: "#CB8909",
+                  padding: 3,
+                  color: "white",
+                  fontWeight: "bold",
+                  fontSize: 20,
                 }}
               >
-                {matchingStarted && activeClass == "NPS2001B"
-                  ? "Matching started"
-                  : "Match me"}
-              </div>
-            </Container>
-            <br />
-            <h5>Current groups:</h5>
-            <p>Group 1</p>
-            <p>Group 2</p>
-          </Box>
-        </Grid>
+                <h4 style={{ fontWeight: "bold" }}>NPS2001B</h4>
+                <h6>May Lim</h6>
+              </Container>
+              <br />
+              <p>Matrix Unplugged: Using Computer for Real-World Problems</p>
+              <p>Course coordinator: May Lim</p>
+              {
+                !questionnaireOpen ? (
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault();
+                      showQuestionnaire(true);
+                      setActiveClass("NPS2001B");
+                    }}
+                    style={{
+                      color: "black",
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Match me
+                  </div>
+                ) : (
+                  <p style={{ fontWeight: "bold" }}>
+                    Your group: {groupNumber}
+                  </p>
+                )
+                // {groupMembers.map((member, id) => {
+                //   return <p key={id}>{member}</p>;
+                // })}
+              }
+            </Box>
+          </Grid>
+        )}
         <Grid item xs={12}>
           {questionnaireOpen && (
             <>
+              <br />
               <Questionnaire
                 matchingStart={() => {
                   // e.preventDefault();
