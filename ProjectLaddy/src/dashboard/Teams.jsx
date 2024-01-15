@@ -55,12 +55,13 @@ export default function Teams({ userData }) {
       .post(URL + "/matches", className, config)
       .then((response) => {
         if (response.status == 200) {
-          const group = response.data.filter((group) =>
-            group.includes(userData.id)
-          );
+          // const group = response.data.filter((group) =>
+          //   group.includes(userData.id)
+          // );
           for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].includes(userData.id)) {
               setGroupNumber(i + 1);
+              addGrouping(i + 1);
               break;
             }
           }
@@ -84,12 +85,12 @@ export default function Teams({ userData }) {
 
   const groupMembers = [];
 
-  async function findMembers(userId) {
+  async function addGrouping(groupNo) {
     const { data, error } = await supabase
       .from("users")
-      .select("username")
-      .eq("id", userId);
-    groupMembers.push(data[0].username);
+      .update({ group_no: groupNo })
+      .eq("id", userData.id);
+    // groupMembers.push(data[0].username);
   }
 
   return (
