@@ -115,6 +115,12 @@ export default function Questions({
         color: "black",
       }}
     >
+      <div style={{ textAlign: "left", fontWeight: "bold" }}>
+        <div>Please note that ALL questions are required</div>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
       <div style={{ textAlign: "left" }}>
         <div>
           Do you consent to the collection of personal information by Team LADDY
