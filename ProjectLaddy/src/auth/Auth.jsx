@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Divider,
   Grid,
   Container,
   Stack,
@@ -15,7 +14,6 @@ import {
 import {
   Badge,
   Email,
-  Google,
   Key,
   PhoneIphone,
   Visibility,
@@ -25,7 +23,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "../supabase";
 import UniversalPopup from "../universal/UniversalPopup";
 import Dashboard from "../dashboard/Dashboard";
-import grouptable from "../images/grouptable.jpg";
 import meeting from "../images/meeting.png";
 
 export default function Auth({ hideDashboard, showDashboard }) {
@@ -302,7 +299,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
               popupText={"Signup failed. Check fields?"}
             />
           </Backdrop>
-          <Backdrop
+          {/* <Backdrop
             sx={{
               color: "#fff",
               zIndex: (theme) => theme.zIndex.drawer + 1,
@@ -316,7 +313,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
                 "Signup success! Please verify your email before logging in"
               }
             />
-          </Backdrop>
+          </Backdrop> */}
           {signUp ? (
             <Grid container spacing={0}>
               <Grid item xs={6}>

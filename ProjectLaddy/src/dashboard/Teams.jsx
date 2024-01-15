@@ -37,8 +37,8 @@ export default function Teams({ userData }) {
     setOpen(true);
   };
 
-  // const URL = "https://iex-backend.onrender.com";
-  const URL = "http://localhost:3001";
+  const URL = "https://iex-backend.onrender.com";
+  // const URL = "http://localhost:3001";
 
   function seeGroups() {
     // e.preventDefault();
@@ -61,13 +61,14 @@ export default function Teams({ userData }) {
           for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].includes(userData.id)) {
               setGroupNumber(i + 1);
+              break;
             }
           }
-          if (groupNumber !== "") {
-            for (let j = 0; j < response.data[groupNumber - 1].length; j++) {
-              findMembers(response.data[groupNumber - 1][j]);
-            }
-          }
+          // if (groupNumber !== "") {
+          //   for (let j = 0; j < response.data[groupNumber - 1].length; j++) {
+          //     findMembers(response.data[groupNumber - 1][j]);
+          //   }
+          // }
         } else {
           console.log(response);
         }
