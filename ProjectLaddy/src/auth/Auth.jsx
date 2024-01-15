@@ -99,11 +99,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
   async function supabaseSignUp(e) {
     e.preventDefault();
 
-    const signUpUsername =
-      document.getElementById("user_first_name").value +
-      " " +
-      document.getElementById("user_last_name").value;
-    const signUpMobile = document.getElementById("user_phone_no").value;
+    const signUpUsername = document.getElementById("user_first_name").value;
     const signUpEmail = document.getElementById("user_email").value;
     const signUpPassword = document.getElementById("user_password").value;
     const confirmSignUpPassword = document.getElementById(
@@ -111,7 +107,6 @@ export default function Auth({ hideDashboard, showDashboard }) {
     ).value;
 
     let usernameError = null;
-    let mobileError = null;
     let emailError = null;
     let emailTaken = null;
     let passwordError = null;
@@ -119,7 +114,6 @@ export default function Auth({ hideDashboard, showDashboard }) {
 
     const errors = [
       usernameError,
-      mobileError,
       emailError,
       emailTaken,
       passwordError,
@@ -137,14 +131,6 @@ export default function Auth({ hideDashboard, showDashboard }) {
       setUsernameInvalid(false);
     }
 
-    if (signUpMobile.length != 8) {
-      errors[1] = true;
-      setMobileInvalid(true);
-    } else {
-      errors[1] = false;
-      setMobileInvalid(false);
-    }
-
     // if (currentUserUsernameData.includes(signUpUsername)) {
     //   errors[1] = true;
     //   setUsernameTaken(true);
@@ -154,39 +140,39 @@ export default function Auth({ hideDashboard, showDashboard }) {
     // }
 
     if (!signUpEmail.match(validEmailRegex)) {
-      errors[2] = true;
+      errors[1] = true;
       setEmailInvalid(true);
     } else {
-      errors[2] = false;
+      errors[1] = false;
       setEmailInvalid(false);
     }
 
     if (currentUserEmailData.includes(signUpEmail)) {
-      errors[3] = true;
+      errors[2] = true;
       setEmailTaken(true);
       document.getElementById("user_email").classList.add("error");
     } else {
-      errors[3] = false;
+      errors[2] = false;
       setEmailTaken(false);
     }
 
     if (!(signUpPassword === confirmSignUpPassword)) {
-      errors[4] = true;
+      errors[3] = true;
       setPasswordMatching(false);
       document.getElementById("user_password").classList.add("error");
       document.getElementById("user_confirm_password").classList.add("error");
     } else {
-      errors[4] = false;
+      errors[3] = false;
       setPasswordMatching(true);
     }
 
     if (!document.getElementById("termsAndConditionsError").checked) {
-      errors[5] = true;
+      errors[4] = true;
       document
         .getElementById("termsAndConditionsMessage")
         .classList.add("error");
     } else {
-      errors[5] = false;
+      errors[4] = false;
       document
         .getElementById("termsAndConditionsMessage")
         .classList.remove("error");
@@ -209,7 +195,6 @@ export default function Auth({ hideDashboard, showDashboard }) {
         await supabase.from("users").insert({
           email: signUpEmail,
           username: signUpUsername,
-          mobile: signUpMobile,
           university: "NUS",
           id: data.user.id,
         });
@@ -321,7 +306,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
                   style={{
                     backgroundColor: "#E98356",
                     padding: 20,
-                    height: 740.5,
+                    height: 595.92,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -373,42 +358,6 @@ export default function Auth({ hideDashboard, showDashboard }) {
                         ),
                       }}
                     />
-                    <TextField
-                      fullWidth
-                      label="Last Name"
-                      id="user_last_name"
-                      style={{ backgroundColor: "white" }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Badge />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <TextField
-                      fullWidth
-                      label="Mobile Phone number"
-                      id="user_phone_no"
-                      style={{ backgroundColor: "white" }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <PhoneIphone />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    {mobileInvalid && (
-                      <p
-                        style={{
-                          fontFamily: "Montserrat",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        Phone number invalid!
-                      </p>
-                    )}
                     <TextField
                       fullWidth
                       label="Email Address"

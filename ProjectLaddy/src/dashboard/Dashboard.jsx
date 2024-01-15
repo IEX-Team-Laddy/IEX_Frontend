@@ -14,7 +14,6 @@ import {
   Home,
   QuestionAnswer,
   Person,
-  ArrowBack,
   Chat,
   ExitToApp,
   DensityMedium,
@@ -23,6 +22,7 @@ import HomeScreen from "./HomeScreen";
 import Questionnaire from "./Questionnaire";
 import Teams from "./Teams";
 import Account from "./Account";
+import FeedbackForm from "./FeedbackForm";
 import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 
@@ -32,6 +32,7 @@ export default function Dashboard({ hideDashboard }) {
   const [questionnaireOpen, openQuestionnaire] = useState(false);
   const [teamsOpen, openTeams] = useState(true);
   const [accountOpen, openAccount] = useState(false);
+  const [feedbackOpen, openFeedback] = useState(false);
   const [userData, setUserData] = useState({});
   const [loginEmail, setLoginEmail] = useState("");
 
@@ -121,6 +122,7 @@ export default function Dashboard({ hideDashboard }) {
               openQuestionnaire(false);
               openTeams(true);
               openAccount(false);
+              openFeedback(false);
             }}
           >
             <ListItemIcon>
@@ -139,6 +141,7 @@ export default function Dashboard({ hideDashboard }) {
               openQuestionnaire(false);
               openTeams(false);
               openAccount(true);
+              openFeedback(false);
             }}
           >
             <ListItemIcon>
@@ -151,11 +154,25 @@ export default function Dashboard({ hideDashboard }) {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton
+            onClick={(e) => {
+              e.preventDefault();
+              openSideBar(false);
+              openHome(false);
+              openSideBar(false);
+              openQuestionnaire(false);
+              openTeams(false);
+              openAccount(false);
+              openFeedback(true);
+            }}
+          >
             <ListItemIcon>
               <Chat sx={{ color: "blue" }} />
             </ListItemIcon>
-            <ListItemText primary={"Feedback"} />
+            <ListItemText
+              primary={"Feedback"}
+              sx={{ textDecoration: feedbackOpen ? "underline" : "none" }}
+            />
           </ListItemButton>
         </ListItem>
       </List>
@@ -190,6 +207,7 @@ export default function Dashboard({ hideDashboard }) {
         {questionnaireOpen && <Questionnaire />}
         {teamsOpen && <Teams userData={userData} />}
         {accountOpen && <Account loginEmail={loginEmail} />}
+        {feedbackOpen && <FeedbackForm />}
       </div>
       {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
       <Drawer anchor="left" open={sideBarOpen} hideBackdrop>
