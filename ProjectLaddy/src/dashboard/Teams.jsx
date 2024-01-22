@@ -121,8 +121,8 @@ export default function Teams({ userData }) {
           </Stack>
         </Grid>
         {(dayToday === 1 || dayToday === 4) &&
-          totalMinutes >= 4 * 60 + 5 &&
-          totalMinutes <= 5 * 60 + 55 && (
+          totalMinutes >= 16 * 60 + 5 &&
+          totalMinutes <= 17 * 60 + 55 && (
             <Grid item xs={4}>
               <Box
                 sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
