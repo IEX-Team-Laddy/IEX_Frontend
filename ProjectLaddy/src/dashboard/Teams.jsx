@@ -23,10 +23,12 @@ export default function Teams({ userData }) {
   const [groupNumber, setGroupNumber] = useState("");
   // const [groupMembers, setGroupMembers] = useState([]);
   const [dayToday, setDayToday] = useState(1);
+  const [totalMinutes, setTotalMinutes] = useState(0);
 
   useEffect(() => {
     const d = new Date();
     setDayToday(d.getDay());
+    setTotalMinutes(d.getHours * 60 + d.getMinutes);
   }, []);
 
   const handleClose = () => {
@@ -75,7 +77,7 @@ export default function Teams({ userData }) {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -118,41 +120,29 @@ export default function Teams({ userData }) {
             </Button>
           </Stack>
         </Grid>
-        {(dayToday === 1 || dayToday === 4) && (
-          <Grid item xs={4}>
-            <Box sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}>
-              <Container
-                sx={{
-                  backgroundColor: "#CB8909",
-                  padding: 3,
-                  color: "white",
-                  fontFamily: "Montserrat",
-                  fontWeight: "bold",
-                  fontSize: 20,
-                }}
+        {(dayToday === 1 || dayToday === 4) &&
+          totalMinutes >= 4 * 60 + 5 &&
+          totalMinutes <= 5 * 60 + 55 && (
+            <Grid item xs={4}>
+              <Box
+                sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
               >
-                <h4 style={{ fontWeight: "bold" }}>NPS2001A</h4>
-                {/* <div
-                  onClick={(e) => {
-                    e.preventDefault();
-                    showQuestionnaire(true);
-                    setActiveClass("NPS2001A");
-                  }}
-                  style={{
-                    color:
-                      matchingStarted || questionnaireOpen ? "grey" : "black",
-                    textDecoration: "underline",
-                    cursor: "pointer",
+                <Container
+                  sx={{
+                    backgroundColor: "#CB8909",
+                    padding: 3,
+                    color: "white",
+                    fontFamily: "Montserrat",
+                    fontWeight: "bold",
+                    fontSize: 20,
                   }}
                 >
-                  {!questionnaireOpen && !matchingStarted && "Match me"}
-                </div> */}
-                <h6>Dr. Mikhail Filippov</h6>
-              </Container>
-              <br />
-              <p>Matrix Unplugged: Using Computer for Real-World Problems</p>
-              {
-                !questionnaireOpen && !matchingStarted ? (
+                  <h4 style={{ fontWeight: "bold" }}>NPS2001A</h4>
+                  <h6>Dr. Mikhail Filippov</h6>
+                </Container>
+                <br />
+                <p>Matrix Unplugged: Using Computer for Real-World Problems</p>
+                {!questionnaireOpen && !matchingStarted ? (
                   <div
                     onClick={(e) => {
                       e.preventDefault();
@@ -172,44 +162,32 @@ export default function Teams({ userData }) {
                   <p style={{ fontWeight: "bold" }}>
                     Your group: {groupNumber}
                   </p>
-                )
-                // {groupMembers.map((member, id) => {
-                //   return <p key={id}>{member}</p>;
-                // })}
-              }
-              {/* {groupMembers.map((member, id) => {
-                return <p key={id}>{member}</p>;
-              })} */}
-              {/* <Button
-                sx={{ backgroundColor: "black", color: "white" }}
-                onClick={seeGroups}
-                variant="contained"
+                )}
+              </Box>
+            </Grid>
+          )}
+        {(dayToday === 3 || dayToday === 5) &&
+          totalMinutes >= 10 * 60 + 5 &&
+          totalMinutes <= 11 * 60 + 55 && (
+            <Grid item xs={4}>
+              <Box
+                sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
               >
-                see group
-              </Button> */}
-            </Box>
-          </Grid>
-        )}
-        {(dayToday === 3 || dayToday === 5) && (
-          <Grid item xs={4}>
-            <Box sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}>
-              <Container
-                sx={{
-                  backgroundColor: "#CB8909",
-                  padding: 3,
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: 20,
-                }}
-              >
-                <h4 style={{ fontWeight: "bold" }}>NPS2001B</h4>
-                <h6>May Lim</h6>
-              </Container>
-              <br />
-              <p>Matrix Unplugged: Using Computer for Real-World Problems</p>
-              <p>Course coordinator: May Lim</p>
-              {
-                !questionnaireOpen ? (
+                <Container
+                  sx={{
+                    backgroundColor: "#CB8909",
+                    padding: 3,
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: 20,
+                  }}
+                >
+                  <h4 style={{ fontWeight: "bold" }}>NPS2001B</h4>
+                  <h6>May Lim</h6>
+                </Container>
+                <br />
+                <p>Matrix Unplugged: Using Computer for Real-World Problems</p>
+                {!questionnaireOpen ? (
                   <div
                     onClick={(e) => {
                       e.preventDefault();
@@ -220,6 +198,7 @@ export default function Teams({ userData }) {
                       color: "black",
                       textDecoration: "underline",
                       cursor: "pointer",
+                      fontWeight: 600,
                     }}
                   >
                     Match me
@@ -228,14 +207,100 @@ export default function Teams({ userData }) {
                   <p style={{ fontWeight: "bold" }}>
                     Your group: {groupNumber}
                   </p>
-                )
-                // {groupMembers.map((member, id) => {
-                //   return <p key={id}>{member}</p>;
-                // })}
-              }
-            </Box>
-          </Grid>
-        )}
+                )}
+              </Box>
+            </Grid>
+          )}
+        {(dayToday === 4 || dayToday === 5) &&
+          totalMinutes >= 12 * 60 + 5 &&
+          totalMinutes <= 13 * 60 + 55 && (
+            <Grid item xs={4}>
+              <Box
+                sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
+              >
+                <Container
+                  sx={{
+                    backgroundColor: "#CB8909",
+                    padding: 3,
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: 20,
+                  }}
+                >
+                  <h4 style={{ fontWeight: "bold" }}>NPS2001C</h4>
+                  <h6>Dr. Jonathan Kang</h6>
+                </Container>
+                <br />
+                <p>Matrix Unplugged: Using Computer for Real-World Problems</p>
+                {!questionnaireOpen ? (
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault();
+                      showQuestionnaire(true);
+                      setActiveClass("NPS2001C");
+                    }}
+                    style={{
+                      color: "black",
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Match me
+                  </div>
+                ) : (
+                  <p style={{ fontWeight: "bold" }}>
+                    Your group: {groupNumber}
+                  </p>
+                )}
+              </Box>
+            </Grid>
+          )}
+        {(dayToday === 4 || dayToday === 5) &&
+          totalMinutes >= 14 * 60 + 5 &&
+          totalMinutes <= 15 * 60 + 55 && (
+            <Grid item xs={4}>
+              <Box
+                sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}
+              >
+                <Container
+                  sx={{
+                    backgroundColor: "#CB8909",
+                    padding: 3,
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: 20,
+                  }}
+                >
+                  <h4 style={{ fontWeight: "bold" }}>NPS2001D</h4>
+                  <h6>Dr. Jonathan Kang</h6>
+                </Container>
+                <br />
+                <p>Matrix Unplugged: Using Computer for Real-World Problems</p>
+                {!questionnaireOpen ? (
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault();
+                      showQuestionnaire(true);
+                      setActiveClass("NPS2001D");
+                    }}
+                    style={{
+                      color: "black",
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Match me
+                  </div>
+                ) : (
+                  <p style={{ fontWeight: "bold" }}>
+                    Your group: {groupNumber}
+                  </p>
+                )}
+              </Box>
+            </Grid>
+          )}
         <Grid item xs={12}>
           {questionnaireOpen && (
             <>
