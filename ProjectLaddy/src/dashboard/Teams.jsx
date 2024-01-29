@@ -342,7 +342,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr. Kiven Strohm");
                 }}
                 style={{
                   color: "black",
@@ -379,7 +379,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr. Ng Keng Khoon");
                 }}
                 style={{
                   color: "black",
@@ -419,7 +419,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr. Lee Chee Keng");
                 }}
                 style={{
                   color: "black",
@@ -456,7 +456,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr. Leung Wing Sze");
                 }}
                 style={{
                   color: "black",
@@ -493,7 +493,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Assoc Prof Lee Kah Wee");
                 }}
                 style={{
                   color: "black",
@@ -530,7 +530,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("A/P Miguel Escobar Varela");
                 }}
                 style={{
                   color: "black",
@@ -567,7 +567,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Chang Yueh Siang");
                 }}
                 style={{
                   color: "black",
@@ -604,7 +604,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Alberto Perez Pereiro");
                 }}
                 style={{
                   color: "black",
@@ -641,7 +641,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Cheng Yi'En");
                 }}
                 style={{
                   color: "black",
@@ -678,7 +678,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Nurhidayahti");
                 }}
                 style={{
                   color: "black",
@@ -715,7 +715,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Assoc Prof Peter Vail");
                 }}
                 style={{
                   color: "black",
@@ -752,7 +752,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Shivani Gupt");
                 }}
                 style={{
                   color: "black",
@@ -789,7 +789,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Yong Han Poh");
                 }}
                 style={{
                   color: "black",
@@ -826,7 +826,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Tan Sok Teng");
                 }}
                 style={{
                   color: "black",
@@ -854,7 +854,7 @@ export default function Teams({ userData }) {
               }}
             >
               {/* <h4 style={{ fontWeight: "bold" }}>IEX Bandung</h4> */}
-              <h4 style={{ fontWeight: "bold" }}>Dr Jerome Kok </h4>
+              <h4 style={{ fontWeight: "bold" }}>Dr Jerome Kok</h4>
             </Container>
             <br />
             <p>Farming in an urban nation</p>
@@ -863,7 +863,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Jerome Kok");
                 }}
                 style={{
                   color: "black",
@@ -900,7 +900,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Julius Batista");
                 }}
                 style={{
                   color: "black",
@@ -939,7 +939,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Kelly Siman");
                 }}
                 style={{
                   color: "black",
@@ -976,7 +976,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Lim Chee Han");
                 }}
                 style={{
                   color: "black",
@@ -1013,7 +1013,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("May Lim");
                 }}
                 style={{
                   color: "black",
@@ -1050,7 +1050,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Michelle Lee");
                 }}
                 style={{
                   color: "black",
@@ -1087,7 +1087,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Shaun Lin");
                 }}
                 style={{
                   color: "black",
@@ -1125,7 +1125,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001D");
+                  setActiveClass("Dr Mikhail Filippov");
                 }}
                 style={{
                   color: "black",
