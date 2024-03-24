@@ -11,7 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Questions({
-  matchingStart,
+  startMatching,
   closeQuestionnaire,
   activeClass,
   userData,
@@ -86,7 +86,7 @@ export default function Questions({
     ];
 
     console.log("USER_ID", userData.id);
-    matchingStart();
+    startMatching(true);
     closeQuestionnaire();
 
     combinedArr.includes(null)

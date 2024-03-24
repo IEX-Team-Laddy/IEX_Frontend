@@ -4,7 +4,7 @@ import Questions from "./Questions";
 import { Cancel, Close } from "@mui/icons-material";
 
 export default function Questionnaire({
-  matchingStart,
+  startMatching,
   closeQuestionnaire,
   activeClass,
   userData,
@@ -16,6 +16,7 @@ export default function Questionnaire({
       <Box
         sx={{
           backgroundImage: "linear-gradient(#E98356, #B27FC6)",
+          borderRadius: 5,
           fontFamily: "Montserrat",
           color: "white",
           padding: 3,
@@ -123,7 +124,7 @@ export default function Questionnaire({
         }}
       >
         <Questions
-          matchingStart={matchingStart}
+          startMatching={startMatching}
           closeQuestionnaire={closeQuestionnaire}
           activeClass={activeClass}
           userData={userData}

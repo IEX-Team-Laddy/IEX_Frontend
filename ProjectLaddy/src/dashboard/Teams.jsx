@@ -52,7 +52,7 @@ export default function Teams({ userData }) {
       },
     };
 
-    const className = ["NPS2001A"];
+    const className = ["YNCG"];
     axios
       .post(URL + "/matches", className, config)
       .then((response) => {
@@ -142,7 +142,7 @@ export default function Teams({ userData }) {
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("NPS2001A");
+                  setActiveClass("YNCG");
                 }}
                 style={{
                   color: "black",
@@ -158,6 +158,16 @@ export default function Teams({ userData }) {
             )}
           </Box>
         </Grid>
+        <Container style={{ marginTop: 10 }}>
+          {questionnaireOpen && (
+            <Questionnaire
+              startMatching={startMatching}
+              closeQuestionnaire={showQuestionnaire}
+              activeClass={activeClass}
+              userData={userData}
+            />
+          )}
+        </Container>
         {/* <Grid item xs={4}>
         <Box sx={{ backgroundColor: "white", padding: 2 }}>
           <Container
