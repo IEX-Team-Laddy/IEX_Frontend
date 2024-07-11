@@ -5,7 +5,7 @@ import Auth from "../auth/Auth";
 import AdminMatch from "./AdminMatch";
 import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
-import dna from "../images/dna.png";
+import logo from "../Assets/Asset1.png";
 
 export default function NavBar() {
   const [dashboard, renderDashboard] = useState(false);
@@ -80,23 +80,13 @@ export default function NavBar() {
         <>
           <div>
             <nav
-              style={{ backgroundColor: "white" }}
+              style={{ backgroundColor: "#fffaf0" }}
               className="navbar navbar-expand-lg navbar-dark"
             >
               <div>
-                <img src={dna} width={50} height={50} />
+                <img src={logo} width={220} height={40} />
               </div>
               <div id="navbar-brand" className="navbar-brand-aria">
-                <NavLink
-                  id="aria-nav-link"
-                  to="/"
-                  style={({ isActive }) => ({
-                    color: "#ED7D31",
-                    fontFamily: "Montserrat",
-                  })}
-                >
-                  LADDY
-                </NavLink>
               </div>
               <button
                 className="navbar-toggler"
@@ -191,22 +181,42 @@ export default function NavBar() {
                   </NavLink>
                 </div>
               </li> */}
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav ml-auto" style={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'space-between' }}>
+                  <li style={{ flexGrow: 1 }}>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      <Button color="inherit" href="#home" style={{ color: '#000000', marginRight: '40px' }}>Home</Button>
+                      <Button color="inherit" href="#about-us" style={{ color: '#000000', marginRight: '40px' }}>About Us</Button>
+                      <Button color="inherit" href="#questionnaire" style={{ color: '#000000', marginRight: '40px' }}>Questionnaire</Button>
+                      <Button color="inherit" href="#contact-us" style={{ color: '#000000', marginRight: '100px' }}>Contact Us</Button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
                   <li>
                     <div id="currentLang" className="nav-item nav-link">
-                      <Button
+                    <Button
                         variant="contained"
-                        onClick={handleOpen}
                         style={{
-                          backgroundColor: "#EFF0F6",
+                          backgroundColor: "#30203C",
                           borderRadius: 20,
-                          padding: 15,
-                          fontFamily: "DM Sans",
-                          fontWeight: "bold",
-                          color: "black",
+                          padding: 10,
+                          fontWeight: "normal",
                         }}
                       >
-                        {currentLang}
-                      </Button>
+                        <NavLink
+                          id="profile-nav-link"
+                          to="/auth"
+                          style={{
+                            color: "White",
+                          }}
+                        >
+                          Get started
+                        </NavLink>
+                    </Button>
                       <Backdrop
                         sx={{
                           color: "#fff",
@@ -238,11 +248,9 @@ export default function NavBar() {
                                     key={idx}
                                     onClick={() => changeLang(elem)}
                                     style={{
-                                      backgroundColor: "white",
+                                      backgroundColor: "#FFFAF0",
                                       borderRadius: 20,
-                                      color: "black",
-                                      fontFamily: "DM Sans",
-                                      fontWeight: "bold",
+                                      color: "White",
                                     }}
                                   >
                                     {elem}
@@ -259,21 +267,19 @@ export default function NavBar() {
                       <Button
                         variant="contained"
                         style={{
-                          backgroundColor: "#9835FB",
+                          backgroundColor: "#FFFAF0",
                           borderRadius: 20,
-                          padding: 15,
-                          fontFamily: "DM Sans",
-                          fontWeight: "bold",
+                          padding: 10,
                         }}
                       >
                         <NavLink
                           id="profile-nav-link"
                           to="/auth"
                           style={{
-                            color: "white",
+                            color: "Black",
                           }}
                         >
-                          Get started
+                          Log In
                         </NavLink>
                       </Button>
                     </div>

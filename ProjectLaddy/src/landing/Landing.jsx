@@ -1,18 +1,46 @@
-import { Container, Box, Grid, Avatar, Stack, Icon } from "@mui/material";
-import {
-  Instagram,
-  Facebook,
-  LinkedIn,
-  YouTube,
-  Twitter,
-  Email,
-} from "@mui/icons-material";
-import Landing2 from "../images/rando.jpg";
+import React, { useState, useEffect } from 'react';
+import { Container, Box, Grid, Stack, Typography, Button } from "@mui/material";
+import { Facebook, LinkedIn, Twitter, YouTube, Instagram, Email } from "@mui/icons-material";
+import { NavLink } from 'react-router-dom'; // Ensure NavLink is imported
+import Asset8 from "../Assets/Asset8.png";
 import Landing3 from "../images/rando2.jpg";
-import Landing4 from "../images/Landing3.jpg";
+import Asset6 from "../Assets/Asset6.png";
 import IEXVideo from "../images/LADDYIntro.mp4";
+import hero from "../Assets/Asset21.png";
+import logo from "../Assets/Asset1.png";
+
+const interests = [
+  "Painting", "Writing", "Volunteer Work", "Photography",
+  "Traveling", "Reading", "Biology", "Languages",
+  "Cooking", "Baking", "Music", "Debating",
+  "Gaming", "Sports", "Astrology", "Stargazing",
+  "Film", "Science", "Mathematics", "Social Events", "Basketball"
+];
+
+const rotatingTexts = [
+  "Positive", "Enthusiastic", "Organized", "Analytical", 
+  "Creative", "Decisive", "Dedicated", "Encouraging", "Proactive"
+];
 
 export default function Landing() {
+  const [selectedInterests, setSelectedInterests] = useState([]);
+  const [currentRotatingText, setCurrentRotatingText] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentRotatingText((prevIndex) => (prevIndex + 1) % rotatingTexts.length);
+    }, 700); // Change text every 0.75 seconds
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleInterestClick = (interest) => {
+    setSelectedInterests((prevSelected) =>
+      prevSelected.includes(interest)
+        ? prevSelected.filter((item) => item !== interest)
+        : [...prevSelected, interest]
+    );
+  };
+
   return (
     <>
       <Box>
@@ -28,156 +56,180 @@ export default function Landing() {
               maxWidth="sm"
               style={{
                 fontFamily: "Inter",
-                fontSize: 40,
+                fontSize: 56,
                 textAlign: "left",
-                color: "#ED7D31",
+                color: "black",
+                fontStyle: "bold",
+                marginLeft: '-50px',
+                marginBottom: '12px',
               }}
             >
-              Ready to find your perfect project partner?
-            </Container>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <video width="500vw" height="300vw" controls>
-              <source src={IEXVideo} type="video/mp4" />
-            </video>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box style={{ backgroundColor: "white" }}>
-        <Grid
-          container
-          spacing={2}
-          style={{ padding: 30 }}
-          // alignItems="center"
-          // justifyContent="center"
-          // style={{ minHeight: "100vh" }}
-        >
-          <Grid item xs={12} sm={6}>
-            <Container
-              maxWidth="sm"
-              style={{
-                fontFamily: "Inter",
-                fontSize: 40,
-                textAlign: "left",
-              }}
-            >
-              Struggling to find like-minded others?
-            </Container>
-            <br />
-            <Container
-              maxWidth="sm"
-              style={{
-                fontFamily: "Montserrat",
-                fontSize: 15,
-                textAlign: "left",
-                color: "#6F7CB2",
-              }}
-            >
-              We at LADDY are dedicated to help you reach out to others that
-              share the same interests and work well with you. With the use of
-              our very own matching algorithm, we endeavour to help you form
-              your perfect project group.
-            </Container>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <img width={"250vw"} src={Landing4} />
-          </Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={6}>
-            <Container style={{ textAlign: "left" }}>
-              <Stack spacing={1}>
-                <div>
-                  <img src={Landing2} />
-                </div>
-                <p style={{ fontSize: 20, fontWeight: "bold" }}>
-                  Carefully curated questionnaire
-                </p>
-                <p
+              Struggling to form the perfect team?
+              <Typography
+                style={{
+                  fontFamily: "Montserrat",
+                  fontSize: 18,
+                  color: "black",
+                  marginTop: '12px',
+                  marginLeft: '0px',
+                  textAlign: 'left'
+                }}
+              >
+                LADDY is dedicated to helping you find individuals with similar interests who will work well with you. 
+                Through the use of our matching algorithms, we endeavour to help you form your perfect project group.
+              </Typography>
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "#F86204",
+                  borderRadius: 20,
+                  padding: 10,
+                  fontFamily: "DM Sans",
+                  fontWeight: "normal",
+                  marginTop: '20px', // Add margin to separate from the text above
+                }}
+              >
+                <NavLink
+                  to="/auth"
                   style={{
-                    fontFamily: "Montserrat",
-                    fontSize: 15,
-                    color: "#5D6970",
+                    color: "White",
+                    textDecoration: 'none', // Ensure the text decoration is removed
                   }}
                 >
-                  Our questions are designed to ensured that you are matched as
-                  accurately as possible to others
-                </p>
-              </Stack>
+                  Get started
+                </NavLink>
+              </Button>
             </Container>
           </Grid>
-          <Grid item xs={6}>
-            <Container style={{ textAlign: "left" }}>
-              <Stack spacing={1}>
-                <div>
-                  <img src={Landing2} />
-                </div>
-                <p style={{ fontSize: 20, fontWeight: "bold" }}>
-                  Free and easy to use
-                </p>
-                <p
-                  style={{
-                    fontFamily: "Montserrat",
-                    fontSize: 15,
-                    color: "#5D6970",
-                  }}
-                >
-                  Intuitive design for all users, allowing for easy networking
-                  and browsing of profiles
-                </p>
-              </Stack>
-            </Container>
+
+          <Grid item xs={12} sm={6}>
+            <div>
+              <img src={hero} width={750} height={700} />
+            </div>
           </Grid>
         </Grid>
       </Box>
-      <br />
-      <br />
-      <Box style={{ backgroundColor: "white" }}>
-        <Grid
-          container
-          spacing={2}
-          style={{ padding: 30 }}
-          // alignItems="center"
-          // justifyContent="center"
-          // style={{ minHeight: "100vh" }}
+
+      <Grid item xs={12} sm={6} sx={{ marginTop: '0px' }}>
+        <video width="1000vw" height="800vw" controls>
+          <source src={IEXVideo} type="video/mp4" />
+        </video>
+      </Grid>
+      
+      <Grid item xs={12} sm={6} sx={{ marginTop: '200px' }}>
+        <Box 
+          sx={{ 
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            backgroundColor: '#fffaf0', 
+            padding: '30px', 
+            borderRadius: '16px', 
+            border: '2px solid #F86204', 
+            marginLeft: '20px',
+            maxWidth: '650px',
+            position: 'relative'
+          }}
         >
+          <Box sx={{ flex: 1 }}>
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                marginBottom: '20px', 
+                color: '#ED7D31', 
+                fontWeight: 'bold' 
+              }}
+            >
+              Section 2: Who You Really Are
+            </Typography>
+            <Typography 
+              variant="h4" 
+              sx={{ 
+                marginBottom: '30px', 
+                fontWeight: 'bold' 
+              }}
+            >
+              Choose Your Interests
+            </Typography>
+            <Grid container spacing={2} justifyContent="center">
+              {interests.map((interest, index) => (
+                <Grid item key={index}>
+                  <Button 
+                    variant="contained" 
+                    sx={{ 
+                      backgroundColor: selectedInterests.includes(interest) ? '#FFA07A' : '#ED7D31', 
+                      color: 'white', 
+                      borderRadius: '16px', 
+                      minWidth: '100px', 
+                      minHeight: '50px', 
+                      margin: '5px',
+                      '&:hover': {
+                        backgroundColor: '#D56A29'
+                      },
+                      '&:active': {
+                        backgroundColor: '#FFA07A'
+                      }
+                    }}
+                    onClick={() => handleInterestClick(interest)}
+                  >
+                    {interest}
+                  </Button>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Box>
+
+        <Box sx={{ position: 'absolute', top: '280%', right: '8%', textAlign: 'center' }}>
+          <Typography variant="h4" sx={{ fontWeight: 'normal', color: '#000000', display: 'inline', paddingRight: '10px' }}>
+            Find your 
+          </Typography>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#ED7D31', display: 'inline', paddingRight: '5px' }}>
+            {rotatingTexts[currentRotatingText]}
+          </Typography>
+          <Typography variant="h4" sx={{ fontWeight: 'normal', color: '#000000', display: 'inline', paddingLeft: '10px' }}>
+            Team.
+          </Typography>
+        </Box>
+      </Grid>
+
+      <Box sx={{ paddingTop: '150px', textAlign: 'center' }}>
+        <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+          We focus on finding the <span style={{ color: '#ED7D31' }}>right</span> team.
+        </Typography>
+        <Grid container spacing={4} sx={{ marginTop: '40px' }}>
           <Grid item xs={12} sm={6}>
-            <img width={"250vw"} src={Landing3} />
+            <Typography variant="h5" sx={{ fontWeight: 'bold', paddingLeft: '50px', textAlign: 'Left' }}>
+              Carefully curated questions
+            </Typography>
+            <Typography variant="body1" sx={{ marginTop: '20px', paddingLeft: '50px', textAlign: 'left' }}>
+              Our platform features an intuitive design for all users, allowing for easy
+              networking and browsing of profiles. With a user-friendly interface, you can
+              effortlessly connect with potential project partners.
+            </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Container
-              maxWidth="sm"
-              style={{
-                fontFamily: "Inter",
-                fontSize: 40,
-                textAlign: "left",
-              }}
-            >
-              You are special
-            </Container>
-            <br />
-            <Container
-              maxWidth="sm"
-              style={{
-                fontFamily: "Montserrat",
-                fontSize: 15,
-                textAlign: "left",
-                color: "#6F7CB2",
-              }}
-            >
-              We know how tough, lonely and frustrating it can be to find others
-              to work on a project you are highly passionate about. LADDY was
-              the same. Whether you are a student, free-lancer, social activist,
-              or corporate worker, we got you.
-              <br />
-              <br />
-              XX% of LADDY's users are greatly satisfied with the cohesiveness
-              of their matched teams, and have gone on to foster meaningful
-              personal relationships that extend beyond the initial project.
-            </Container>
+            <img width={"100%"} src={Asset6} style={{ marginTop: '-100px', paddingLeft: '50px' }} />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={4} alignItems="center" justifyContent="center" sx={{ marginTop: '-50px' }}>
+          <Grid item xs={12} sm={4}>
+            <img width={"150%"} src={Asset8} style={{ marginTop: '-150px', paddingLeft: '20px' }} />
+          </Grid>
+          <Grid item xs={12} sm={7}>
+            <Typography variant="h5" sx={{ fontWeight: 'bold', marginTop: '-150px', textAlign: 'left', paddingLeft: '100px' }}>
+              Free and easy to use
+            </Typography>
+            <Typography variant="body1" sx={{ marginTop: '0px', textAlign: 'left', paddingLeft: '100px' }}>
+              Our questions are designed to ensure you are matched as accurately as possible.
+              Each question aims to gather detailed insights like your skills, interests, and preferences. 
+              This comprehensive approach helps us to create precise matches, enhancing the likelihood of successful and productive collaborations.
+            </Typography>
           </Grid>
         </Grid>
       </Box>
+
       <br />
       <br />
       <div
@@ -188,16 +240,6 @@ export default function Landing() {
           justifyContent: "space-evenly",
         }}
       >
-        {/* <Container
-          maxWidth="sm"
-          style={{
-            fontFamily: "Inter",
-            fontSize: 15,
-            color: "#939EA4",
-            backgroundColor: "#FFEDE7",
-            padding: 30,
-          }}
-        > */}
         <div>© 2023 LADDY</div>
         <Facebook sx={{ color: "#0072b1" }} />
         <LinkedIn sx={{ color: "#0072b1" }} />
@@ -205,7 +247,6 @@ export default function Landing() {
         <YouTube sx={{ color: "red" }} />
         <Instagram sx={{ color: "black" }} />
         <Email sx={{ color: "green" }} />
-        {/* </Container> */}
       </div>
     </>
   );
