@@ -10,12 +10,12 @@ import {
   Checkbox,
   FormControlLabel,
   Backdrop,
+  Typography,
 } from "@mui/material";
 import {
   Badge,
   Email,
   Key,
-  PhoneIphone,
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
@@ -23,7 +23,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../supabase";
 import UniversalPopup from "../universal/UniversalPopup";
 import Dashboard from "../dashboard/Dashboard";
-import meeting from "../images/meeting.png";
+import Asset3 from "../Assets/Asset3.png";
 
 export default function Auth({ hideDashboard, showDashboard }) {
   const [session, setSession] = useState(null);
@@ -54,10 +54,6 @@ export default function Auth({ hideDashboard, showDashboard }) {
     fetchUserData();
   }, []);
 
-  // useEffect(() => {
-  //   showDashboard();
-  // });
-
   function toggleVisibility(e) {
     e.preventDefault();
     setPasswordVisible(!passwordVisible);
@@ -66,12 +62,6 @@ export default function Auth({ hideDashboard, showDashboard }) {
   const validUsernameRegex = /^[a-zA-Z0-9]/;
   const validEmailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-  // async function supabaseLogInGoogle(e) {
-  //   e.preventDefault();
-  //   const
-
-  // }
 
   async function supabaseLogIn(e) {
     e.preventDefault();
@@ -130,14 +120,6 @@ export default function Auth({ hideDashboard, showDashboard }) {
       errors[0] = false;
       setUsernameInvalid(false);
     }
-
-    // if (currentUserUsernameData.includes(signUpUsername)) {
-    //   errors[1] = true;
-    //   setUsernameTaken(true);
-    // } else {
-    //   errors[0] = false;
-    //   setUsernameTaken(false);
-    // }
 
     if (!signUpEmail.match(validEmailRegex)) {
       errors[1] = true;
@@ -247,11 +229,6 @@ export default function Auth({ hideDashboard, showDashboard }) {
     setAccountCreationSuccess(false);
   }
 
-  // function hideDashboard() {
-  //   showNavBar();
-  //   showDashboard(false);
-  // }
-
   return (
     <>
       {dashboardOpen ? (
@@ -284,27 +261,12 @@ export default function Auth({ hideDashboard, showDashboard }) {
               popupText={"Signup failed. Check fields?"}
             />
           </Backdrop>
-          {/* <Backdrop
-            sx={{
-              color: "#fff",
-              zIndex: (theme) => theme.zIndex.drawer + 1,
-            }}
-            open={accountCreationSuccess}
-            onClick={handleCloseSignUpSuccess}
-          >
-            <UniversalPopup
-              closePopUp={closePopUpSignupSuccess}
-              popupText={
-                "Signup success! Please verify your email before logging in"
-              }
-            />
-          </Backdrop> */}
           {signUp ? (
             <Grid container spacing={0}>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <Container
                   style={{
-                    backgroundColor: "#E98356",
+                    backgroundColor: "#FFFAF0",
                     padding: 20,
                     height: 595.92,
                     display: "flex",
@@ -312,44 +274,46 @@ export default function Auth({ hideDashboard, showDashboard }) {
                     justifyContent: "center",
                   }}
                 >
-                  {/* <p
-                    style={{
-                      fontFamily: "Montserrat",
-                      fontSize: 40,
-                      color: "white",
-                    }}
-                  >
-                    Dive right in
-                  </p> */}
-                  <img width={300} src={meeting} />
+                  <img width={600} src={Asset3} />
                 </Container>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <Container
                   style={{
-                    backgroundColor: "white",
-                    // borderRadius: 20,
-                    padding: 30,
+                    backgroundColor: "#FFFAF0",
+                    padding: 50,
                   }}
                 >
-                  <p
-                    style={{
+                  <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{
                       fontFamily: "Montserrat",
-                      fontSize: 20,
                       fontWeight: "bold",
-                      color: "white",
-                      textAlign: "left",
+                      color: "#A87FDB",
+                      textAlign: "Center",
+                      mb: 1,
                     }}
                   >
-                    <div style={{ color: "#A87FDB" }}>Dive right in.</div>
-                    <div style={{ color: "#E98356" }}>Set up your account.</div>
-                  </p>
+                    Dive right in.
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{
+                      color: "#000000",
+                      textAlign: "Center",
+                      mb: 7,
+                    }}
+                  >
+                    Set up your account.
+                  </Typography>
                   <Stack spacing={2}>
                     <TextField
                       fullWidth
                       label="First Name"
                       id="user_first_name"
-                      style={{ backgroundColor: "white" }}
+                      style={{ backgroundColor: "white", }}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -362,7 +326,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
                       fullWidth
                       label="Email Address"
                       id="user_email"
-                      style={{ backgroundColor: "white" }}
+                      style={{ backgroundColor: "white", marginTop: '30px'  }}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -372,31 +336,35 @@ export default function Auth({ hideDashboard, showDashboard }) {
                       }}
                     />
                     {emailInvalid && (
-                      <p
-                        style={{
+                      <Typography
+                        variant="body2"
+                        sx={{
                           fontFamily: "Montserrat",
                           fontWeight: "bold",
+                          color: "red",
                         }}
                       >
                         Invalid email!
-                      </p>
+                      </Typography>
                     )}
                     {emailTaken && (
-                      <p
-                        style={{
+                      <Typography
+                        variant="body2"
+                        sx={{
                           fontFamily: "Montserrat",
                           fontWeight: "bold",
+                          color: "red",
                         }}
                       >
                         Email taken!
-                      </p>
+                      </Typography>
                     )}
                     <TextField
                       fullWidth
                       label="Password"
                       id="user_password"
                       type={passwordVisible ? "text" : "password"}
-                      style={{ backgroundColor: "white" }}
+                      style={{ backgroundColor: "white", marginTop: '30px' }}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -421,7 +389,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
                       label="Confirm Password"
                       id="user_confirm_password"
                       type={passwordVisible ? "text" : "password"}
-                      style={{ backgroundColor: "white" }}
+                      style={{ backgroundColor: "white", marginTop: '30px' }}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -442,14 +410,16 @@ export default function Auth({ hideDashboard, showDashboard }) {
                       }}
                     />
                     {!passwordMatching && (
-                      <p
-                        style={{
+                      <Typography
+                        variant="body2"
+                        sx={{
                           fontFamily: "Montserrat",
                           fontWeight: "bold",
+                          color: "red",
                         }}
                       >
                         Passwords don't match!
-                      </p>
+                      </Typography>
                     )}
                     <FormControlLabel
                       control={
@@ -487,8 +457,9 @@ export default function Auth({ hideDashboard, showDashboard }) {
                     Sign me Up!
                   </Button>
                   <hr style={{ borderWidth: 1, borderColor: "black" }} />
-                  <p
-                    style={{
+                  <Typography
+                    variant="body1"
+                    sx={{
                       fontFamily: "Montserrat",
                       fontSize: 15,
                       color: "#7F7F7F",
@@ -515,16 +486,16 @@ export default function Auth({ hideDashboard, showDashboard }) {
                     >
                       Sign In
                     </button>
-                  </p>
+                  </Typography>
                 </Container>
               </Grid>
             </Grid>
           ) : (
             <Grid container spacing={0}>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <Container
                   style={{
-                    backgroundColor: "#E98356",
+                    backgroundColor: "#FFFAF0",
                     padding: 20,
                     height: 740.5,
                     display: "flex",
@@ -532,24 +503,14 @@ export default function Auth({ hideDashboard, showDashboard }) {
                     justifyContent: "center",
                   }}
                 >
-                  {/* <p
-                    style={{
-                      fontFamily: "Montserrat",
-                      fontSize: 40,
-                      color: "white",
-                    }}
-                  >
-                    Dive right in
-                  </p> */}
-                  <img width={300} src={meeting} />
+                  <img width={700} src={Asset3} />
                 </Container>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <Container
                   style={{
                     backgroundColor: "white",
                     height: 740.5,
-                    // borderRadius: 20,
                     padding: 30,
                     display: "flex",
                     alignItems: "center",
@@ -557,19 +518,21 @@ export default function Auth({ hideDashboard, showDashboard }) {
                   }}
                 >
                   <div>
-                    <p
-                      style={{
-                        fontFamily: "Montserrat",
-                        fontSize: 20,
-                        fontWeight: "bold",
-                        color: "white",
-                        textAlign: "left",
+                    <Typography
+                      variant="h5"
+                      component="div"
+                      sx={{
+                        fontWeight: "normal",
+                        fontsize: "72",
+                        color: "#E98356",
+                        marginTop: "-200px",
+                        textAlign: "Center",
+                        mb: 6,
                       }}
                     >
-                      <div style={{ color: "#A87FDB" }}>Welcome back!</div>
-                      <div style={{ color: "#E98356" }}>Login.</div>
-                    </p>
-                    <Stack spacing={2}>
+                      Log In.
+                    </Typography>
+                    <Stack spacing={1}> {/* Adjusted spacing to 1 */}
                       <TextField
                         fullWidth
                         label="Email Address"
@@ -588,7 +551,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
                         label="Password"
                         id="user_login_password"
                         type={passwordVisible ? "text" : "password"}
-                        style={{ backgroundColor: "white" }}
+                        style={{ backgroundColor: "white", marginTop: '20px' }}/* Adjusted margin-top */
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">
@@ -608,12 +571,14 @@ export default function Auth({ hideDashboard, showDashboard }) {
                           ),
                         }}
                       />
-                      <p
-                        style={{
+                      <Typography
+                        variant="body1"
+                        sx={{
                           fontFamily: "Montserrat",
                           fontSize: 15,
                           color: "#7F7F7F",
                           textAlign: "left",
+                          mt: 1, // Add space below "Log In."
                         }}
                       >
                         Need an account?
@@ -633,13 +598,15 @@ export default function Auth({ hideDashboard, showDashboard }) {
                         >
                           Sign Up.
                         </button>
-                      </p>
-                      <p
-                        style={{
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        sx={{
                           fontFamily: "Montserrat",
                           fontSize: 15,
                           color: "#7F7F7F",
                           textAlign: "left",
+                          mt: -1 // Adjusted margin-top to reduce space
                         }}
                       >
                         Forgot password?
@@ -656,25 +623,9 @@ export default function Auth({ hideDashboard, showDashboard }) {
                         >
                           Recover.
                         </button>
-                      </p>
-                      {/* <FormControlLabel
-                  control={
-                    <Checkbox
-                      sx={{
-                        color: "black",
-                        "&.Mui-checked": { color: "black" },
-                      }}
-                    />
-                  }
-                  style={{
-                    color: "#7F7F7F",
-                    fontSize: 10,
-                  }}
-                  label="Remember me"
-                /> */}
+                      </Typography>
                     </Stack>
                     <br />
-                    {/* {accountLoginFail && <p>Login failed. Check email/password?</p>} */}
                     <Button
                       variant="contained"
                       onClick={supabaseLogIn}
@@ -687,48 +638,9 @@ export default function Auth({ hideDashboard, showDashboard }) {
                         borderRadius: 15,
                       }}
                     >
-                      Log In
+                      Log In.
                     </Button>
                   </div>
-                  {/* <br />
-                  <br />
-                  <Divider>OR</Divider>
-                  <br /> */}
-                  {/* <Button
-                variant="contained"
-                style={{
-                  width: 200,
-                  backgroundColor: "white",
-                  color: "black",
-                  textAlign: "center",
-                  fontFamily: "Montserrat",
-                  fontWeight: "bold",
-                  fontSize: 12,
-                  borderRadius: 30,
-                  //   marginRight: 20,
-                }}
-                startIcon={<School style={{ color: "black" }} />}
-              >
-                Login with NUS
-              </Button> */}
-                  {/* <br />
-              <br /> */}
-                  {/* <Button
-                    variant="contained"
-                    style={{
-                      width: 200,
-                      backgroundImage: "linear-gradient(#F9AF3A, #DE5F8F)",
-                      color: "black",
-                      textAlign: "center",
-                      fontFamily: "Montserrat",
-                      fontWeight: "bold",
-                      fontSize: 12,
-                      borderRadius: 30,
-                    }}
-                    startIcon={<Google style={{ color: "black" }} />}
-                  >
-                    Login with Google
-                  </Button> */}
                 </Container>
               </Grid>
             </Grid>
