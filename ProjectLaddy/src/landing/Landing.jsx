@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Box, Grid, Stack, Typography, Button } from "@mui/material";
+import { Container, Box, Grid, Stack, Typography, Button, Divider } from "@mui/material";
 import { Facebook, LinkedIn, Twitter, YouTube, Instagram, Email } from "@mui/icons-material";
 import { NavLink } from 'react-router-dom'; // Ensure NavLink is imported
 import Asset8 from "../Assets/Asset8.png";
@@ -29,7 +29,7 @@ export default function Landing() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentRotatingText((prevIndex) => (prevIndex + 1) % rotatingTexts.length);
-    }, 700); // Change text every 0.75 seconds
+    }, 400); // Change text every 0.4 seconds
     return () => clearInterval(interval);
   }, []);
 
@@ -78,27 +78,59 @@ export default function Landing() {
                 LADDY is dedicated to helping you find individuals with similar interests who will work well with you. 
                 Through the use of our matching algorithms, we endeavour to help you form your perfect project group.
               </Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '40px', justifyContent: 'center' }}>
               <Button
                 variant="contained"
                 style={{
                   backgroundColor: "#F86204",
                   borderRadius: 20,
-                  padding: 10,
+                  padding: '10px 20px',
                   fontFamily: "DM Sans",
                   fontWeight: "normal",
-                  marginTop: '20px', // Add margin to separate from the text above
+                  textAlign: 'center',
+                  whiteSpace: 'normal',
+                  lineHeight: 1.5,
+                  marginRight: '10px', // Adjust the margin to bring the buttons closer together
+                  minWidth: '150px', // Reduce the width of the first button
                 }}
               >
                 <NavLink
                   to="/auth"
                   style={{
                     color: "White",
-                    textDecoration: 'none', // Ensure the text decoration is removed
+                    textDecoration: 'none',
                   }}
                 >
-                  Get started
+                  Get a free work <br /> personality report!
                 </NavLink>
               </Button>
+              <Divider orientation="vertical" flexItem sx={{ margin: '0 30px', backgroundColor: '#F86204', height: '50px' }} />
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "#F86204",
+                  borderRadius: 20,
+                  padding: '10px 20px',
+                  fontFamily: "DM Sans",
+                  fontWeight: "normal",
+                  textAlign: 'center',
+                  whiteSpace: 'normal',
+                  lineHeight: 1.5,
+                  marginLeft: '10px', // Adjust the margin to bring the buttons closer together
+                  minWidth: '180px', // Ensure the button has enough width for the text
+                }}
+              >
+                <NavLink
+                  to="/auth"
+                  style={{
+                    color: "White",
+                    textDecoration: 'none',
+                  }}
+                >
+                  Form a team!
+                </NavLink>
+              </Button>
+            </Box>
             </Container>
           </Grid>
 
