@@ -108,7 +108,7 @@ export default function Teams({ userData }) {
               label="Search for your class or project"
               sx={{ width: "100vw", backgroundColor: "white", borderRadius: 3 }}
               InputLabelProps={{
-                style: { fontFamily: "Montserrat", color: "#CB8909" },
+                style: { fontFamily: "Montserrat", color: "#30203C" },
               }}
             />
             <Button
@@ -124,7 +124,7 @@ export default function Teams({ userData }) {
           <Box sx={{ backgroundColor: "white", borderRadius: 3, padding: 2 }}>
             <Container
               sx={{
-                backgroundColor: "#CB8909",
+                backgroundColor: "#30203C",
                 padding: 3,
                 color: "white",
                 fontFamily: "Montserrat",

@@ -189,7 +189,7 @@ export default function Dashboard({ hideDashboard }) {
           }}
           sx={{
             display: "flex",
-            backgroundImage: "linear-gradient(#B27FC6, #E98356)",
+            backgroundColor: "#F86204",
           }}
           variant="contained"
         >

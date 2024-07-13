@@ -16,9 +16,12 @@ export default function Questions({
   activeClass,
   userData,
 }) {
-  const [consentAnswer, setGivenConsent] = useState("yes");
+  const [consentAnswer, setConsentAnswer] = useState("yes");
   const [gender, setGender] = useState(null);
-  const [commStyle, setCommStyle] = useState(null);
+  const [university, setUniversity] = useState(null);
+  const [major, setMajor] = useState("");
+  const [secondMajor, setSecondMajor] = useState("");
+  const [brainstorming, setBrainstorming] = useState(null);
   const [feedbackGiving, setFeedbackGiving] = useState(null);
   const [feedbackReceiving, setFeedbackReceiving] = useState(null);
   const [workingHours, setWorkingHours] = useState(null);
@@ -26,10 +29,8 @@ export default function Questions({
   const [workingApproach, setWorkingApproach] = useState(null);
   const [manageDeadlines, setManageDeadlines] = useState(null);
   const [workConsistency, setWorkConsistency] = useState(null);
-  const [timeCommittment, setTimeCommittment] = useState(null);
   const [meetingStyle, setMeetingStyle] = useState(null);
   const [meetingFrequency, setMeetingFrequency] = useState(null);
-  const [mistakeHandling, setMistakeHandling] = useState(null);
   const [adaptingComfort, setAdaptingComfort] = useState(null);
   const [effectiveCommunication, setEffectiveCommunication] = useState(null);
   const [initiatingConvo, setInitiatingConvo] = useState(null);
@@ -37,9 +38,11 @@ export default function Questions({
   const [challengePreference, setChallengePreference] = useState(null);
   const [exploringComfort, setExploringComfort] = useState(null);
   const [conflictManagement, setConflictManagement] = useState(null);
+  const [stressManagement, setStressManagement] = useState(null);
+  const [idealGroupSize, setIdealGroupSize] = useState(null);
+  const [hangoutActivities, setHangoutActivities] = useState(null);
 
   const URL = "https://iex-backend.onrender.com";
-  // const URL = "http://localhost:3001";
 
   function submitQuestionnaire(e) {
     e.preventDefault();
@@ -51,27 +54,28 @@ export default function Questions({
 
     const heteroWeights = [
       gender,
-      // document.getElementById("userMajor").value,
       adaptingComfort,
-      commStyle,
       initiatingConvo,
       initiatingFrequency,
-      mistakeHandling,
       conflictManagement,
     ];
 
     const homoWeights = [
+      feedbackGiving,
+      feedbackReceiving,
       workingHours,
       meetingHours,
       workingApproach,
       manageDeadlines,
       workConsistency,
-      timeCommittment,
       meetingStyle,
       meetingFrequency,
       effectiveCommunication,
       challengePreference,
       exploringComfort,
+      stressManagement,
+      idealGroupSize,
+      hangoutActivities,
     ];
 
     const feedback = [
@@ -83,7 +87,8 @@ export default function Questions({
       activeClass,
       userData.id,
       consentAnswer,
-      document.getElementById("userMajor").value,
+      major,
+      secondMajor,
       homoWeights,
       heteroWeights,
       feedback,
@@ -99,12 +104,11 @@ export default function Questions({
           .post(URL + "/questiondata", combinedArr, config)
           .then((response) => {
             console.log(response);
-            if (response.status == 200) {
-              setQuestionnaireSubmitted(true);
+            if (response.status === 200) {
               startMatching();
               closeQuestionnaire();
             } else {
-              setQuestionnaireError(true);
+              alert("Submission error");
             }
           })
           .catch((err) => {
@@ -134,24 +138,17 @@ export default function Questions({
         <br />
         <FormControl>
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue={consentAnswer}
-            name="Question 1"
+            aria-labelledby="consent-radio-group-label"
+            value={consentAnswer}
+            name="consent"
+            onChange={(e) => setConsentAnswer(e.target.value)}
           >
             <FormControlLabel
-              checked={consentAnswer == "yes"}
-              onClick={(e) => {
-                setGivenConsent(e.target.value);
-              }}
               value="yes"
               control={<Radio />}
               label="Yes"
             />
             <FormControlLabel
-              checked={consentAnswer == "no"}
-              onClick={(e) => {
-                setGivenConsent(e.target.value);
-              }}
               value="no"
               control={<Radio />}
               label="No"
@@ -163,9 +160,9 @@ export default function Questions({
       <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
       <br />
       <div style={{ textAlign: "left" }}>
-        <div>Major</div>
+        <div>Name</div>
         <br />
-        <TextField id="userMajor" fullWidth />
+        <TextField id="userName" fullWidth />
       </div>
       <br />
       <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
@@ -175,37 +172,31 @@ export default function Questions({
           <div>Gender</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue={commStyle}
-            name="Question 3"
+            aria-labelledby="gender-radio-group-label"
+            name="gender"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
           >
             <FormControlLabel
-              checked={gender == 0}
-              onClick={(e) => {
-                setGender(e.target.value);
-              }}
-              value={0}
+              value="Male"
               control={<Radio />}
               label="Male"
             />
             <FormControlLabel
-              checked={gender == 1}
-              onClick={(e) => {
-                setGender(e.target.value);
-              }}
-              value={1}
+              value="Female"
               control={<Radio />}
               label="Female"
             />
             <FormControlLabel
-              checked={gender == 0.5}
-              onClick={(e) => {
-                setGender(e.target.value);
-              }}
-              value={0.5}
+              value="Other"
               control={<Radio />}
               label="Other"
             />
+            <FormControlLabel
+              value="Prefer not to say"
+              control={<Radio />}
+              label="Prefer not to say"
+            />
           </RadioGroup>
         </FormControl>
       </div>
@@ -214,46 +205,101 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            How do you typically give feedback to others?
-            {/* (feedforward entails
-            providing corrective feedback based on future behavior or
-            performance. This method of feedback focuses on behavior that should
-            be avoided/continued in the future) */}
-          </div>
+          <div>University</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 3"
+            aria-labelledby="university-radio-group-label"
+            name="university"
+            value={university}
+            onChange={(e) => setUniversity(e.target.value)}
           >
             <FormControlLabel
-              checked={feedbackGiving == 0}
-              onClick={(e) => {
-                setFeedbackGiving(e.target.value);
-              }}
-              value={0}
+              value="NUS"
               control={<Radio />}
-              label="Negative feedback"
+              label="NUS"
             />
             <FormControlLabel
-              checked={feedbackGiving == 1}
-              onClick={(e) => {
-                setFeedbackGiving(e.target.value);
-              }}
-              value={1}
+              value="SMU"
               control={<Radio />}
-              label="Positive feedback"
-            />
-            {/* <FormControlLabel
-              value="negative_feedforward"
-              control={<Radio />}
-              label="Negative feed-forward"
+              label="SMU"
             />
             <FormControlLabel
-              value="positive_feedforward"
+              value="NTU"
               control={<Radio />}
-              label="Positive feed-forward"
-            /> */}
+              label="NTU"
+            />
+            <FormControlLabel
+              value="SIM"
+              control={<Radio />}
+              label="SIM"
+            />
+            <FormControlLabel
+              value="SUSS"
+              control={<Radio />}
+              label="SUSS"
+            />
+            <FormControlLabel
+              value="Others/Exchange"
+              control={<Radio />}
+              label="Others/Exchange"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <div>Major (Fully spelled out)</div>
+        <br />
+        <TextField
+          id="userMajor"
+          fullWidth
+          value={major}
+          onChange={(e) => setMajor(e.target.value)}
+        />
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <div>2nd Major/Degree (if applicable)</div>
+        <br />
+        <TextField
+          id="userSecondMajor"
+          fullWidth
+          value={secondMajor}
+          onChange={(e) => setSecondMajor(e.target.value)}
+        />
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>As the meeting starts, how would you suggest initiating the brainstorming session?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="brainstorming-radio-group-label"
+            name="brainstorming"
+            value={brainstorming}
+            onChange={(e) => setBrainstorming(e.target.value)}
+          >
+            <FormControlLabel
+              value="Start the discussion off by sharing a few of your ideas; let’s start with those and see what everyone thinks"
+              control={<Radio />}
+              label="Start the discussion off by sharing a few of your ideas; let’s start with those and see what everyone thinks"
+            />
+            <FormControlLabel
+              value="Let’s gather everyone's ideas first and then discuss them one by one."
+              control={<Radio />}
+              label="Let’s gather everyone's ideas first and then discuss them one by one."
+            />
+            <FormControlLabel
+              value="Wait for others to start the discussion and listen to them first before sharing your ideas."
+              control={<Radio />}
+              label="Wait for others to start the discussion and listen to them first before sharing your ideas."
+            />
           </RadioGroup>
         </FormControl>
       </div>
@@ -262,40 +308,70 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>How do you prefer to receive feedback from others?</div>
+          <div>One of your team members consistently delivers high-quality work but missed a few deadlines. How do you provide feedback?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 4"
+            aria-labelledby="feedback-giving-radio-group-label"
+            name="feedbackGiving"
+            value={feedbackGiving}
+            onChange={(e) => setFeedbackGiving(e.target.value)}
           >
             <FormControlLabel
-              checked={feedbackReceiving == 0}
-              onClick={(e) => {
-                setFeedbackReceiving(e.target.value);
-              }}
-              value={0}
+              value="Focus on the missed deadlines and the need to adhere to the project timeline."
               control={<Radio />}
-              label="Negative feedback"
+              label="Focus on the missed deadlines and the need to adhere to the project timeline."
             />
             <FormControlLabel
-              checked={feedbackReceiving == 1}
-              onClick={(e) => {
-                setFeedbackReceiving(e.target.value);
-              }}
-              value={1}
+              value="Praise their high-quality work without mentioning the missed deadlines."
               control={<Radio />}
-              label="Positive feedback"
-            />
-            {/* <FormControlLabel
-              value="negative_feedforward"
-              control={<Radio />}
-              label="Negative feed-forward"
+              label="Praise their high-quality work without mentioning the missed deadlines."
             />
             <FormControlLabel
-              value="positive_feedforward"
+              value="Suggest future strategies for meeting deadlines without focusing on past mistakes."
               control={<Radio />}
-              label="Positive feed-forward"
-            /> */}
+              label="Suggest future strategies for meeting deadlines without focusing on past mistakes."
+            />
+            <FormControlLabel
+              value="Highlight their high-quality work first and then discuss the missed deadlines, suggesting ways to improve time management."
+              control={<Radio />}
+              label="Highlight their high-quality work first and then discuss the missed deadlines, suggesting ways to improve time management."
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>During your feedback session, your team leader points out that while your work quality is excellent, you missed a few deadlines. How would you prefer to receive this feedback?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="feedback-receiving-radio-group-label"
+            name="feedbackReceiving"
+            value={feedbackReceiving}
+            onChange={(e) => setFeedbackReceiving(e.target.value)}
+          >
+            <FormControlLabel
+              value="Just be direct with me and focus on the missed deadlines and the need for punctuality."
+              control={<Radio />}
+              label="Just be direct with me and focus on the missed deadlines and the need for punctuality."
+            />
+            <FormControlLabel
+              value="Praise my work quality without dwelling too much on the deadlines."
+              control={<Radio />}
+              label="Praise my work quality without dwelling too much on the deadlines."
+            />
+            <FormControlLabel
+              value="Have a conversation with me about future strategies for meeting deadlines without focusing on past mistakes."
+              control={<Radio />}
+              label="Have a conversation with me about future strategies for meeting deadlines without focusing on past mistakes."
+            />
+            <FormControlLabel
+              value="Highlight the quality of my work first and then discuss the missed deadlines with suggestions for improvement."
+              control={<Radio />}
+              label="Highlight the quality of my work first and then discuss the missed deadlines with suggestions for improvement."
+            />
           </RadioGroup>
         </FormControl>
       </div>
@@ -307,26 +383,20 @@ export default function Questions({
           <div>Are you an early bird or a night owl?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 5"
+            aria-labelledby="working-hours-radio-group-label"
+            name="workingHours"
+            value={workingHours}
+            onChange={(e) => setWorkingHours(e.target.value)}
           >
             <FormControlLabel
-              checked={workingHours == 0}
-              onClick={(e) => {
-                setWorkingHours(e.target.value);
-              }}
-              value={0}
+              value="Early Bird"
               control={<Radio />}
               label="Early Bird"
             />
             <FormControlLabel
-              checked={workingHours == 1}
-              onClick={(e) => {
-                setWorkingHours(e.target.value);
-              }}
-              value={1}
+              value="Night Owl"
               control={<Radio />}
-              label="Night owl"
+              label="Night Owl"
             />
           </RadioGroup>
         </FormControl>
@@ -336,32 +406,23 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            Do you prefer taking meetings in the morning or towards the end of
-            the day / evening?
-          </div>
+          <div>Do you prefer taking meetings in the morning or towards the end of the day/evening?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 6"
+            aria-labelledby="meeting-hours-radio-group-label"
+            name="meetingHours"
+            value={meetingHours}
+            onChange={(e) => setMeetingHours(e.target.value)}
           >
             <FormControlLabel
-              checked={meetingHours == 0}
-              onClick={(e) => {
-                setMeetingHours(e.target.value);
-              }}
-              value={0}
+              value="Morning"
               control={<Radio />}
               label="Morning"
             />
             <FormControlLabel
-              checked={meetingHours == 1}
-              onClick={(e) => {
-                setMeetingHours(e.target.value);
-              }}
-              value={1}
+              value="Evening/Night"
               control={<Radio />}
-              label="Evening / Night"
+              label="Evening/Night"
             />
           </RadioGroup>
         </FormControl>
@@ -371,32 +432,38 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            Are you more of "Do first, think later" or "Plan first, do later"
-            individual?
-          </div>
+          <div>You have a tight deadline to develop a new research presentation. How would you prefer to start the project?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 7"
+            aria-labelledby="working-approach-radio-group-label"
+            name="workingApproach"
+            value={workingApproach}
+            onChange={(e) => setWorkingApproach(e.target.value)}
           >
             <FormControlLabel
-              checked={workingApproach == 0}
-              onClick={(e) => {
-                setWorkingApproach(e.target.value);
-              }}
-              value={0}
+              value="Jump right into research and adjust as needed along the way."
               control={<Radio />}
-              label="Do first, think later"
+              label="Jump right into research and adjust as needed along the way."
             />
             <FormControlLabel
-              checked={workingApproach == 1}
-              onClick={(e) => {
-                setWorkingApproach(e.target.value);
-              }}
-              value={1}
+              value="Quickly outline a rough plan and then start researching."
               control={<Radio />}
-              label="Plan first, do later"
+              label="Quickly outline a rough plan and then start researching."
+            />
+            <FormControlLabel
+              value="Create a detailed plan before starting any research."
+              control={<Radio />}
+              label="Create a detailed plan before starting any research."
+            />
+            <FormControlLabel
+              value="Thoroughly plan every detail and follow the plan closely."
+              control={<Radio />}
+              label="Thoroughly plan every detail and follow the plan closely."
+            />
+            <FormControlLabel
+              value="Spend significant time on planning and ensure all possible issues are considered before starting."
+              control={<Radio />}
+              label="Spend significant time on planning and ensure all possible issues are considered before starting."
             />
           </RadioGroup>
         </FormControl>
@@ -406,60 +473,38 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            On a scale of 1 to 5, where 1 is 'very poor' , and 5 is 'excellent,'
-            how would you rate your ability to manage deadlines? Please choose
-            only one number that best represents your overall performance.
-          </div>
+          <div>You are juggling several tasks, each with its own deadline. Some tasks are interdependent, requiring careful scheduling to ensure timely completion of the overall project. How do you handle multiple tasks with overlapping deadlines?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 8"
+            aria-labelledby="manage-deadlines-radio-group-label"
+            name="manageDeadlines"
+            value={manageDeadlines}
+            onChange={(e) => setManageDeadlines(e.target.value)}
           >
             <FormControlLabel
-              checked={manageDeadlines == 0}
-              onClick={(e) => {
-                setManageDeadlines(e.target.value);
-              }}
-              value={0}
+              value="I prefer to complete each task close to or just before its deadline."
               control={<Radio />}
-              label="1 - Very poor"
+              label="I prefer to complete each task close to or just before its deadline."
             />
             <FormControlLabel
-              checked={manageDeadlines == 0.25}
-              onClick={(e) => {
-                setManageDeadlines(e.target.value);
-              }}
-              value={0.25}
+              value="I finish tasks with a small buffer before each deadline."
               control={<Radio />}
-              label="2 - Poor"
+              label="I finish tasks with a small buffer before each deadline."
             />
             <FormControlLabel
-              checked={manageDeadlines == 0.5}
-              onClick={(e) => {
-                setManageDeadlines(e.target.value);
-              }}
-              value={0.5}
+              value="I manage to complete tasks well before their deadlines."
               control={<Radio />}
-              label="3 - Average"
+              label="I manage to complete tasks well before their deadlines."
             />
             <FormControlLabel
-              checked={manageDeadlines == 0.75}
-              onClick={(e) => {
-                setManageDeadlines(e.target.value);
-              }}
-              value={0.75}
+              value="I usually complete tasks quite early, ensuring a comfortable buffer before deadlines."
               control={<Radio />}
-              label="4 - Very good"
+              label="I usually complete tasks quite early, ensuring a comfortable buffer before deadlines."
             />
             <FormControlLabel
-              checked={manageDeadlines == 1}
-              onClick={(e) => {
-                setManageDeadlines(e.target.value);
-              }}
-              value={1}
+              value="I finish tasks almost immediately after they are assigned."
               control={<Radio />}
-              label="5 - Excellent"
+              label="I finish tasks almost immediately after they are assigned."
             />
           </RadioGroup>
         </FormControl>
@@ -472,26 +517,20 @@ export default function Questions({
           <div>Do you typically work consistently or in bursts?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 9"
+            aria-labelledby="work-consistency-radio-group-label"
+            name="workConsistency"
+            value={workConsistency}
+            onChange={(e) => setWorkConsistency(e.target.value)}
           >
             <FormControlLabel
-              checked={workConsistency == 0}
-              onClick={(e) => {
-                setWorkConsistency(e.target.value);
-              }}
-              value={0}
+              value="Works consistently"
               control={<Radio />}
-              label="Work consistently"
+              label="Works consistently"
             />
             <FormControlLabel
-              checked={workConsistency == 1}
-              onClick={(e) => {
-                setWorkConsistency(e.target.value);
-              }}
-              value={1}
+              value="In bursts of effort"
               control={<Radio />}
-              label="Bursts of effort"
+              label="In bursts of effort"
             />
           </RadioGroup>
         </FormControl>
@@ -501,109 +540,28 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            How much time are you willing to commit to a group project in a
-            week?
-          </div>
+          <div>Do you prefer in-person meetings, online meetings, or a mix of both?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 10"
+            aria-labelledby="meeting-style-radio-group-label"
+            name="meetingStyle"
+            value={meetingStyle}
+            onChange={(e) => setMeetingStyle(e.target.value)}
           >
             <FormControlLabel
-              checked={timeCommittment == 0}
-              onClick={(e) => {
-                setTimeCommittment(e.target.value);
-              }}
-              value={0}
+              value="In-Person meetings"
               control={<Radio />}
-              label="Less than 2 hours"
+              label="In-Person meetings"
             />
             <FormControlLabel
-              checked={timeCommittment == 0.2}
-              onClick={(e) => {
-                setTimeCommittment(e.target.value);
-              }}
-              value={0.2}
-              control={<Radio />}
-              label="2-4 hours"
-            />
-            <FormControlLabel
-              checked={timeCommittment == 0.4}
-              onClick={(e) => {
-                setTimeCommittment(e.target.value);
-              }}
-              value={0.4}
-              control={<Radio />}
-              label="4-6 hours"
-            />
-            <FormControlLabel
-              checked={timeCommittment == 0.6}
-              onClick={(e) => {
-                setTimeCommittment(e.target.value);
-              }}
-              value={0.6}
-              control={<Radio />}
-              label="6-8 hours"
-            />
-            <FormControlLabel
-              checked={timeCommittment == 0.8}
-              onClick={(e) => {
-                setTimeCommittment(e.target.value);
-              }}
-              value={0.8}
-              control={<Radio />}
-              label="8-10 hours"
-            />
-            <FormControlLabel
-              checked={timeCommittment == 1}
-              onClick={(e) => {
-                setTimeCommittment(e.target.value);
-              }}
-              value={1}
-              control={<Radio />}
-              label="More than 10 hours"
-            />
-          </RadioGroup>
-        </FormControl>
-      </div>
-      <br />
-      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-      <br />
-      <div style={{ textAlign: "left" }}>
-        <FormControl>
-          <div>Do you prefer in person meetings, online or a mix of both</div>
-          <br />
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 11"
-          >
-            <FormControlLabel
-              checked={meetingStyle == 0}
-              onClick={(e) => {
-                setMeetingStyle(e.target.value);
-              }}
-              value={0}
-              control={<Radio />}
-              label="In Person meetings"
-            />
-            <FormControlLabel
-              checked={meetingStyle == 1}
-              onClick={(e) => {
-                setMeetingStyle(e.target.value);
-              }}
-              value={1}
+              value="Online meetings"
               control={<Radio />}
               label="Online meetings"
             />
             <FormControlLabel
-              checked={meetingStyle == 0.5}
-              onClick={(e) => {
-                setMeetingStyle(e.target.value);
-              }}
-              value={0.5}
+              value="Hybrid"
               control={<Radio />}
-              label="Hybrid meetings"
+              label="Hybrid"
             />
           </RadioGroup>
         </FormControl>
@@ -616,51 +574,33 @@ export default function Questions({
           <div>How often do you like to hold meetings for a project?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 12"
+            aria-labelledby="meeting-frequency-radio-group-label"
+            name="meetingFrequency"
+            value={meetingFrequency}
+            onChange={(e) => setMeetingFrequency(e.target.value)}
           >
             <FormControlLabel
-              checked={meetingFrequency == 0}
-              onClick={(e) => {
-                setMeetingFrequency(e.target.value);
-              }}
-              value={0}
+              value="As minimal as possible"
               control={<Radio />}
               label="As minimal as possible"
             />
             <FormControlLabel
-              checked={meetingFrequency == 0.25}
-              onClick={(e) => {
-                setMeetingFrequency(e.target.value);
-              }}
-              value={0.25}
+              value="Once every two weeks"
               control={<Radio />}
-              label="Once every 2 weeks"
+              label="Once every two weeks"
             />
             <FormControlLabel
-              checked={meetingFrequency == 0.5}
-              onClick={(e) => {
-                setMeetingFrequency(e.target.value);
-              }}
-              value={0.5}
+              value="Once every week"
               control={<Radio />}
               label="Once every week"
             />
             <FormControlLabel
-              checked={meetingFrequency == 0.75}
-              onClick={(e) => {
-                setMeetingFrequency(e.target.value);
-              }}
-              value={0.75}
+              value="Twice a week"
               control={<Radio />}
               label="Twice a week"
             />
             <FormControlLabel
-              checked={meetingFrequency == 1}
-              onClick={(e) => {
-                setMeetingFrequency(e.target.value);
-              }}
-              value={1}
+              value="More than twice a week"
               control={<Radio />}
               label="More than twice a week"
             />
@@ -672,160 +612,38 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>How do you handle mistakes within a project group?</div>
+          <div>After presenting a project demo to the client, you receive feedback that requires several adjustments to meet the client's new expectations. This will involve reworking some parts of the project. How comfortable are you in adapting to feedback and making necessary adjustments to the project?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 13"
+            aria-labelledby="adapting-comfort-radio-group-label"
+            name="adaptingComfort"
+            value={adaptingComfort}
+            onChange={(e) => setAdaptingComfort(e.target.value)}
           >
             <FormControlLabel
-              checked={mistakeHandling == 0}
-              onClick={(e) => {
-                setMistakeHandling(e.target.value);
-              }}
-              value={0}
+              value="I prefer maintaining the original plan but can make changes with guidance."
               control={<Radio />}
-              label="Keep it to yourself"
+              label="I prefer maintaining the original plan but can make changes with guidance."
             />
             <FormControlLabel
-              checked={mistakeHandling == 0.25}
-              onClick={(e) => {
-                setMistakeHandling(e.target.value);
-              }}
-              value={0.25}
+              value="I can make necessary adjustments with some effort and find ways to improve."
               control={<Radio />}
-              label="PM the person who made the mistake"
+              label="I can make necessary adjustments with some effort and find ways to improve."
             />
             <FormControlLabel
-              checked={mistakeHandling == 0.5}
-              onClick={(e) => {
-                setMistakeHandling(e.target.value);
-              }}
-              value={0.5}
+              value="I am comfortable with making adjustments based on feedback and can adapt with little time."
               control={<Radio />}
-              label="PM someone who you trust to correct the mistake"
+              label="I am comfortable with making adjustments based on feedback and can adapt with little time."
             />
             <FormControlLabel
-              checked={mistakeHandling == 0.75}
-              onClick={(e) => {
-                setMistakeHandling(e.target.value);
-              }}
-              value={0.75}
+              value="I welcome feedback and make adjustments smoothly and efficiently."
               control={<Radio />}
-              label="Openly point it out in the form of constructive criticism"
+              label="I welcome feedback and make adjustments smoothly and efficiently."
             />
             <FormControlLabel
-              checked={mistakeHandling == 1}
-              onClick={(e) => {
-                setMistakeHandling(e.target.value);
-              }}
-              value={1}
+              value="I embrace feedback and adapt quickly to make the necessary changes with enthusiasm."
               control={<Radio />}
-              label="Openly point out the mistake and charge the person to rectify it immediately"
-            />
-          </RadioGroup>
-        </FormControl>
-      </div>
-      <br />
-      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-      <br />
-      {/* <div style={{ textAlign: "left" }}>
-        <FormControl>
-          <div>
-            How do you manage stress and maintain composure in high-pressure
-            situations?
-          </div>
-          <br />
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="radio-buttons-group"
-          >
-            <FormControlLabel
-              value="breathe"
-              control={<Radio />}
-              label="Take deep breaths, assess priorities, and break tasks into manageable steps"
-            />
-            <FormControlLabel
-              value="impulse"
-              control={<Radio />}
-              label="React impulsively"
-            />
-            <FormControlLabel
-              value="delegate"
-              control={<Radio />}
-              label="Delegate tasks to others"
-            />
-            <FormControlLabel
-              value="support"
-              control={<Radio />}
-              label="Seek support from colleagues and communicate openly about challenges"
-            />
-            <FormControlLabel
-              value="openly_negative"
-              control={<Radio />}
-              label="Openly point it out as a mistake and charge the person to rectify it immediately"
-            />
-          </RadioGroup>
-        </FormControl>
-      </div>
-      <br />
-      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-      <br /> */}
-      <div>
-        <FormControl>
-          <div>
-            How comfortable are you in adapting to changing project requirements
-            and circumstances?
-          </div>
-          <br />
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 14"
-          >
-            <FormControlLabel
-              checked={adaptingComfort == 0}
-              onClick={(e) => {
-                setAdaptingComfort(e.target.value);
-              }}
-              value={0}
-              control={<Radio />}
-              label="1 - Very uncomfortable"
-            />
-            <FormControlLabel
-              checked={adaptingComfort == 0.25}
-              onClick={(e) => {
-                setAdaptingComfort(e.target.value);
-              }}
-              value={0.25}
-              control={<Radio />}
-              label="2 - Mildly uncomfortable"
-            />
-            <FormControlLabel
-              checked={adaptingComfort == 0.5}
-              onClick={(e) => {
-                setAdaptingComfort(e.target.value);
-              }}
-              value={0.5}
-              control={<Radio />}
-              label="3 - More than comfortable"
-            />
-            <FormControlLabel
-              checked={adaptingComfort == 0.75}
-              onClick={(e) => {
-                setAdaptingComfort(e.target.value);
-              }}
-              value={0.75}
-              control={<Radio />}
-              label="4 - Very comfortable"
-            />
-            <FormControlLabel
-              checked={adaptingComfort == 1}
-              onClick={(e) => {
-                setAdaptingComfort(e.target.value);
-              }}
-              value={1}
-              control={<Radio />}
-              label="5 - Extremely comfortable"
+              label="I embrace feedback and adapt quickly to make the necessary changes with enthusiasm."
             />
           </RadioGroup>
         </FormControl>
@@ -835,42 +653,38 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            What is your preferred communication style within a professional
-            team or project group?
-          </div>
+          <div>During the project, regular updates and feedback sessions are scheduled to ensure everyone is aligned and any issues are addressed promptly. The success of the project depends on how well the team communicates. How important are these regular updates and feedback sessions to you?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue={commStyle}
-            name="Question 2"
+            aria-labelledby="effective-communication-radio-group-label"
+            name="effectiveCommunication"
+            value={effectiveCommunication}
+            onChange={(e) => setEffectiveCommunication(e.target.value)}
           >
             <FormControlLabel
-              checked={commStyle == 0}
-              onClick={(e) => {
-                setCommStyle(e.target.value);
-              }}
-              value={0}
+              value="Not important; I believe in working independently and managing my tasks."
               control={<Radio />}
-              label="Assertive"
+              label="Not important; I believe in working independently and managing my tasks."
             />
             <FormControlLabel
-              checked={commStyle == 0.5}
-              onClick={(e) => {
-                setCommStyle(e.target.value);
-              }}
-              value={0.5}
+              value="Somewhat important; occasional feedback is sufficient for me."
               control={<Radio />}
-              label="Collaborative"
+              label="Somewhat important; occasional feedback is sufficient for me."
             />
             <FormControlLabel
-              checked={commStyle == 1}
-              onClick={(e) => {
-                setCommStyle(e.target.value);
-              }}
-              value={1}
+              value="Moderately important; regular updates and feedback are useful but not critical."
               control={<Radio />}
-              label="Avoidant"
+              label="Moderately important; regular updates and feedback are useful but not critical."
+            />
+            <FormControlLabel
+              value="Important; frequent updates and feedback sessions help keep me aligned with the team."
+              control={<Radio />}
+              label="Important; frequent updates and feedback sessions help keep me aligned with the team."
+            />
+            <FormControlLabel
+              value="Very important; I rely on constant updates and feedback to ensure the project's success."
+              control={<Radio />}
+              label="Very important; I rely on constant updates and feedback to ensure the project's success."
             />
           </RadioGroup>
         </FormControl>
@@ -880,59 +694,38 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            How important is effective communication within a project group to
-            you?
-          </div>
+          <div>Your team holds regular meetings to discuss project progress, share updates, and brainstorm new ideas. You often need to initiate and contribute to discussions to ensure effective collaboration. How comfortable are you in initiating and maintaining professional conversations with colleagues during these meetings?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 15"
+            aria-labelledby="initiating-convo-radio-group-label"
+            name="initiatingConvo"
+            value={initiatingConvo}
+            onChange={(e) => setInitiatingConvo(e.target.value)}
           >
             <FormControlLabel
-              checked={effectiveCommunication == 0}
-              onClick={(e) => {
-                setEffectiveCommunication(e.target.value);
-              }}
-              value={0}
+              value="I prefer to listen as I find it very difficult to initiate conversations."
               control={<Radio />}
-              label="1 - Each person just independently does what they're assigned"
+              label="I prefer to listen as I find it very difficult to initiate conversations."
             />
             <FormControlLabel
-              checked={effectiveCommunication == 0.25}
-              onClick={(e) => {
-                setEffectiveCommunication(e.target.value);
-              }}
-              value={0.25}
+              value="I feel somewhat uncomfortable but can participate when necessary."
               control={<Radio />}
-              label="2 - Rare communication"
+              label="I feel somewhat uncomfortable but can participate when necessary."
             />
             <FormControlLabel
-              checked={effectiveCommunication == 0.5}
-              onClick={(e) => {
-                setEffectiveCommunication(e.target.value);
-              }}
-              value={0.5}
+              value="I am moderately comfortable and can contribute to discussions with some effort."
               control={<Radio />}
-              label="3 - Occasional communication"
+              label="I am moderately comfortable and can contribute to discussions with some effort."
             />
             <FormControlLabel
-              checked={effectiveCommunication == 0.75}
-              onClick={(e) => {
-                setEffectiveCommunication(e.target.value);
-              }}
-              value={0.75}
+              value="I am comfortable initiating and maintaining conversations, and I participate actively."
               control={<Radio />}
-              label="4 - Frequent communication"
+              label="I am comfortable initiating and maintaining conversations, and I participate actively."
             />
             <FormControlLabel
-              checked={effectiveCommunication == 1}
-              onClick={(e) => {
-                setEffectiveCommunication(e.target.value);
-              }}
-              value={1}
+              value="I am very comfortable and enjoy leading and contributing to conversations regularly."
               control={<Radio />}
-              label="5 - Constant communication throughout duration of project"
+              label="I am very comfortable and enjoy leading and contributing to conversations regularly."
             />
           </RadioGroup>
         </FormControl>
@@ -942,59 +735,38 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            How comfortable are you in initiating and maintaining professional
-            conversations with colleagues or collaborators?
-          </div>
+          <div>Your team is working on a complex task that requires close collaboration and regular updates. Open communication is essential to ensure everyone is aligned and issues are addressed promptly. How often do you initiate communication or discussions about the task with your teammates?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 16"
+            aria-labelledby="initiating-frequency-radio-group-label"
+            name="initiatingFrequency"
+            value={initiatingFrequency}
+            onChange={(e) => setInitiatingFrequency(e.target.value)}
           >
             <FormControlLabel
-              checked={initiatingConvo == 0}
-              onClick={(e) => {
-                setInitiatingConvo(e.target.value);
-              }}
-              value={0}
+              value="Never; I hope the issue resolves itself or someone else addresses it."
               control={<Radio />}
-              label="1 - Very uncomfortable"
+              label="Never; I hope the issue resolves itself or someone else addresses it."
             />
             <FormControlLabel
-              checked={initiatingConvo == 0.25}
-              onClick={(e) => {
-                setInitiatingConvo(e.target.value);
-              }}
-              value={0.25}
+              value="Rarely; I communicate only when absolutely necessary."
               control={<Radio />}
-              label="2 - Mildly uncomfortable"
+              label="Rarely; I communicate only when absolutely necessary."
             />
             <FormControlLabel
-              checked={initiatingConvo == 0.5}
-              onClick={(e) => {
-                setInitiatingConvo(e.target.value);
-              }}
-              value={0.5}
+              value="Sometimes; I initiate discussions when I have specific updates or questions."
               control={<Radio />}
-              label="3 - Generally comfortable"
+              label="Sometimes; I initiate discussions when I have specific updates or questions."
             />
             <FormControlLabel
-              checked={initiatingConvo == 0.75}
-              onClick={(e) => {
-                setInitiatingConvo(e.target.value);
-              }}
-              value={0.75}
+              value="Often; I regularly check in and share updates with my team."
               control={<Radio />}
-              label="4 - Very comfortable"
+              label="Often; I regularly check in and share updates with my team."
             />
             <FormControlLabel
-              checked={initiatingConvo == 1}
-              onClick={(e) => {
-                setInitiatingConvo(e.target.value);
-              }}
-              value={1}
+              value="Always; I consistently initiate communication and ensure everyone is informed."
               control={<Radio />}
-              label="5 - Extremely comfortable"
+              label="Always; I consistently initiate communication and ensure everyone is informed."
             />
           </RadioGroup>
         </FormControl>
@@ -1004,59 +776,38 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            How often do you initiate communication or discussions within a
-            project group?
-          </div>
+          <div>Your team participates in a workshop designed to solve complex problems through creative and critical thinking exercises. Each team member is encouraged to contribute innovative ideas and think critically about potential solutions. How do you feel about participating in workshops that focus on creative and critical thinking?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 17"
+            aria-labelledby="challenge-preference-radio-group-label"
+            name="challengePreference"
+            value={challengePreference}
+            onChange={(e) => setChallengePreference(e.target.value)}
           >
             <FormControlLabel
-              checked={initiatingFrequency == 0}
-              onClick={(e) => {
-                setInitiatingFrequency(e.target.value);
-              }}
-              value={0}
+              value="I prefer to avoid such workshops and focus on routine tasks."
               control={<Radio />}
-              label="1 - Not at all"
+              label="I prefer to avoid such workshops and focus on routine tasks."
             />
             <FormControlLabel
-              checked={initiatingFrequency == 0.25}
-              onClick={(e) => {
-                setInitiatingFrequency(e.target.value);
-              }}
-              value={0.25}
+              value="I participate if required but don't actively seek out these opportunities."
               control={<Radio />}
-              label="2 - Rarely"
+              label="I participate if required but don't actively seek out these opportunities."
             />
             <FormControlLabel
-              checked={initiatingFrequency == 0.5}
-              onClick={(e) => {
-                setInitiatingFrequency(e.target.value);
-              }}
-              value={0.5}
+              value="I find these workshops somewhat enjoyable and participate occasionally."
               control={<Radio />}
-              label="3 - Generally"
+              label="I find these workshops somewhat enjoyable and participate occasionally."
             />
             <FormControlLabel
-              checked={initiatingFrequency == 0.75}
-              onClick={(e) => {
-                setInitiatingFrequency(e.target.value);
-              }}
-              value={0.75}
+              value="I look forward to these workshops and actively participate in them."
               control={<Radio />}
-              label="4 - Frequently"
+              label="I look forward to these workshops and actively participate in them."
             />
             <FormControlLabel
-              checked={initiatingFrequency == 1}
-              onClick={(e) => {
-                setInitiatingFrequency(e.target.value);
-              }}
-              value={1}
+              value="I thoroughly enjoy these workshops and actively seek out opportunities to engage in creative problem-solving."
               control={<Radio />}
-              label="5 - Always open"
+              label="I thoroughly enjoy these workshops and actively seek out opportunities to engage in creative problem-solving."
             />
           </RadioGroup>
         </FormControl>
@@ -1066,32 +817,38 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            Do you prefer challenges and projects that require creative and
-            critical thinking?
-          </div>
+          <div>Your team has been tasked with improving a current process that has become outdated. You have the opportunity to implement innovative approaches to streamline and enhance efficiency. How open are you to exploring and implementing innovative approaches to improve the process?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 18"
+            aria-labelledby="exploring-comfort-radio-group-label"
+            name="exploringComfort"
+            value={exploringComfort}
+            onChange={(e) => setExploringComfort(e.target.value)}
           >
             <FormControlLabel
-              checked={challengePreference == 0}
-              onClick={(e) => {
-                setChallengePreference(e.target.value);
-              }}
-              value={0}
+              value="I prefer sticking to traditional methods that have worked in the past."
               control={<Radio />}
-              label="Rather do repetitive work that I find easier"
+              label="I prefer sticking to traditional methods that have worked in the past."
             />
             <FormControlLabel
-              checked={challengePreference == 1}
-              onClick={(e) => {
-                setChallengePreference(e.target.value);
-              }}
-              value={1}
+              value="I am hesitant but willing to consider new approaches if necessary."
               control={<Radio />}
-              label="Give me a challenge"
+              label="I am hesitant but willing to consider new approaches if necessary."
+            />
+            <FormControlLabel
+              value="I am somewhat open and will try new approaches if they seem beneficial."
+              control={<Radio />}
+              label="I am somewhat open and will try new approaches if they seem beneficial."
+            />
+            <FormControlLabel
+              value="I prefer to explore and implement more innovative approaches."
+              control={<Radio />}
+              label="I prefer to explore and implement more innovative approaches."
+            />
+            <FormControlLabel
+              value="I try to find and explore innovative approaches first if I am able to."
+              control={<Radio />}
+              label="I try to find and explore innovative approaches first if I am able to."
             />
           </RadioGroup>
         </FormControl>
@@ -1101,59 +858,38 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            How open are you to exploring new ideas, approaches, and experiences
-            in your professional work?
-          </div>
+          <div>Your team is working on a critical project, and you notice a significant mistake in the work submitted by one of your colleagues. The mistake could impact the project's outcome if not addressed promptly. How do you handle this mistake within the project group?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 19"
+            aria-labelledby="conflict-management-radio-group-label"
+            name="conflictManagement"
+            value={conflictManagement}
+            onChange={(e) => setConflictManagement(e.target.value)}
           >
             <FormControlLabel
-              checked={exploringComfort == 0}
-              onClick={(e) => {
-                setExploringComfort(e.target.value);
-              }}
-              value={0}
+              value="Keep it to yourself, assuming someone else will notice it and address it."
               control={<Radio />}
-              label="1 - Not open at all"
+              label="Keep it to yourself, assuming someone else will notice it and address it."
             />
             <FormControlLabel
-              checked={exploringComfort == 0.25}
-              onClick={(e) => {
-                setExploringComfort(e.target.value);
-              }}
-              value={0.25}
+              value="After the meeting, privately message the person who made the mistake to correct it."
               control={<Radio />}
-              label="2 - Rarely open"
+              label="After the meeting, privately message the person who made the mistake to correct it."
             />
             <FormControlLabel
-              checked={exploringComfort == 0.5}
-              onClick={(e) => {
-                setExploringComfort(e.target.value);
-              }}
-              value={0.5}
+              value="Privately message a more capable team member to address the mistake."
               control={<Radio />}
-              label="3 - Generally open"
+              label="Privately message a more capable team member to address the mistake."
             />
             <FormControlLabel
-              checked={exploringComfort == 0.75}
-              onClick={(e) => {
-                setExploringComfort(e.target.value);
-              }}
-              value={0.75}
+              value="Point out the error in the meeting positively to ensure it is corrected."
               control={<Radio />}
-              label="4 - Frequently open"
+              label="Point out the error in the meeting positively to ensure it is corrected."
             />
             <FormControlLabel
-              checked={exploringComfort == 1}
-              onClick={(e) => {
-                setExploringComfort(e.target.value);
-              }}
-              value={1}
+              value="Point out the mistake directly in the meeting and ask the person to rectify it."
               control={<Radio />}
-              label="5 - Always open"
+              label="Point out the mistake directly in the meeting and ask the person to rectify it."
             />
           </RadioGroup>
         </FormControl>
@@ -1163,32 +899,154 @@ export default function Questions({
       <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
-          <div>
-            Are you comfortable handling conflicts and disagreements within a
-            project group or would you rather someone else?
-          </div>
+          <div>During a team meeting to discuss project strategies, two team members have a heated disagreement about the best approach to take. The conflict is disrupting the meeting, and a resolution is needed to move forward. How comfortable are you in handling this conflict within the project group?</div>
           <br />
           <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="Question 20"
+            aria-labelledby="conflict-management-radio-group-label"
+            name="conflictManagement"
+            value={conflictManagement}
+            onChange={(e) => setConflictManagement(e.target.value)}
           >
             <FormControlLabel
-              checked={conflictManagement == 0}
-              onClick={(e) => {
-                setConflictManagement(e.target.value);
-              }}
-              value={0}
+              value="I am very uncomfortable and would prefer someone else handle it."
               control={<Radio />}
-              label="Conflict avoidant"
+              label="I am very uncomfortable and would prefer someone else handle it."
             />
             <FormControlLabel
-              checked={conflictManagement == 1}
-              onClick={(e) => {
-                setConflictManagement(e.target.value);
-              }}
-              value={1}
+              value="I am somewhat uncomfortable but can try to manage if necessary."
               control={<Radio />}
-              label="Conflict confrontational"
+              label="I am somewhat uncomfortable but can try to manage if necessary."
+            />
+            <FormControlLabel
+              value="I am moderately comfortable and can step in to help resolve the conflict."
+              control={<Radio />}
+              label="I am moderately comfortable and can step in to help resolve the conflict."
+            />
+            <FormControlLabel
+              value="I am comfortable and willing to handle the conflict to reach a resolution."
+              control={<Radio />}
+              label="I am comfortable and willing to handle the conflict to reach a resolution."
+            />
+            <FormControlLabel
+              value="I am very comfortable and prefer to take the lead in resolving conflicts and disagreements."
+              control={<Radio />}
+              label="I am very comfortable and prefer to take the lead in resolving conflicts and disagreements."
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>Your team is working on a project with an extremely tight deadline. There have been unexpected setbacks, and everyone is feeling the pressure. The project must be completed on time, and the stress levels are high. How do you manage stress and maintain composure in this high-pressure situation?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="stress-management-radio-group-label"
+            name="stressManagement"
+            value={stressManagement}
+            onChange={(e) => setStressManagement(e.target.value)}
+          >
+            <FormControlLabel
+              value="Take deep breaths, assess priorities, and break tasks into smaller, manageable steps alone."
+              control={<Radio />}
+              label="Take deep breaths, assess priorities, and break tasks into smaller, manageable steps alone."
+            />
+            <FormControlLabel
+              value="I use positive reinforcement to keep the team’s morale high while quickly resolving the issue."
+              control={<Radio />}
+              label="I use positive reinforcement to keep the team’s morale high while quickly resolving the issue."
+            />
+            <FormControlLabel
+              value="I become highly focused and driven, using the stress to motivate myself and others."
+              control={<Radio />}
+              label="I become highly focused and driven, using the stress to motivate myself and others."
+            />
+            <FormControlLabel
+              value="Seek support from colleagues and communicate openly about challenges to stay calm."
+              control={<Radio />}
+              label="Seek support from colleagues and communicate openly about challenges to stay calm."
+            />
+            <FormControlLabel
+              value="I rely on structured routines and clear plans to manage my stress."
+              control={<Radio />}
+              label="I rely on structured routines and clear plans to manage my stress."
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>If it were up to you, what is your ideal group size?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="ideal-group-size-radio-group-label"
+            name="idealGroupSize"
+            value={idealGroupSize}
+            onChange={(e) => setIdealGroupSize(e.target.value)}
+          >
+            <FormControlLabel
+              value="4"
+              control={<Radio />}
+              label="4"
+            />
+            <FormControlLabel
+              value="5"
+              control={<Radio />}
+              label="5"
+            />
+            <FormControlLabel
+              value="6"
+              control={<Radio />}
+              label="6"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <div>Please provide some reasons for your ideal group size (just for our analysis, does not impact)</div>
+        <br />
+        <TextField id="groupSizeReason" fullWidth />
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>If you could hang out with your project mates, what kind of activities would you like to do?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="hangout-activities-radio-group-label"
+            name="hangoutActivities"
+            value={hangoutActivities}
+            onChange={(e) => setHangoutActivities(e.target.value)}
+          >
+            <FormControlLabel
+              value="Outdoor adventure / exercise e.g., hiking or rock climbing"
+              control={<Radio />}
+              label="Outdoor adventure / exercise e.g., hiking or rock climbing"
+            />
+            <FormControlLabel
+              value="Social gatherings e.g., dinner or a game night"
+              control={<Radio />}
+              label="Social gatherings e.g., dinner or a game night"
+            />
+            <FormControlLabel
+              value="Cultural/Event exploration e.g., food festivals, museums or exploring local cultural events"
+              control={<Radio />}
+              label="Cultural/Event exploration e.g., food festivals, museums or exploring local cultural events"
+            />
+            <FormControlLabel
+              value="Creative pursuits e.g., art and craft session, cooking or baking together"
+              control={<Radio />}
+              label="Creative pursuits e.g., art and craft session, cooking or baking together"
             />
           </RadioGroup>
         </FormControl>
@@ -1202,7 +1060,7 @@ export default function Questions({
           fontSize: 10,
           padding: 1.5,
           fontWeight: "bold",
-          backgroundImage: "linear-gradient(#B27FC6, #E98356)",
+          backgroundColor: "#F86204",
         }}
       >
         Submit Questionnaire

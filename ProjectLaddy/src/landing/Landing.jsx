@@ -76,7 +76,7 @@ export default function Landing() {
                 }}
               >
                 LADDY is dedicated to helping you find individuals with similar interests who will work well with you. 
-                Through the use of our matching algorithms, we endeavour to help you form your perfect project group.
+                Through the use of our matching algorithm with over 20 parameters, we endeavour to help you form your perfect project group.
               </Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '40px', justifyContent: 'center' }}>
               <Button
