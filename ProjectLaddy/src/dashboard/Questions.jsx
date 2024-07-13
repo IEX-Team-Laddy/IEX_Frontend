@@ -61,8 +61,6 @@ export default function Questions({
     ];
 
     const homoWeights = [
-      feedbackGiving,
-      feedbackReceiving,
       workingHours,
       meetingHours,
       workingApproach,
@@ -76,6 +74,11 @@ export default function Questions({
       exploringComfort,
     ];
 
+    const feedback = [
+      feedbackGiving,
+      feedbackReceiving,
+    ];
+
     const combinedArr = [
       activeClass,
       userData.id,
@@ -83,6 +86,7 @@ export default function Questions({
       document.getElementById("userMajor").value,
       homoWeights,
       heteroWeights,
+      feedback,
     ];
 
     console.log("USER_ID", userData.id);
