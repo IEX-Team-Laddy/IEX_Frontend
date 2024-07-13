@@ -212,7 +212,7 @@ export default function Landing() {
           </Box>
         </Box>
 
-        <Box sx={{ position: 'absolute', top: '280%', right: '8%', textAlign: 'center' }}>
+        <Box sx={{ position: 'absolute', top: '240%', right: '13%', textAlign: 'center' }}>
           <Typography variant="h4" sx={{ fontWeight: 'normal', color: '#000000', display: 'inline', paddingRight: '10px' }}>
             Find your 
           </Typography>
