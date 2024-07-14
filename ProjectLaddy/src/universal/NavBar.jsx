@@ -1,23 +1,17 @@
 import { Routes, Route, NavLink } from "react-router-dom";
-import { Button, Backdrop, Stack, Paper, Avatar } from "@mui/material";
+import { Button } from "@mui/material";
 import Landing from "../landing/Landing";
 import Auth from "../auth/Auth";
-import AdminMatch from "./AdminMatch";
-import { useEffect, useState } from "react";
+import AdminMatch from "../universal/AdminMatch"; // Ensure this path is correct
+import { useState } from "react";
 import { supabase } from "../supabase";
 import logo from "../Assets/Asset1.png";
+import { Link as ScrollLink } from 'react-scroll';
 
 export default function NavBar() {
   const [dashboard, renderDashboard] = useState(false);
   const [navBar, navBarOpen] = useState(true);
   const [open, setOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState(<div>English 🇺🇸</div>);
-  // const [currentSession, setCurrentSession] = useState(null);
-  // const [loginEmail, setLoginEmail] = useState("");
-
-  function changeLang(elem) {
-    setCurrentLang(elem);
-  }
 
   const handleClose = () => {
     setOpen(false);
@@ -26,51 +20,17 @@ export default function NavBar() {
     setOpen(true);
   };
 
-  // console.log(currentLang.props.children);
-
   function renderDashboardOnSignIn(session) {
-    // e.preventDefault();
-    // setCurrentSession(session);
-    // setLoginEmail(loginEmail);
     renderDashboard(session === null);
-    console.log(session);
-    console.log(dashboard);
   }
 
   function hideDashboard() {
-    // e.preventDefault();
     renderDashboard(false);
   }
 
   function showDashboard() {
-    // e.preventDefault();
     renderDashboard(true);
   }
-
-  // async function retrieveSession() {
-  //   const { data, error } = await supabase.auth.getSession();
-  //   renderDashboard(data.session !== null);
-  //   console.log(data.session);
-  // }
-
-  // useEffect(() => {
-  //   retrieveSession();
-  // });
-
-  // function hideNavBar() {
-  //   navBarOpen(false);
-  // }
-
-  // function showNavBar() {
-  //   navBarOpen(true);
-  // }
-
-  const languageOptions = [
-    <div>English 🇺🇸</div>,
-    <div>Spanish 🇪🇸</div>,
-    <div>Mandarin 🇨🇳</div>,
-    <div>Hindi 🇮🇳</div>,
-  ];
 
   return (
     <>
@@ -86,8 +46,7 @@ export default function NavBar() {
               <div>
                 <img src={logo} width={220} height={40} />
               </div>
-              <div id="navbar-brand" className="navbar-brand-aria">
-              </div>
+              <div id="navbar-brand" className="navbar-brand-aria"></div>
               <button
                 className="navbar-toggler"
                 type="button"
@@ -107,203 +66,72 @@ export default function NavBar() {
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-                <ul className="navbar-nav ml-auto">
-                  {/* <li>
-                    <div id="navbar-gpa" className="nav-item nav-link">
-                      <NavLink
-                        id="gpa-nav-link"
-                        to="/"
-                        style={({ isActive }) => ({
-                          color: "#170F49",
-                        })}
-                      >
-                        Home
-                      </NavLink>
-                    </div>
-                  </li> */}
-                  {/* <li>
-                    <div id="navbar-gpa" className="nav-item nav-link">
-                      <NavLink
-                        id="gpa-nav-link"
-                        to="/about"
-                        style={({ isActive }) => ({
-                          color: isActive ? "#170F49" : "grey",
-                        })}
-                      >
-                        About
-                      </NavLink>
-                    </div>
-                  </li>
-                  <li>
-                    <div id="navbar-gpa" className="nav-item nav-link">
-                      <NavLink
-                        id="gpa-nav-link"
-                        to="/blog"
-                        style={({ isActive }) => ({
-                          color: isActive ? "#170F49" : "grey",
-                        })}
-                      >
-                        Blog
-                      </NavLink>
-                    </div>
-                  </li> */}
-                  {/* <li>
-                <div id="navbar-gpa" className="nav-item nav-link">
-                  <NavLink
-                    id="gpa-nav-link"
-                    to="/services"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      renderSignUpPage(false);
-                    }}
-                    style={({ isActive }) => ({
-                      color: isActive ? "#170F49" : "grey",
-                    })}
-                  >
-                    Services
-                  </NavLink>
-                </div>
-              </li>
-              <li>
-                <div id="navbar-gpa" className="nav-item nav-link">
-                  <NavLink
-                    id="gpa-nav-link"
-                    to="/pricing"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      renderSignUpPage(false);
-                    }}
-                    style={({ isActive }) => ({
-                      color: isActive ? "#170F49" : "grey",
-                    })}
-                  >
-                    Pricing
-                  </NavLink>
-                </div>
-              </li> */}
-              <div
-                className="collapse navbar-collapse"
-                id="navbarSupportedContent"
-              >
                 <ul className="navbar-nav ml-auto" style={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'space-between' }}>
                   <li style={{ flexGrow: 1 }}>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
-                      <Button color="inherit" href="#home" style={{ color: '#000000', marginRight: '40px' }}>Home</Button>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      <Button color="inherit" component={NavLink} to="/" style={{ color: '#000000', marginRight: '40px' }}>Home</Button>
                       <Button color="inherit" href="#about-us" style={{ color: '#000000', marginRight: '40px' }}>About Us</Button>
-                      <Button color="inherit" href="#questionnaire" style={{ color: '#000000', marginRight: '40px' }}>Questionnaire</Button>
-                      <Button color="inherit" href="#contact-us" style={{ color: '#000000', marginRight: '100px' }}>Contact Us</Button>
+                      <Button color="inherit" component="a" href="https://forms.gle/PWsDFzBuRWWryAaA6" target="_blank" style={{ color: '#000000', marginRight: '40px' }}>Questionnaire</Button>
+                      <Button color="inherit" component="a" href="mailto:projectladdy@gmail.com" style={{ color: '#000000', marginRight: '40px' }}>Contact Us</Button>
                     </div>
                   </li>
                 </ul>
               </div>
-                  <li>
-                    <div id="currentLang" className="nav-item nav-link">
-                    <Button
-                        variant="contained"
-                        style={{
-                          backgroundColor: "#30203C",
-                          borderRadius: 20,
-                          padding: 10,
-                          fontWeight: "normal",
-                        }}
-                      >
-                        <NavLink
-                          id="profile-nav-link"
-                          to="/auth"
-                          style={{
-                            color: "White",
-                          }}
-                        >
-                          Get started
-                        </NavLink>
-                    </Button>
-                      <Backdrop
-                        sx={{
-                          color: "#fff",
-                          zIndex: (theme) => theme.zIndex.drawer + 1,
-                        }}
-                        open={open}
-                        onClick={handleClose}
-                      >
-                        <Paper
-                          elevation={10}
-                          sx={{
-                            backgroundImage:
-                              "linear-gradient(#E98356, #B27FC6)",
-                            padding: 10,
-                            borderRadius: 10,
-                          }}
-                        >
-                          <Stack spacing={2}>
-                            {languageOptions
-                              .filter(
-                                (elem) =>
-                                  elem.props.children !==
-                                  currentLang.props.children
-                              )
-                              .map((elem, idx) => {
-                                return (
-                                  <Button
-                                    variant="contained"
-                                    key={idx}
-                                    onClick={() => changeLang(elem)}
-                                    style={{
-                                      backgroundColor: "#FFFAF0",
-                                      borderRadius: 20,
-                                      color: "White",
-                                    }}
-                                  >
-                                    {elem}
-                                  </Button>
-                                );
-                              })}
-                          </Stack>
-                        </Paper>
-                      </Backdrop>
-                    </div>
-                  </li>
-                  <li>
-                    <div id="navbar-username" className="nav-item nav-link">
-                      <Button
-                        variant="contained"
-                        style={{
-                          backgroundColor: "#FFFAF0",
-                          borderRadius: 20,
-                          padding: 10,
-                        }}
-                      >
-                        <NavLink
-                          id="profile-nav-link"
-                          to="/auth"
-                          style={{
-                            color: "Black",
-                          }}
-                        >
-                          Log In
-                        </NavLink>
-                      </Button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              <li style={{ listStyleType: "none" }}>
+                <Button
+                  variant="contained"
+                  style={{
+                    backgroundColor: "#30203C",
+                    borderRadius: 20,
+                    padding: 9,
+                    fontWeight: "normal",
+                    marginRight: "30px",
+                  }}
+                >
+                  <NavLink
+                    id="profile-nav-link"
+                    to="/auth"
+                    style={{
+                      color: "White",
+                    }}
+                  >
+                    Get started
+                  </NavLink>
+                </Button>
+              </li>
+              <li style={{ listStyleType: "none" }}>
+                <Button
+                  variant="contained"
+                  style={{
+                    backgroundColor: "#FFFAF0",
+                    borderRadius: 20,
+                    padding: 9,
+                    marginRight: "40px",
+                  }}
+                >
+                  <NavLink
+                    id="profile-nav-link"
+                    to="/auth"
+                    style={{
+                      color: "Black",
+                    }}
+                  >
+                    Log In
+                  </NavLink>
+                </Button>
+              </li>
             </nav>
           </div>
         </>
       )}
       <Routes>
         <Route exact path="/" element={<Landing />} />
-        {/* <Route exact path="/about" element={<About />} /> */}
-        {/* <Route exact path="/blog" element={<Landing />} /> */}
-        {/* <Route exact path="/services" element={<Landing />} />
-        <Route exact path="/pricing" element={<Landing />} /> */}
         <Route exact path="/languages" element={<Landing />} />
         <Route
           exact
           path="/auth"
           element={
             <Auth
-              // hideNavBar={hideNavBar}
-              // showNavBar={showNavBar}
               showDashboard={showDashboard}
               hideDashboard={hideDashboard}
             />

@@ -79,7 +79,7 @@ export default function Landing() {
                 Through the use of our matching algorithm with over 20 parameters, we endeavour to help you form your perfect project group.
               </Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '40px', justifyContent: 'center' }}>
-              <Button
+                <Button
                 variant="contained"
                 style={{
                   backgroundColor: "#F86204",
@@ -90,19 +90,14 @@ export default function Landing() {
                   textAlign: 'center',
                   whiteSpace: 'normal',
                   lineHeight: 1.5,
-                  marginRight: '10px', // Adjust the margin to bring the buttons closer together
-                  minWidth: '150px', // Reduce the width of the first button
+                  marginRight: '10px',
+                  minWidth: '150px',
                 }}
+                component="a"
+                href="https://forms.gle/PWsDFzBuRWWryAaA6"
+                target="_blank"
               >
-                <NavLink
-                  to="/auth"
-                  style={{
-                    color: "White",
-                    textDecoration: 'none',
-                  }}
-                >
-                  Get a free work <br /> personality report!
-                </NavLink>
+                Get a free work <br /> personality report!
               </Button>
               <Divider orientation="vertical" flexItem sx={{ margin: '0 30px', backgroundColor: '#F86204', height: '50px' }} />
               <Button
@@ -212,7 +207,7 @@ export default function Landing() {
           </Box>
         </Box>
 
-        <Box sx={{ position: 'absolute', top: '240%', right: '13%', textAlign: 'center' }}>
+        <Box sx={{ position: 'absolute', top: '275%', right: '7%', textAlign: 'center' }}>
           <Typography variant="h4" sx={{ fontWeight: 'normal', color: '#000000', display: 'inline', paddingRight: '10px' }}>
             Find your 
           </Typography>
