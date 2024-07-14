@@ -275,6 +275,133 @@ export default function Questions({
       <br />
       <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
       <br />
+      {/* Repeat the University question */}
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>IEX Topic Interest</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="university-radio-group-label"
+            name="university"
+            value={university}
+            onChange={(e) => setUniversity(e.target.value)}
+          >
+            <FormControlLabel
+              value="Waste Management in Bandung"
+              control={<Radio />}
+              label="Waste Management in Bandung"
+            />
+            <FormControlLabel
+              value="Social Design as Worldmaking in Singapore"
+              control={<Radio />}
+              label="Social Design as Worldmaking in Singapore"
+            />
+            <FormControlLabel
+              value="Bajautopic in Sabah"
+              control={<Radio />}
+              label="Bajautopia in Sabah"
+            />
+            <FormControlLabel
+              value="Tourist Development in Thailand"
+              control={<Radio />}
+              label="Tourist Development in Thailand"
+            />
+            <FormControlLabel
+              value="Inclusion in Education"
+              control={<Radio />}
+              label="Inclusion in Education"
+            />
+            <FormControlLabel
+              value="100% Housing"
+              control={<Radio />}
+              label="100% Housing"
+            />
+            <FormControlLabel
+              value="Digital Documentation of Indonesian Arts Communities"
+              control={<Radio />}
+              label="Digital Documentation of Indonesian Arts Communities"
+            />
+            <FormControlLabel
+              value="Communities and Heritage Conservation"
+              control={<Radio />}
+              label="Communities and Heritage Conservation"
+            />
+            <FormControlLabel
+              value="Postconflict Cambodia"
+              control={<Radio />}
+              label="Postconflict Cambodia"
+            />
+            <FormControlLabel
+              value="Education (Innov-Ed) in Vietnam"
+              control={<Radio />}
+              label="Education (Innov-Ed) in Vietnam"
+            />
+            <FormControlLabel
+              value="Self-help + Communities"
+              control={<Radio />}
+              label="Self-help + Communities"
+            />
+            <FormControlLabel
+              value="Project Chiang Mai"
+              control={<Radio />}
+              label="Project Chiang Mai"
+            />
+            <FormControlLabel
+              value="Gender Matters Everyday"
+              control={<Radio />}
+              label="Gender Matters Everyday"
+            />
+            <FormControlLabel
+              value="Inclusive Research for Social Change"
+              control={<Radio />}
+              label="Inclusive Research for Social Change"
+            />
+            <FormControlLabel
+              value="Rohingya Refugees in Malaysia"
+              control={<Radio />}
+              label="Rohingya Refugees in Malaysia"
+            />
+            <FormControlLabel
+              value="Farming in an Urban Nation"
+              control={<Radio />}
+              label="Farming in an Urban Nation"
+            />
+            <FormControlLabel
+              value="Bamboo Differences - Philippines"
+              control={<Radio />}
+              label="Bamboo Differences - Philippines"
+            />
+            <FormControlLabel
+              value="The Practical Realities of Well-Being"
+              control={<Radio />}
+              label="The Practical Realities of Well-Being"
+            />
+            <FormControlLabel
+              value="Technology for Social Good"
+              control={<Radio />}
+              label="Technology for Social Good"
+            />
+            <FormControlLabel
+              value="Let's Green this Little Red Dot!"
+              control={<Radio />}
+              label="Let's Green this Little Red Dot!"
+            />
+            <FormControlLabel
+              value="Environmental and Community Impact, Cambodia"
+              control={<Radio />}
+              label="Environmental and Community Impact, Cambodia"
+            />
+            <FormControlLabel
+              value="Digital Communities"
+              control={<Radio />}
+              label="Digital Communities"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
       <div style={{ textAlign: "left" }}>
         <FormControl>
           <div>As the meeting starts, how would you suggest initiating the brainstorming session?</div>

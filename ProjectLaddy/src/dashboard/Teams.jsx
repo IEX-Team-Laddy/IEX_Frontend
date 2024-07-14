@@ -52,7 +52,7 @@ export default function Teams({ userData }) {
       },
     };
 
-    const className = ["YNCG"];
+    const className = ["IEX"];
     axios
       .post(URL + "/matches", className, config)
       .then((response) => {
@@ -132,17 +132,17 @@ export default function Teams({ userData }) {
                 fontSize: 20,
               }}
             >
-              <h4 style={{ fontWeight: "bold" }}>YNCG</h4>
+              <h4 style={{ fontWeight: "bold" }}>IEX</h4>
               <h6>Dev Desai</h6>
             </Container>
             <br />
-            <p>Yale-NUS Consulting Group</p>
+            <p>NUS College Impact Experience Course</p>
             {!questionnaireOpen && !matchingStarted ? (
               <div
                 onClick={(e) => {
                   e.preventDefault();
                   showQuestionnaire(true);
-                  setActiveClass("YNCG");
+                  setActiveClass("IEX");
                 }}
                 style={{
                   color: "black",
