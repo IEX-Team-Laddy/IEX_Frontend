@@ -6,7 +6,6 @@ import AdminMatch from "../universal/AdminMatch"; // Ensure this path is correct
 import { useState } from "react";
 import { supabase } from "../supabase";
 import logo from "../Assets/Asset1.png";
-import { Link as ScrollLink } from 'react-scroll';
 
 export default function NavBar() {
   const [dashboard, renderDashboard] = useState(false);
