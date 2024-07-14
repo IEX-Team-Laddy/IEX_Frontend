@@ -78,54 +78,54 @@ export default function Landing() {
                 LADDY is dedicated to helping you find individuals with similar interests who will work well with you. 
                 Through the use of our matching algorithm with over 20 parameters, we endeavour to help you form your perfect project group.
               </Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '40px', justifyContent: 'center' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '40px', justifyContent: 'flex-start' }}>
                 <Button
-                variant="contained"
-                style={{
-                  backgroundColor: "#F86204",
-                  borderRadius: 20,
-                  padding: '10px 20px',
-                  fontFamily: "DM Sans",
-                  fontWeight: "normal",
-                  textAlign: 'center',
-                  whiteSpace: 'normal',
-                  lineHeight: 1.5,
-                  marginRight: '10px',
-                  minWidth: '150px',
-                }}
-                component="a"
-                href="https://forms.gle/PWsDFzBuRWWryAaA6"
-                target="_blank"
-              >
-                Get a free work <br /> personality report!
-              </Button>
-              <Divider orientation="vertical" flexItem sx={{ margin: '0 30px', backgroundColor: '#F86204', height: '50px' }} />
-              <Button
-                variant="contained"
-                style={{
-                  backgroundColor: "#F86204",
-                  borderRadius: 20,
-                  padding: '10px 20px',
-                  fontFamily: "DM Sans",
-                  fontWeight: "normal",
-                  textAlign: 'center',
-                  whiteSpace: 'normal',
-                  lineHeight: 1.5,
-                  marginLeft: '10px', // Adjust the margin to bring the buttons closer together
-                  minWidth: '180px', // Ensure the button has enough width for the text
-                }}
-              >
-                <NavLink
-                  to="/auth"
+                  variant="contained"
                   style={{
-                    color: "White",
-                    textDecoration: 'none',
+                    backgroundColor: "#F86204",
+                    borderRadius: 20,
+                    padding: '10px 20px',
+                    fontFamily: "DM Sans",
+                    fontWeight: "normal",
+                    textAlign: 'center',
+                    whiteSpace: 'normal',
+                    lineHeight: 1.5,
+                    marginRight: '50px',
+                    minWidth: '150px',
+                  }}
+                  component="a"
+                  href="https://forms.gle/PWsDFzBuRWWryAaA6"
+                  target="_blank"
+                >
+                  Get a free work <br /> personality report!
+                </Button>
+                <Divider orientation="vertical" flexItem sx={{ margin: '0 20px', backgroundColor: '#F86204', height: '100px' }} />
+                <Button
+                  variant="contained"
+                  style={{
+                    backgroundColor: "#F86204",
+                    borderRadius: 20,
+                    padding: '10px 20px',
+                    fontFamily: "DM Sans",
+                    fontWeight: "normal",
+                    textAlign: 'center',
+                    whiteSpace: 'normal',
+                    lineHeight: 1.5,
+                    marginLeft: '45px',
+                    minWidth: '180px',
                   }}
                 >
-                  Form a team!
-                </NavLink>
-              </Button>
-            </Box>
+                  <NavLink
+                    to="/auth"
+                    style={{
+                      color: "White",
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Form a team!
+                  </NavLink>
+                </Button>
+              </Box>
             </Container>
           </Grid>
 
