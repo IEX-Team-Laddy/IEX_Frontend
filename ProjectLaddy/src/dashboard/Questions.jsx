@@ -387,9 +387,9 @@ export default function Questions({
               label="Let's Green this Little Red Dot!"
             />
             <FormControlLabel
-              value="Environmental and Community Impact, Cambodia"
+              value="Environmental and Community Impact - Cambodia"
               control={<Radio />}
-              label="Environmental and Community Impact, Cambodia"
+              label="Environmental and Community Impact - Cambodia"
             />
             <FormControlLabel
               value="Digital Communities"
