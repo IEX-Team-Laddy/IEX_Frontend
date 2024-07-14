@@ -237,7 +237,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
         <Box sx={{ padding: 5 }}>
           <Backdrop
             sx={{
-              color: "#fff",
+              color: "White",
               zIndex: (theme) => theme.zIndex.drawer + 1,
             }}
             open={accountLoginFail}
@@ -250,7 +250,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
           </Backdrop>
           <Backdrop
             sx={{
-              color: "#fff",
+              color: "White",
               zIndex: (theme) => theme.zIndex.drawer + 1,
             }}
             open={accountCreationFail}
@@ -313,7 +313,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
                       fullWidth
                       label="First Name"
                       id="user_first_name"
-                      style={{ backgroundColor: "white", }}
+                      style={{ backgroundColor: "White", }}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -326,7 +326,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
                       fullWidth
                       label="Email Address"
                       id="user_email"
-                      style={{ backgroundColor: "white", marginTop: '30px'  }}
+                      style={{ backgroundColor: "White", marginTop: '30px'  }}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -364,7 +364,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
                       label="Password"
                       id="user_password"
                       type={passwordVisible ? "text" : "password"}
-                      style={{ backgroundColor: "white", marginTop: '30px' }}
+                      style={{ backgroundColor: "White", marginTop: '30px' }}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -476,7 +476,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
                         setPasswordMatching(true);
                       }}
                       style={{
-                        backgroundColor: "transparent",
+                        backgroundColor: "#FFFAF0",
                         border: "none",
                         fontFamily: "Montserrat",
                         fontWeight: "bold",
@@ -509,7 +509,7 @@ export default function Auth({ hideDashboard, showDashboard }) {
               <Grid item xs={12} sm={6}>
                 <Container
                   style={{
-                    backgroundColor: "white",
+                    backgroundColor: "#FFFAF0",
                     height: 740.5,
                     padding: 30,
                     display: "flex",

@@ -3,9 +3,8 @@ import { Container, Box, Grid, Stack, Typography, Button, Divider } from "@mui/m
 import { Facebook, LinkedIn, Twitter, YouTube, Instagram, Email } from "@mui/icons-material";
 import { NavLink } from 'react-router-dom'; // Ensure NavLink is imported
 import Asset8 from "../Assets/Asset8.png";
-import Landing3 from "../images/rando2.jpg";
 import Asset6 from "../Assets/Asset6.png";
-import IEXVideo from "../images/LADDYIntro.mp4";
+import IEXVideo from "../Assets/LADDYIntro.mp4";
 import hero from "../Assets/Asset21.png";
 import logo from "../Assets/Asset1.png";
 
