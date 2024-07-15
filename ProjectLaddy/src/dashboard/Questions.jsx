@@ -250,6 +250,73 @@ export default function Questions({
       <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
       <br />
       <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>Faculty</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="university-radio-group-label"
+            name="university"
+            value={university}
+            onChange={(e) => setUniversity(e.target.value)}
+          >
+            <FormControlLabel
+              value="College of Humanities and Sciences"
+              control={<Radio />}
+              label="College of Humanities and Sciences"
+            />
+            <FormControlLabel
+              value="College of Design and Engineering"
+              control={<Radio />}
+              label="College of Design and Engineering"
+            />
+            <FormControlLabel
+              value="Faculty of Business"
+              control={<Radio />}
+              label="Faculty of Business"
+            />
+            <FormControlLabel
+              value="Faculty of Medicine"
+              control={<Radio />}
+              label="Faculty of Medicine"
+            />
+            <FormControlLabel
+              value="Faculty of Computing"
+              control={<Radio />}
+              label="Faculty of Computing"
+            />
+            <FormControlLabel
+              value="Faculty of Dentistry"
+              control={<Radio />}
+              label="Faculty of Dentistry"
+            />
+            <FormControlLabel
+              value="Faculty of Law"
+              control={<Radio />}
+              label="Faculty of Law"
+            />
+            <FormControlLabel
+              value="Faculty of Music"
+              control={<Radio />}
+              label="Faculty of Music"
+            />
+            <FormControlLabel
+              value="Faculty of Nursing"
+              control={<Radio />}
+              label="Faculty of Nursing"
+            />
+            <FormControlLabel
+              value="Faculty of Pharmacy"
+              control={<Radio />}
+              label="Faculty of Pharmacy"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
         <div>Major (Fully spelled out)</div>
         <br />
         <TextField
@@ -275,7 +342,6 @@ export default function Questions({
       <br />
       <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
       <br />
-      {/* Repeat the University question */}
       <div style={{ textAlign: "left" }}>
         <FormControl>
           <div>IEX Topic Interest</div>
