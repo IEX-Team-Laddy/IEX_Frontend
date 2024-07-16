@@ -1,4 +1,4 @@
-import { Add, SetMealSharp } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import {
   Container,
   Button,
@@ -10,6 +10,7 @@ import {
   Paper,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import Questionnaire from "./Questionnaire";
 import axios from "axios";
 import { supabase } from "../supabase";
@@ -21,21 +22,20 @@ export default function Teams({ userData }) {
   const [activeClass, setActiveClass] = useState("");
   const [open, setOpen] = useState(false);
   const [groupNumber, setGroupNumber] = useState("");
-  // const [groupMembers, setGroupMembers] = useState([]);
   const [dayToday, setDayToday] = useState(1);
   const [totalMinutes, setTotalMinutes] = useState(0);
 
   useEffect(() => {
     const d = new Date();
     setDayToday(d.getDay());
-    setTotalMinutes(d.getHours * 60 + d.getMinutes);
+    setTotalMinutes(d.getHours() * 60 + d.getMinutes());
   }, []);
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleOpen = (e) => {
+  const handleOpen = () => {
     setOpen(true);
   };
 
@@ -43,8 +43,6 @@ export default function Teams({ userData }) {
   // const URL = "http://localhost:3001";
 
   function seeGroups() {
-    // e.preventDefault();
-
     const config = {
       headers: {
         // Authorization: "Bearer YOUR_TOKEN",
@@ -56,10 +54,7 @@ export default function Teams({ userData }) {
     axios
       .post(URL + "/matches", className, config)
       .then((response) => {
-        if (response.status == 200) {
-          // const group = response.data.filter((group) =>
-          //   group.includes(userData.id)
-          // );
+        if (response.status === 200) {
           for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].includes(userData.id)) {
               setGroupNumber(i + 1);
@@ -67,32 +62,27 @@ export default function Teams({ userData }) {
               break;
             }
           }
-          // if (groupNumber !== "") {
-          //   for (let j = 0; j < response.data[groupNumber - 1].length; j++) {
-          //     findMembers(response.data[groupNumber - 1][j]);
-          //   }
-          // }
         } else {
           console.log(response);
         }
       })
       .catch((err) => {
-        // console.log(err);
+        console.error(err);
       });
   }
 
   useEffect(() => {
     seeGroups();
-  });
-
-  const groupMembers = [];
+  }, []); // Add dependency array to avoid infinite loop
 
   async function addGrouping(groupNo) {
     const { data, error } = await supabase
       .from("users")
       .update({ group_no: groupNo })
       .eq("id", userData.id);
-    // groupMembers.push(data[0].username);
+    if (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -130,10 +120,18 @@ export default function Teams({ userData }) {
                 fontFamily: "Montserrat",
                 fontWeight: "bold",
                 fontSize: 20,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start'  // Align items to the left
               }}
             >
-              <h4 style={{ fontWeight: "bold" }}>IEX</h4>
-              <h6>Dev Desai</h6>
+              <NavLink
+                to="/coordinator"
+                style={{ color: "inherit", textDecoration: "none" }}
+              >
+                <h4 style={{ fontWeight: "bold", textDecoration: 'underline', marginBottom: '10px' }}>IEX</h4>
+              </NavLink>
+              <h6 style={{ margin: 0 }}>Dev Desai</h6>
             </Container>
             <br />
             <p>NUS College Impact Experience Course</p>
@@ -168,30 +166,6 @@ export default function Teams({ userData }) {
             />
           )}
         </Container>
-        {/* <Grid item xs={4}>
-        <Box sx={{ backgroundColor: "white", padding: 2 }}>
-          <Container
-            sx={{
-              backgroundColor: "#CB8909",
-              color: "white",
-              fontFamily: "Montserrat",
-              fontWeight: "bold",
-              fontSize: 20,
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <div>IEX</div>
-            <div style={{ color: "black", textDecoration: "underline" }}>
-              Match me
-            </div>
-          </Container>
-          <br />
-          <h5>Current groups:</h5>
-          <p>Group 1</p>
-          <p>Group 2</p>
-        </Box>
-      </Grid> */}
         <Backdrop
           sx={{
             color: "#fff",
