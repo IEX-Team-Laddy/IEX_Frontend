@@ -266,7 +266,7 @@ export default function Landing() {
           justifyContent: "space-evenly",
         }}
       >
-        <div>© 2023 LADDY</div>
+        <div>© 2024 LADDY</div>
         <Facebook sx={{ color: "#0072b1" }} />
         <LinkedIn sx={{ color: "#0072b1" }} />
         <Twitter sx={{ color: "#1DA1F2" }} />
