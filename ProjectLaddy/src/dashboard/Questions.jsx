@@ -19,9 +19,11 @@ export default function Questions({
   const [consentAnswer, setConsentAnswer] = useState("yes");
   const [gender, setGender] = useState(null);
   const [university, setUniversity] = useState(null);
+  const [faculty, setFaculty] = useState(null);
   const [major, setMajor] = useState("");
   const [secondMajor, setSecondMajor] = useState("");
-  const [brainstorming, setBrainstorming] = useState(null);
+  const [iexInterest, setIEXInterest] = useState(null);
+  const [collaboration, setCollaboration] = useState(null);
   const [feedbackGiving, setFeedbackGiving] = useState(null);
   const [feedbackReceiving, setFeedbackReceiving] = useState(null);
   const [workingHours, setWorkingHours] = useState(null);
@@ -78,10 +80,7 @@ export default function Questions({
       hangoutActivities,
     ];
 
-    const feedback = [
-      feedbackGiving,
-      feedbackReceiving,
-    ];
+    const feedback = [feedbackGiving, feedbackReceiving];
 
     const combinedArr = [
       activeClass,
@@ -141,22 +140,17 @@ export default function Questions({
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue={consentAnswer}
             name="Question 1"
+            onChange={(e) => setConsentAnswer(e.target.value)}
           >
             <FormControlLabel
-              checked={consentAnswer == "yes"}
-              onClick={(e) => {
-                setConsentAnswer(e.target.value);
-              }}
-              value="yes"
+              checked={consentAnswer == 0}
+              value={0}
               control={<Radio />}
               label="Yes"
             />
             <FormControlLabel
-              checked={consentAnswer == "no"}
-              onClick={(e) => {
-                setConsentAnswer(e.target.value);
-              }}
-              value="no"
+              checked={consentAnswer == 1}
+              value={1}
               control={<Radio />}
               label="No"
             />
@@ -182,39 +176,28 @@ export default function Questions({
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue={gender}
             name="Question 3"
+            onChange={(e) => setGender(parseFloat(e.target.value))}
           >
             <FormControlLabel
               checked={gender == 0}
-              onClick={(e) => {
-                setGender(e.target.value);
-              }}
               value={0}
               control={<Radio />}
               label="Male"
             />
             <FormControlLabel
               checked={gender == 1}
-              onClick={(e) => {
-                setGender(e.target.value);
-              }}
               value={1}
               control={<Radio />}
               label="Female"
             />
             <FormControlLabel
               checked={gender == 0.5}
-              onClick={(e) => {
-                setGender(e.target.value);
-              }}
               value={0.5}
               control={<Radio />}
               label="Other"
             />
             <FormControlLabel
               checked={gender == 0.75}
-              onClick={(e) => {
-                setGender(e.target.value);
-              }}
               value={0.75}
               control={<Radio />}
               label="Prefer not to say"
@@ -233,57 +216,40 @@ export default function Questions({
             aria-labelledby="demo-radio-buttons-group-label"
             name="university"
             value={university}
+            onChange={(e) => setUniversity(parseFloat(e.target.value))}
           >
             <FormControlLabel
               checked={university == 0}
-              onClick={(e) => {
-                setUniversity(e.target.value);
-              }}
               value={0}
               control={<Radio />}
               label="NUS"
             />
             <FormControlLabel
               checked={university == 0.2}
-              onClick={(e) => {
-                setUniversity(e.target.value);
-              }}
               value={0.2}
               control={<Radio />}
               label="SMU"
             />
             <FormControlLabel
               checked={university == 0.4}
-              onClick={(e) => {
-                setUniversity(e.target.value);
-              }}
               value={0.4}
               control={<Radio />}
               label="NTU"
             />
             <FormControlLabel
               checked={university == 0.6}
-              onClick={(e) => {
-                setUniversity(e.target.value);
-              }}
               value={0.6}
               control={<Radio />}
               label="SIM"
             />
             <FormControlLabel
               checked={university == 0.8}
-              onClick={(e) => {
-                setUniversity(e.target.value);
-              }}
               value={0.8}
               control={<Radio />}
               label="SUSS"
             />
             <FormControlLabel
               checked={university == 1}
-              onClick={(e) => {
-                setUniversity(e.target.value);
-              }}
               value={1}
               control={<Radio />}
               label="Others/Exchange"
@@ -302,93 +268,64 @@ export default function Questions({
             aria-labelledby="demo-radio-buttons-group-label"
             name="Faculty"
             value={faculty}
+            onChange={(e) => setFaculty(parseFloat(e.target.value))}
           >
             <FormControlLabel
               checked={faculty == 0}
-              onClick={(e) => {
-                setFaculty(e.target.value);
-              }}
               value={0}
               control={<Radio />}
               label="College of Humanities and Sciences"
             />
             <FormControlLabel
               checked={faculty == 0.11}
-              onClick={(e) => {
-                setFaculty(e.target.value);
-              }}
               value={0.11}
               control={<Radio />}
               label="College of Design and Engineering"
             />
             <FormControlLabel
               checked={faculty == 0.22}
-              onClick={(e) => {
-                setFaculty(e.target.value);
-              }}
               value={0.22}
               control={<Radio />}
               label="Faculty of Business"
             />
             <FormControlLabel
               checked={faculty == 0.33}
-              onClick={(e) => {
-                setFaculty(e.target.value);
-              }}
               value={0.33}
               control={<Radio />}
               label="Faculty of Medicine"
             />
             <FormControlLabel
               checked={faculty == 0.44}
-              onClick={(e) => {
-                setFaculty(e.target.value);
-              }}
               value={0.44}
               control={<Radio />}
               label="Faculty of Computing"
             />
             <FormControlLabel
               checked={faculty == 0.55}
-              onClick={(e) => {
-                setFaculty(e.target.value);
-              }}
               value={0.55}
               control={<Radio />}
               label="Faculty of Dentistry"
             />
             <FormControlLabel
               checked={faculty == 0.66}
-              onClick={(e) => {
-                setFaculty(e.target.value);
-              }}
               value={0.66}
               control={<Radio />}
               label="Faculty of Law"
             />
             <FormControlLabel
               checked={faculty == 0.77}
-              onClick={(e) => {
-                setFaculty(e.target.value);
-              }}
               value={0.77}
               control={<Radio />}
               label="Faculty of Music"
             />
             <FormControlLabel
               checked={faculty == 0.88}
-              onClick={(e) => {
-                setFaculty(e.target.value);
-              }}
               value={0.88}
               control={<Radio />}
               label="Faculty of Nursing"
             />
             <FormControlLabel
               checked={faculty == 1}
-              onClick={(e) => {
-                setFaculty(e.target.value);
-              }}
               value={1}
               control={<Radio />}
               label="Faculty of Pharmacy"
@@ -407,7 +344,7 @@ export default function Questions({
             aria-labelledby="demo-radio-buttons-group-label"
             name="Major"
             value={major}
-            onClick={(e) => setMajor(e.target.value)}
+            onChange={(e) => setMajor(e.target.value)}
           >
             <FormControlLabel
               value={0}
@@ -690,12 +627,11 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="iex"
+            value={iexInterest}
+            onChange={(e) => setIEXInterest(parseFloat(e.target.value))}
           >
             <FormControlLabel
-              checked={iexinterest == 0}
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
+              checked={iexInterest == 0}
               value={0}
               control={<Radio />}
               label="Waste Management in Bandung"
@@ -704,169 +640,106 @@ export default function Questions({
               value={0.048}
               control={<Radio />}
               label="Social Design as Worldmaking in Singapore"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.096}
               control={<Radio />}
               label="Bajautopia in Sabah"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.144}
               control={<Radio />}
               label="Tourist Development in Thailand"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.192}
               control={<Radio />}
               label="Inclusion in Education"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.24}
               control={<Radio />}
               label="100% Housing"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.288}
               control={<Radio />}
               label="Digital Documentation of Indonesian Arts Communities"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.336}
               control={<Radio />}
               label="Communities and Heritage Conservation"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.384}
               control={<Radio />}
               label="Postconflict Cambodia"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.432}
               control={<Radio />}
               label="Education (Innov-Ed) in Vietnam"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.48}
               control={<Radio />}
               label="Self-help + Communities"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.528}
               control={<Radio />}
               label="Project Chiang Mai"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.576}
               control={<Radio />}
               label="Gender Matters Everyday"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.624}
               control={<Radio />}
               label="Inclusive Research for Social Change"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.672}
               control={<Radio />}
               label="Rohingya Refugees in Malaysia"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.72}
               control={<Radio />}
               label="Farming in an Urban Nation"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.768}
               control={<Radio />}
               label="Bamboo Differences - Philippines"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.816}
               control={<Radio />}
               label="The Practical Realities of Well-Being"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.864}
               control={<Radio />}
               label="Technology for Social Good"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.912}
               control={<Radio />}
               label="Let's Green this Little Red Dot!"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={0.96}
               control={<Radio />}
               label="Environmental and Community Impact - Cambodia"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="Digital Communities"
-              onClick={(e) => {
-                setIEXInterest(e.target.value);
-              }}
             />
           </RadioGroup>
         </FormControl>
@@ -881,24 +754,23 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="Collaboration"
+            value={collaboration}
+            onChange={(e) => setCollaboration(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="Start the discussion off by sharing a few of your ideas; let’s start with those and see what everyone thinks"
-              onClick={(e) => setBrainstorming(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="Let’s gather everyone's ideas first and then discuss them one by one."
-              onClick={(e) => setBrainstorming(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="Wait for others to start the discussion and listen to them first before sharing your ideas."
-              onClick={(e) => setBrainstorming(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -913,30 +785,28 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="feedbackGiving"
+            value={feedbackGiving}
+            onChange={(e) => setFeedbackGiving(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="Focus on the missed deadlines and the need to adhere to the project timeline."
-              onClick={(e) => setFeedbackGiving(e.target.value)}
             />
             <FormControlLabel
               value={0.33}
               control={<Radio />}
               label="Praise their high-quality work without mentioning the missed deadlines."
-              onClick={(e) => setFeedbackGiving(e.target.value)}
             />
             <FormControlLabel
               value={0.66}
               control={<Radio />}
               label="Suggest future strategies for meeting deadlines without focusing on past mistakes."
-              onClick={(e) => setFeedbackGiving(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="Highlight their high-quality work first and then discuss the missed deadlines, suggesting ways to improve time management."
-              onClick={(e) => setFeedbackGiving(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -951,317 +821,301 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="feedbackReceiving"
+            value={feedbackReceiving}
+            onChange={(e) => setFeedbackReceiving(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="Just be direct with me and focus on the missed deadlines and the need for punctuality."
-              onClick={(e) => setFeedbackReceiving(e.target.value)}
             />
             <FormControlLabel
               value={0.33}
               control={<Radio />}
               label="Praise my work quality without dwelling too much on the deadlines."
-              onClick={(e) => setFeedbackReceiving(e.target.value)}
             />
             <FormControlLabel
-             
-             value={0.66}
-             control={<Radio />}
-             label="Have a conversation with me about future strategies for meeting deadlines without focusing on past mistakes."
-             onClick={(e) => setFeedbackReceiving(e.target.value)}
-           />
-           <FormControlLabel
-             value={1}
-             control={<Radio />}
-             label="Highlight the quality of my work first and then discuss the missed deadlines with suggestions for improvement."
-             onClick={(e) => setFeedbackReceiving(e.target.value)}
-           />
-         </RadioGroup>
-       </FormControl>
-     </div>
-     <br />
-     <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-     <br />
-     <div style={{ textAlign: "left" }}>
-       <FormControl>
-         <div>Are you an early bird or a night owl?</div>
-         <br />
-         <RadioGroup
-           aria-labelledby="demo-radio-buttons-group-label"
-           name="workingHours"
-         >
-           <FormControlLabel
-             value={0}
-             control={<Radio />}
-             label="Early Bird"
-             onClick={(e) => setWorkingHours(e.target.value)}
-           />
-           <FormControlLabel
-             value={1}
-             control={<Radio />}
-             label="Night Owl"
-             onClick={(e) => setWorkingHours(e.target.value)}
-           />
-         </RadioGroup>
-       </FormControl>
-     </div>
-     <br />
-     <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-     <br />
-     <div style={{ textAlign: "left" }}>
-       <FormControl>
-         <div>Do you prefer taking meetings in the morning or towards the end of the day/evening?</div>
-         <br />
-         <RadioGroup
-           aria-labelledby="demo-radio-buttons-group-label"
-           name="meetingHours"
-         >
-           <FormControlLabel
-             value={0}
-             control={<Radio />}
-             label="Morning"
-             onClick={(e) => setMeetingHours(e.target.value)}
-           />
-           <FormControlLabel
-             value={1}
-             control={<Radio />}
-             label="Evening/Night"
-             onClick={(e) => setMeetingHours(e.target.value)}
-           />
-         </RadioGroup>
-       </FormControl>
-     </div>
-     <br />
-     <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-     <br />
-     <div style={{ textAlign: "left" }}>
-       <FormControl>
-         <div>You have a tight deadline to develop a new research presentation. How would you prefer to start the project?</div>
-         <br />
-         <RadioGroup
-           aria-labelledby="demo-radio-buttons-group-label"
-           name="workingApproach"
-         >
-           <FormControlLabel
-             value={0}
-             control={<Radio />}
-             label="Jump right into research and adjust as needed along the way."
-             onClick={(e) => setWorkingApproach(e.target.value)}
-           />
-           <FormControlLabel
-             value={0.25}
-             control={<Radio />}
-             label="Quickly outline a rough plan and then start researching."
-             onClick={(e) => setWorkingApproach(e.target.value)}
-           />
-           <FormControlLabel
-             value={0.5}
-             control={<Radio />}
-             label="Create a detailed plan before starting any research."
-             onClick={(e) => setWorkingApproach(e.target.value)}
-           />
-           <FormControlLabel
-             value={0.75}
-             control={<Radio />}
-             label="Thoroughly plan every detail and follow the plan closely."
-             onClick={(e) => setWorkingApproach(e.target.value)}
-           />
-           <FormControlLabel
-             value={1}
-             control={<Radio />}
-             label="Spend significant time on planning and ensure all possible issues are considered before starting."
-             onClick={(e) => setWorkingApproach(e.target.value)}
-           />
-         </RadioGroup>
-       </FormControl>
-     </div>
-     <br />
-     <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-     <br />
-     <div style={{ textAlign: "left" }}>
-       <FormControl>
-         <div>You are juggling several tasks, each with its own deadline. Some tasks are interdependent, requiring careful scheduling to ensure timely completion of the overall project. How do you handle multiple tasks with overlapping deadlines?</div>
-         <br />
-         <RadioGroup
-           aria-labelledby="demo-radio-buttons-group-label"
-           name="manageDeadlines"
-         >
-           <FormControlLabel
-             value={0}
-             control={<Radio />}
-             label="I prefer to complete each task close to or just before its deadline."
-             onClick={(e) => setManageDeadlines(e.target.value)}
-           />
-           <FormControlLabel
-             value={0.25}
-             control={<Radio />}
-             label="I finish tasks with a small buffer before each deadline."
-             onClick={(e) => setManageDeadlines(e.target.value)}
-           />
-           <FormControlLabel
-             value={0.5}
-             control={<Radio />}
-             label="I manage to complete tasks well before their deadlines."
-             onClick={(e) => setManageDeadlines(e.target.value)}
-           />
-           <FormControlLabel
-             value={0.75}
-             control={<Radio />}
-             label="I usually complete tasks quite early, ensuring a comfortable buffer before deadlines."
-             onClick={(e) => setManageDeadlines(e.target.value)}
-           />
-           <FormControlLabel
-             value={1}
-             control={<Radio />}
-             label="I finish tasks almost immediately after they are assigned."
-             onClick={(e) => setManageDeadlines(e.target.value)}
-           />
-         </RadioGroup>
-       </FormControl>
-     </div>
-     <br />
-     <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-     <br />
-     <div style={{ textAlign: "left" }}>
-       <FormControl>
-         <div>Do you typically work consistently or in bursts?</div>
-         <br />
-         <RadioGroup
-           aria-labelledby="demo-radio-buttons-group-label"
-           name="workConsistency"
-         >
-           <FormControlLabel
-             value={0}
-             control={<Radio />}
-             label="Works consistently"
-             onClick={(e) => setWorkConsistency(e.target.value)}
-           />
-           <FormControlLabel
-             value={1}
-             control={<Radio />}
-             label="In bursts of effort"
-             onClick={(e) => setWorkConsistency(e.target.value)}
-           />
-         </RadioGroup>
-       </FormControl>
-     </div>
-     <br />
-     <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-     <br />
-     <div style={{ textAlign: "left" }}>
-       <FormControl>
-         <div>Do you prefer in-person meetings, online meetings, or a mix of both?</div>
-         <br />
-         <RadioGroup
-           aria-labelledby="demo-radio-buttons-group-label"
-           name="meetingStyle"
-         >
-           <FormControlLabel
-             value={0}
-             control={<Radio />}
-             label="In-Person meetings"
-             onClick={(e) => setMeetingStyle(e.target.value)}
-           />
-           <FormControlLabel
-             value={1}
-             control={<Radio />}
-             label="Online meetings"
-             onClick={(e) => setMeetingStyle(e.target.value)}
-           />
-           <FormControlLabel
-             value={0.5}
-             control={<Radio />}
-             label="Hybrid"
-             onClick={(e) => setMeetingStyle(e.target.value)}
-           />
-         </RadioGroup>
-       </FormControl>
-     </div>
-     <br />
-     <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-     <br />
-     <div style={{ textAlign: "left" }}>
-       <FormControl>
-         <div>How often do you like to hold meetings for a project?</div>
-         <br />
-         <RadioGroup
-           aria-labelledby="demo-radio-buttons-group-label"
-           name="meetingFrequency"
-         >
-           <FormControlLabel
-             value={0}
-             control={<Radio />}
-             label="As minimal as possible"
-             onClick={(e) => setMeetingFrequency(e.target.value)}
-           />
-           <FormControlLabel
-             value={0.25}
-             control={<Radio />}
-             label="Once every two weeks"
-             onClick={(e) => setMeetingFrequency(e.target.value)}
-           />
-           <FormControlLabel
-             value={0.5}
-             control={<Radio />}
-             label="Once every week"
-             onClick={(e) => setMeetingFrequency(e.target.value)}
-           />
-           <FormControlLabel
-             value={0.75}
-             control={<Radio />}
-             label="Twice a week"
-             onClick={(e) => setMeetingFrequency(e.target.value)}
-           />
-           <FormControlLabel
-             value={1}
-             control={<Radio />}
-             label="More than twice a week"
-             onClick={(e) => setMeetingFrequency(e.target.value)}
-           />
-         </RadioGroup>
-       </FormControl>
-     </div>
-     <br />
-     <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-     <br />
-     <div style={{ textAlign: "left" }}>
-       <FormControl>
-         <div>After presenting a project demo to the client, you receive feedback that requires several adjustments to meet the client's new expectations. This will involve reworking some parts of the project. How comfortable are you in adapting to feedback and making necessary adjustments to the project?</div>
-         <br />
-         <RadioGroup
+              value={0.66}
+              control={<Radio />}
+              label="Have a conversation with me about future strategies for meeting deadlines without focusing on past mistakes."
+            />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="Highlight the quality of my work first and then discuss the missed deadlines with suggestions for improvement."
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>Are you an early bird or a night owl?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="workingHours"
+            value={workingHours}
+            onChange={(e) => setWorkingHours(parseFloat(e.target.value))}
+          >
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="Early Bird"
+            />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="Night Owl"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>Do you prefer taking meetings in the morning or towards the end of the day/evening?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="meetingHours"
+            value={meetingHours}
+            onChange={(e) => setMeetingHours(parseFloat(e.target.value))}
+          >
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="Morning"
+            />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="Evening/Night"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>You have a tight deadline to develop a new research presentation. How would you prefer to start the project?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="workingApproach"
+            value={workingApproach}
+            onChange={(e) => setWorkingApproach(parseFloat(e.target.value))}
+          >
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="Jump right into research and adjust as needed along the way."
+            />
+            <FormControlLabel
+              value={0.25}
+              control={<Radio />}
+              label="Quickly outline a rough plan and then start researching."
+            />
+            <FormControlLabel
+              value={0.5}
+              control={<Radio />}
+              label="Create a detailed plan before starting any research."
+            />
+            <FormControlLabel
+              value={0.75}
+              control={<Radio />}
+              label="Thoroughly plan every detail and follow the plan closely."
+            />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="Spend significant time on planning and ensure all possible issues are considered before starting."
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>You are juggling several tasks, each with its own deadline. Some tasks are interdependent, requiring careful scheduling to ensure timely completion of the overall project. How do you handle multiple tasks with overlapping deadlines?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="manageDeadlines"
+            value={manageDeadlines}
+            onChange={(e) => setManageDeadlines(parseFloat(e.target.value))}
+          >
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="I prefer to complete each task close to or just before its deadline."
+            />
+            <FormControlLabel
+              value={0.25}
+              control={<Radio />}
+              label="I finish tasks with a small buffer before each deadline."
+            />
+            <FormControlLabel
+              value={0.5}
+              control={<Radio />}
+              label="I manage to complete tasks well before their deadlines."
+            />
+            <FormControlLabel
+              value={0.75}
+              control={<Radio />}
+              label="I usually complete tasks quite early, ensuring a comfortable buffer before deadlines."
+            />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="I finish tasks almost immediately after they are assigned."
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>Do you typically work consistently or in bursts?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="workConsistency"
+            value={workConsistency}
+            onChange={(e) => setWorkConsistency(parseFloat(e.target.value))}
+          >
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="Works consistently"
+            />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="In bursts of effort"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>Do you prefer in-person meetings, online meetings, or a mix of both?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="meetingStyle"
+            value={meetingStyle}
+            onChange={(e) => setMeetingStyle(parseFloat(e.target.value))}
+          >
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="In-Person meetings"
+            />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="Online meetings"
+            />
+            <FormControlLabel
+              value={0.5}
+              control={<Radio />}
+              label="Hybrid"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>How often do you like to hold meetings for a project?</div>
+          <br />
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="meetingFrequency"
+            value={meetingFrequency}
+            onChange={(e) => setMeetingFrequency(parseFloat(e.target.value))}
+          >
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="As minimal as possible"
+            />
+            <FormControlLabel
+              value={0.25}
+              control={<Radio />}
+              label="Once every two weeks"
+            />
+            <FormControlLabel
+              value={0.5}
+              control={<Radio />}
+              label="Once every week"
+            />
+            <FormControlLabel
+              value={0.75}
+              control={<Radio />}
+              label="Twice a week"
+            />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="More than twice a week"
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+      <br />
+      <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
+      <br />
+      <div style={{ textAlign: "left" }}>
+        <FormControl>
+          <div>After presenting a project demo to the client, you receive feedback that requires several adjustments to meet the client's new expectations. This will involve reworking some parts of the project. How comfortable are you in adapting to feedback and making necessary adjustments to the project?</div>
+          <br />
+          <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="adaptingComfort"
+            value={adaptingComfort}
+            onChange={(e) => setAdaptingComfort(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="I prefer maintaining the original plan but can make changes with guidance."
-              onClick={(e) => setAdaptingComfort(e.target.value)}
             />
             <FormControlLabel
               value={0.25}
               control={<Radio />}
               label="I can make necessary adjustments with some effort and find ways to improve."
-              onClick={(e) => setAdaptingComfort(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="I am comfortable with making adjustments based on feedback and can adapt with little time."
-              onClick={(e) => setAdaptingComfort(e.target.value)}
             />
             <FormControlLabel
               value={0.75}
               control={<Radio />}
               label="I welcome feedback and make adjustments smoothly and efficiently."
-              onClick={(e) => setAdaptingComfort(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="I embrace feedback and adapt quickly to make the necessary changes with enthusiasm."
-              onClick={(e) => setAdaptingComfort(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1276,36 +1130,33 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="effectiveCommunication"
+            value={effectiveCommunication}
+            onChange={(e) => setEffectiveCommunication(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="Not important; I believe in working independently and managing my tasks."
-              onClick={(e) => setEffectiveCommunication(e.target.value)}
             />
             <FormControlLabel
               value={0.25}
               control={<Radio />}
               label="Somewhat important; occasional feedback is sufficient for me."
-              onClick={(e) => setEffectiveCommunication(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="Moderately important; regular updates and feedback are useful but not critical."
-              onClick={(e) => setEffectiveCommunication(e.target.value)}
             />
             <FormControlLabel
               value={0.75}
               control={<Radio />}
               label="Important; frequent updates and feedback sessions help keep me aligned with the team."
-              onClick={(e) => setEffectiveCommunication(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="Very important; I rely on constant updates and feedback to ensure the project's success."
-              onClick={(e) => setEffectiveCommunication(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1320,36 +1171,33 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="initiatingConvo"
+            value={initiatingConvo}
+            onChange={(e) => setInitiatingConvo(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="I prefer to listen as I find it very difficult to initiate conversations."
-              onClick={(e) => setInitiatingConvo(e.target.value)}
             />
             <FormControlLabel
               value={0.25}
               control={<Radio />}
               label="I feel somewhat uncomfortable but can participate when necessary."
-              onClick={(e) => setInitiatingConvo(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="I am moderately comfortable and can contribute to discussions with some effort."
-              onClick={(e) => setInitiatingConvo(e.target.value)}
             />
             <FormControlLabel
               value={0.75}
               control={<Radio />}
               label="I am comfortable initiating and maintaining conversations, and I participate actively."
-              onClick={(e) => setInitiatingConvo(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="I am very comfortable and enjoy leading and contributing to conversations regularly."
-              onClick={(e) => setInitiatingConvo(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1364,36 +1212,33 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="initiatingFrequency"
+            value={initiatingFrequency}
+            onChange={(e) => setInitiatingFrequency(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="Never; I hope the issue resolves itself or someone else addresses it."
-              onClick={(e) => setInitiatingFrequency(e.target.value)}
             />
             <FormControlLabel
               value={0.25}
               control={<Radio />}
               label="Rarely; I communicate only when absolutely necessary."
-              onClick={(e) => setInitiatingFrequency(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="Sometimes; I initiate discussions when I have specific updates or questions."
-              onClick={(e) => setInitiatingFrequency(e.target.value)}
             />
             <FormControlLabel
               value={0.75}
               control={<Radio />}
               label="Often; I regularly check in and share updates with my team."
-              onClick={(e) => setInitiatingFrequency(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="Always; I consistently initiate communication and ensure everyone is informed."
-              onClick={(e) => setInitiatingFrequency(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1408,36 +1253,33 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="challengePreference"
+            value={challengePreference}
+            onChange={(e) => setChallengePreference(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="I prefer to avoid such workshops and focus on routine tasks."
-              onClick={(e) => setChallengePreference(e.target.value)}
             />
             <FormControlLabel
               value={0.25}
               control={<Radio />}
               label="I participate if required but don't actively seek out these opportunities."
-              onClick={(e) => setChallengePreference(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="I find these workshops somewhat enjoyable and participate occasionally."
-              onClick={(e) => setChallengePreference(e.target.value)}
             />
             <FormControlLabel
               value={0.75}
               control={<Radio />}
               label="I look forward to these workshops and actively participate in them."
-              onClick={(e) => setChallengePreference(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="I thoroughly enjoy these workshops and actively seek out opportunities to engage in creative problem-solving."
-              onClick={(e) => setChallengePreference(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1452,36 +1294,33 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="exploringComfort"
+            value={exploringComfort}
+            onChange={(e) => setExploringComfort(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="I prefer sticking to traditional methods that have worked in the past."
-              onClick={(e) => setExploringComfort(e.target.value)}
             />
             <FormControlLabel
               value={0.25}
               control={<Radio />}
               label="I am hesitant but willing to consider new approaches if necessary."
-              onClick={(e) => setExploringComfort(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="I am somewhat open and will try new approaches if they seem beneficial."
-              onClick={(e) => setExploringComfort(e.target.value)}
             />
             <FormControlLabel
               value={0.75}
               control={<Radio />}
               label="I prefer to explore and implement more innovative approaches."
-              onClick={(e) => setExploringComfort(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="I try to find and explore innovative approaches first if I am able to."
-              onClick={(e) => setExploringComfort(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1496,36 +1335,33 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="conflictManagement"
+            value={conflictManagement}
+            onChange={(e) => setConflictManagement(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="Keep it to yourself, assuming someone else will notice it and address it."
-              onClick={(e) => setConflictManagement(e.target.value)}
             />
             <FormControlLabel
               value={0.25}
               control={<Radio />}
               label="After the meeting, privately message the person who made the mistake to correct it."
-              onClick={(e) => setConflictManagement(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="Privately message a more capable team member to address the mistake."
-              onClick={(e) => setConflictManagement(e.target.value)}
             />
             <FormControlLabel
               value={0.75}
               control={<Radio />}
               label="Point out the error in the meeting positively to ensure it is corrected."
-              onClick={(e) => setConflictManagement(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="Point out the mistake directly in the meeting and ask the person to rectify it."
-              onClick={(e) => setConflictManagement(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1540,36 +1376,33 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="conflictManagement"
+            value={conflictManagement}
+            onChange={(e) => setConflictManagement(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="I am very uncomfortable and would prefer someone else handle it."
-              onClick={(e) => setConflictManagement(e.target.value)}
             />
             <FormControlLabel
               value={0.25}
               control={<Radio />}
               label="I am somewhat uncomfortable but can try to manage if necessary."
-              onClick={(e) => setConflictManagement(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="I am moderately comfortable and can step in to help resolve the conflict."
-              onClick={(e) => setConflictManagement(e.target.value)}
             />
             <FormControlLabel
               value={0.75}
               control={<Radio />}
               label="I am comfortable and willing to handle the conflict to reach a resolution."
-              onClick={(e) => setConflictManagement(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="I am very comfortable and prefer to take the lead in resolving conflicts and disagreements."
-              onClick={(e) => setConflictManagement(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1584,36 +1417,33 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="stressManagement"
+            value={stressManagement}
+            onChange={(e) => setStressManagement(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="Take deep breaths, assess priorities, and break tasks into smaller, manageable steps alone."
-              onClick={(e) => setStressManagement(e.target.value)}
             />
             <FormControlLabel
               value={0.25}
               control={<Radio />}
               label="I use positive reinforcement to keep the team’s morale high while quickly resolving the issue."
-              onClick={(e) => setStressManagement(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="I become highly focused and driven, using the stress to motivate myself and others."
-              onClick={(e) => setStressManagement(e.target.value)}
             />
             <FormControlLabel
               value={0.75}
               control={<Radio />}
               label="Seek support from colleagues and communicate openly about challenges to stay calm."
-              onClick={(e) => setStressManagement(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="I rely on structured routines and clear plans to manage my stress."
-              onClick={(e) => setStressManagement(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1628,24 +1458,23 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="idealGroupSize"
+            value={idealGroupSize}
+            onChange={(e) => setIdealGroupSize(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="4"
-              onClick={(e) => setIdealGroupSize(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="5"
-              onClick={(e) => setIdealGroupSize(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="6"
-              onClick={(e) => setIdealGroupSize(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1668,30 +1497,28 @@ export default function Questions({
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="hangoutActivities"
+            value={hangoutActivities}
+            onChange={(e) => setHangoutActivities(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
               control={<Radio />}
               label="Outdoor adventure / exercise e.g., hiking or rock climbing"
-              onClick={(e) => setHangoutActivities(e.target.value)}
             />
             <FormControlLabel
               value={0.25}
               control={<Radio />}
               label="Social gatherings e.g., dinner or a game night"
-              onClick={(e) => setHangoutActivities(e.target.value)}
             />
             <FormControlLabel
               value={0.5}
               control={<Radio />}
               label="Cultural/Event exploration e.g., food festivals, museums or exploring local cultural events"
-              onClick={(e) => setHangoutActivities(e.target.value)}
             />
             <FormControlLabel
               value={1}
               control={<Radio />}
               label="Creative pursuits e.g., art and craft session, cooking or baking together"
-              onClick={(e) => setHangoutActivities(e.target.value)}
             />
           </RadioGroup>
         </FormControl>
@@ -1713,4 +1540,3 @@ export default function Questions({
     </div>
   );
 }
-
