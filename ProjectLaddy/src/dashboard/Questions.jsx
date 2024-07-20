@@ -18,12 +18,16 @@ export default function Questions({
 }) {
   const [consentAnswer, setConsentAnswer] = useState("yes");
   const [gender, setGender] = useState(null);
-  const [university, setUniversity] = useState(null);
   const [faculty, setFaculty] = useState(null);
+
+  // Not currently used in backend (tochange eventually)
+  const [university, setUniversity] = useState(null);
   const [major, setMajor] = useState("");
   const [secondMajor, setSecondMajor] = useState("");
   const [iexInterest, setIEXInterest] = useState(null);
-  const [collaboration, setCollaboration] = useState(null);
+
+  // Homo, Hetero and Feedback qns
+  const [startCollab, setStartCollab] = useState(null);
   const [feedbackGiving, setFeedbackGiving] = useState(null);
   const [feedbackReceiving, setFeedbackReceiving] = useState(null);
   const [workingHours, setWorkingHours] = useState(null);
@@ -39,8 +43,9 @@ export default function Questions({
   const [initiatingFrequency, setInitiatingFrequency] = useState(null);
   const [challengePreference, setChallengePreference] = useState(null);
   const [exploringComfort, setExploringComfort] = useState(null);
-  const [conflictManagement, setConflictManagement] = useState(null);
-  const [stressManagement, setStressManagement] = useState(null);
+  const [handleMistake, setHandleMistake] = useState(null);
+  const [handleConflict, setHandleConflict] = useState(null);
+  const [handleStress, setHandleStress] = useState(null);
   const [idealGroupSize, setIdealGroupSize] = useState(null);
   const [hangoutActivities, setHangoutActivities] = useState(null);
 
@@ -59,12 +64,12 @@ export default function Questions({
       adaptingComfort,
       initiatingConvo,
       initiatingFrequency,
-      conflictManagement,
+      handleMistake,
+      handleConflict,
     ];
 
     const homoWeights = [
-      feedbackGiving,
-      feedbackReceiving,
+      startCollab,
       workingHours,
       meetingHours,
       workingApproach,
@@ -75,7 +80,7 @@ export default function Questions({
       effectiveCommunication,
       challengePreference,
       exploringComfort,
-      stressManagement,
+      handleStress,
       idealGroupSize,
       hangoutActivities,
     ];
@@ -88,6 +93,7 @@ export default function Questions({
       consentAnswer,
       major,
       secondMajor,
+      faculty,
       homoWeights,
       heteroWeights,
       feedback,
@@ -144,13 +150,13 @@ export default function Questions({
           >
             <FormControlLabel
               checked={consentAnswer == 0}
-              value={0}
+              value={"Yes"}
               control={<Radio />}
               label="Yes"
             />
             <FormControlLabel
               checked={consentAnswer == 1}
-              value={1}
+              value={"No"}
               control={<Radio />}
               label="No"
             />
@@ -196,12 +202,15 @@ export default function Questions({
               control={<Radio />}
               label="Other"
             />
+            {/* 
+            Prefer not to say is not a valid option since Gender is one of the attributes to match by
+            
             <FormControlLabel
               checked={gender == 0.75}
               value={0.75}
               control={<Radio />}
               label="Prefer not to say"
-            />
+            /> */}
           </RadioGroup>
         </FormControl>
       </div>
@@ -219,38 +228,38 @@ export default function Questions({
             onChange={(e) => setUniversity(parseFloat(e.target.value))}
           >
             <FormControlLabel
-              checked={university == 0}
-              value={0}
+              checked={university == "NUS"}
+              value={"NUS"}
               control={<Radio />}
               label="NUS"
             />
             <FormControlLabel
-              checked={university == 0.2}
-              value={0.2}
+              checked={university == "SMU"}
+              value={"SMU"}
               control={<Radio />}
               label="SMU"
             />
             <FormControlLabel
-              checked={university == 0.4}
-              value={0.4}
+              checked={university == "NTU"}
+              value={"NTU"}
               control={<Radio />}
               label="NTU"
             />
             <FormControlLabel
-              checked={university == 0.6}
-              value={0.6}
+              checked={university == "SIM"}
+              value={"SIM"}
               control={<Radio />}
               label="SIM"
             />
             <FormControlLabel
-              checked={university == 0.8}
-              value={0.8}
+              checked={university == "SUSS"}
+              value={"SUSS"}
               control={<Radio />}
               label="SUSS"
             />
             <FormControlLabel
-              checked={university == 1}
-              value={1}
+              checked={university == "Others/Exchange"}
+              value={"Others/Exchange"}
               control={<Radio />}
               label="Others/Exchange"
             />
@@ -271,62 +280,62 @@ export default function Questions({
             onChange={(e) => setFaculty(parseFloat(e.target.value))}
           >
             <FormControlLabel
-              checked={faculty == 0}
-              value={0}
+              checked={faculty == "CHS"}
+              value={"CHS"}
               control={<Radio />}
               label="College of Humanities and Sciences"
             />
             <FormControlLabel
-              checked={faculty == 0.11}
-              value={0.11}
+              checked={faculty == "CDE"}
+              value={"CDE"}
               control={<Radio />}
               label="College of Design and Engineering"
             />
             <FormControlLabel
-              checked={faculty == 0.22}
-              value={0.22}
+              checked={faculty == "BUS"}
+              value={"BUS"}
               control={<Radio />}
               label="Faculty of Business"
             />
             <FormControlLabel
-              checked={faculty == 0.33}
-              value={0.33}
+              checked={faculty == "MED"}
+              value={"MED"}
               control={<Radio />}
               label="Faculty of Medicine"
             />
             <FormControlLabel
-              checked={faculty == 0.44}
-              value={0.44}
+              checked={faculty == "COM"}
+              value={"COM"}
               control={<Radio />}
               label="Faculty of Computing"
             />
             <FormControlLabel
-              checked={faculty == 0.55}
-              value={0.55}
+              checked={faculty == "DEN"}
+              value={"DEN"}
               control={<Radio />}
               label="Faculty of Dentistry"
             />
             <FormControlLabel
-              checked={faculty == 0.66}
-              value={0.66}
+              checked={faculty == "LAW"}
+              value={"LAW"}
               control={<Radio />}
               label="Faculty of Law"
             />
             <FormControlLabel
-              checked={faculty == 0.77}
-              value={0.77}
+              checked={faculty == "MUS"}
+              value={"MUS"}
               control={<Radio />}
               label="Faculty of Music"
             />
             <FormControlLabel
-              checked={faculty == 0.88}
-              value={0.88}
+              checked={faculty == "NUR"}
+              value={"NUR"}
               control={<Radio />}
               label="Faculty of Nursing"
             />
             <FormControlLabel
-              checked={faculty == 1}
-              value={1}
+              checked={faculty == "PHA"}
+              value={"PHA"}
               control={<Radio />}
               label="Faculty of Pharmacy"
             />
@@ -347,257 +356,257 @@ export default function Questions({
             onChange={(e) => setMajor(e.target.value)}
           >
             <FormControlLabel
-              value={0}
+              value={"Comp Eng"}
               control={<Radio />}
               label="Computer Engineering"
             />
             <FormControlLabel
-              value={0.02}
+              value={"Biomed Eng"}
               control={<Radio />}
               label="Biomedical Engineering"
             />
             <FormControlLabel
-              value={0.04}
+              value={"Chem Eng"}
               control={<Radio />}
               label="Chemical Engineering"
             />
             <FormControlLabel
-              value={0.06}
+              value={"Civil Eng"}
               control={<Radio />}
               label="Civil Engineering"
             />
             <FormControlLabel
-              value={0.08}
+              value={"Elec Eng"}
               control={<Radio />}
               label="Electrical Engineering"
             />
             <FormControlLabel
-              value={0.1}
+              value={"Eng Sci"}
               control={<Radio />}
               label="Engineering Science"
             />
             <FormControlLabel
-              value={0.12}
+              value={"Env Eng"}
               control={<Radio />}
               label="Environmental Engineering"
             />
             <FormControlLabel
-              value={0.14}
+              value={"Ind Sys Eng"}
               control={<Radio />}
               label="Industrial & Systems Engineering"
             />
             <FormControlLabel
-              value={0.16}
+              value={"Infra Proj Mgmt"}
               control={<Radio />}
               label="Infrastructure & Project Management"
             />
             <FormControlLabel
-              value={0.18}
+              value={"Materials Sci Eng"}
               control={<Radio />}
               label="Materials Science & Engineering"
             />
             <FormControlLabel
-              value={0.20}
+              value={"Mech Eng"}
               control={<Radio />}
               label="Mechanical Engineering"
             />
             <FormControlLabel
-              value={0.22}
+              value={"Data Sci & Econ"}
               control={<Radio />}
               label="Data Science and Economics"
             />
             <FormControlLabel
-              value={0.24}
+              value={"Env Stu"}
               control={<Radio />}
               label="Environmental Studies"
             />
             <FormControlLabel
-              value={0.26}
+              value={"Food Sci & Tech"}
               control={<Radio />}
               label="Food Science and Technology"
             />
             <FormControlLabel
-              value={0.28}
+              value={"Anthro"}
               control={<Radio />}
               label="Anthropology"
             />
             <FormControlLabel
-              value={0.30}
+              value={"Chinese Lang"}
               control={<Radio />}
               label="Chinese Language"
             />
             <FormControlLabel
-              value={0.32}
+              value={"Chinese Stu"}
               control={<Radio />}
               label="Chinese Studies"
             />
             <FormControlLabel
-              value={0.34}
+              value={"Comms New Media"}
               control={<Radio />}
               label="Communications and New Media"
             />
             <FormControlLabel
-              value={0.36}
+              value={"Econs"}
               control={<Radio />}
               label="Economics"
             />
             <FormControlLabel
-              value={0.38}
+              value={"Eng Lang"}
               control={<Radio />}
               label="English Language"
             />
             <FormControlLabel
-              value={0.40}
+              value={"Eng Lit"}
               control={<Radio />}
               label="English Literature"
             />
             <FormControlLabel
-              value={0.42}
+              value={"Geog"}
               control={<Radio />}
               label="Geography"
             />
             <FormControlLabel
-              value={0.44}
+              value={"Global Stud"}
               control={<Radio />}
               label="Global Studies"
             />
             <FormControlLabel
-              value={0.46}
+              value={"Hist"}
               control={<Radio />}
               label="History"
             />
             <FormControlLabel
-              value={0.48}
+              value={"Jap Stu"}
               control={<Radio />}
               label="Japanese Studies"
             />
             <FormControlLabel
-              value={0.50}
+              value={"Malay Stu"}
               control={<Radio />}
               label="Malay Studies"
             />
             <FormControlLabel
-              value={0.52}
+              value={"Phil"}
               control={<Radio />}
               label="Philosophy"
             />
             <FormControlLabel
-              value={0.54}
+              value={"Political Sci"}
               control={<Radio />}
               label="Political Science"
             />
             <FormControlLabel
-              value={0.56}
+              value={"Psych"}
               control={<Radio />}
               label="Psychology"
             />
             <FormControlLabel
-              value={0.58}
+              value={"Social Work"}
               control={<Radio />}
               label="Social Work"
             />
             <FormControlLabel
-              value={0.60}
+              value={"Sociology"}
               control={<Radio />}
               label="Sociology"
             />
             <FormControlLabel
-              value={0.62}
+              value={"S Asian Stu"}
               control={<Radio />}
               label="South Asian Studies"
             />
             <FormControlLabel
-              value={0.64}
+              value={"SE Asian Stu"}
               control={<Radio />}
               label="Southeast Asian Studies"
             />
             <FormControlLabel
-              value={0.66}
+              value={"Theatre Stu"}
               control={<Radio />}
               label="Theatre Studies"
             />
             <FormControlLabel
-              value={0.68}
+              value={"Chem"}
               control={<Radio />}
               label="Chemistry"
             />
             <FormControlLabel
-              value={0.70}
+              value={"DSA"}
               control={<Radio />}
               label="Data Science and Analytics"
             />
             <FormControlLabel
-              value={0.72}
+              value={"Life Sci"}
               control={<Radio />}
               label="Life Sciences"
             />
             <FormControlLabel
-              value={0.192}
+              value={"Math"}
               control={<Radio />}
               label="Mathematics"
             />
             <FormControlLabel
-              value={0.74}
+              value={"Phy"}
               control={<Radio />}
               label="Physics"
             />
             <FormControlLabel
-              value={0.76}
+              value={"QF"}
               control={<Radio />}
               label="Quantitative Finance"
             />
             <FormControlLabel
-              value={0.78}
+              value={"Stats"}
               control={<Radio />}
               label="Statistics"
             />
             <FormControlLabel
-              value={0.80}
+              value={"Pharm Sci"}
               control={<Radio />}
               label="Pharmaceutical Science"
             />
             <FormControlLabel
-              value={0.82}
+              value={"PPE"}
               control={<Radio />}
               label="Philosophy, Politics, and Economics"
             />
             <FormControlLabel
-              value={0.84}
+              value={"Busi Admin"}
               control={<Radio />}
               label="Business Administration"
             />
             <FormControlLabel
-              value={0.86}
+              value={"Busi Admin (Acc)"}
               control={<Radio />}
               label="Business Administration (Accountancy)"
             />
             <FormControlLabel
-              value={0.88}
+              value={"Real Estate"}
               control={<Radio />}
               label="Real Estate"
             />
             <FormControlLabel
-              value={0.90}
+              value={"Busi Analy"}
               control={<Radio />}
               label="Business Analytics"
             />
             <FormControlLabel
-              value={0.92}
+              value={"CS"}
               control={<Radio />}
               label="Computer Science"
             />
             <FormControlLabel
-              value={0.94}
+              value={"Info Sec"}
               control={<Radio />}
               label="Information Security"
             />
             <FormControlLabel
-              value={0.96}
+              value={"Info Sys"}
               control={<Radio />}
               label="Information Systems"
             />
             <FormControlLabel
-              value={1}
+              value={"Law"}
               control={<Radio />}
               label="Law"
             />
@@ -753,9 +762,9 @@ export default function Questions({
           <br />
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            name="Collaboration"
-            value={collaboration}
-            onChange={(e) => setCollaboration(parseFloat(e.target.value))}
+            name="startCollab"
+            value={startCollab}
+            onChange={(e) => setStartCollab(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
@@ -1334,9 +1343,9 @@ export default function Questions({
           <br />
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            name="conflictManagement"
-            value={conflictManagement}
-            onChange={(e) => setConflictManagement(parseFloat(e.target.value))}
+            name="handleMistake"
+            value={handleMistake}
+            onChange={(e) => setHandleMistake(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
@@ -1375,9 +1384,9 @@ export default function Questions({
           <br />
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            name="conflictManagement"
-            value={conflictManagement}
-            onChange={(e) => setConflictManagement(parseFloat(e.target.value))}
+            name="handleConflict"
+            value={handleConflict}
+            onChange={(e) => setHandleConflict(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
@@ -1416,9 +1425,9 @@ export default function Questions({
           <br />
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            name="stressManagement"
-            value={stressManagement}
-            onChange={(e) => setStressManagement(parseFloat(e.target.value))}
+            name="handleStress"
+            value={handleStress}
+            onChange={(e) => setHandleStress(parseFloat(e.target.value))}
           >
             <FormControlLabel
               value={0}
