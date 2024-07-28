@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Container, Grid, Box, Typography, Button, Paper } from '@mui/material';
+import { Container, Grid, Box, Typography, Button, Paper, MenuItem, Select, TextField } from '@mui/material';
 
 const Coordinator = () => {
+  const totalParticipants = 100;
   const [groups, setGroups] = useState([
     { name: 'Group 1', members: ['Person A', 'Person B', 'Person C', 'Person D', 'Person E'] },
     { name: 'Group 2', members: [] },
@@ -9,43 +10,106 @@ const Coordinator = () => {
     { name: 'Group 4', members: [] },
     { name: 'Group 5', members: [] },
   ]);
+  const [numGroups, setNumGroups] = useState(20);
+  const [selectedParticipant, setSelectedParticipant] = useState('');
 
   const handleStartMatching = () => {
-    // Logic for starting matching
+    // Redistribute participants into groups
+    const newGroups = Array.from({ length: numGroups }, (_, i) => ({
+      name: `Group ${i + 1}`,
+      members: [],
+    }));
+
+    for (let i = 0; i < totalParticipants; i++) {
+      newGroups[i % numGroups].members.push(`Participant ${i + 1}`);
+    }
+
+    setGroups(newGroups);
     console.log('Start Matching button clicked');
   };
 
+  const handleParticipantChange = (event) => {
+    setSelectedParticipant(event.target.value);
+  };
+
+  const handleNumGroupsChange = (event) => {
+    setNumGroups(event.target.value);
+  };
+
   return (
-    <Container>
+    <Container sx={{ backgroundColor: '#FFFaf0', padding: 4 }}>
       <Grid container spacing={2} alignItems="center" sx={{ marginBottom: 4 }}>
-        <Grid item xs={12} md={3}>
-          <Typography variant="h6">No. of Participants Registered</Typography>
-          <Typography variant="body1">100/100</Typography>
+        <Grid item xs={12}>
+          <Box
+            sx={{
+              backgroundColor: '#FCBD94',
+              color: '#30203C',
+              padding: 2,
+              textAlign: 'center',
+              borderRadius: 1,
+            }}
+          >
+            <Typography variant="h6">Room Code: 12345</Typography>
+          </Box>
         </Grid>
-        <Grid item xs={12} md={3}>
-          <Button variant="contained" color="primary" sx={{ width: '100%' }}>
-            No of Groups: 20
-          </Button>
+        <Grid item xs={12} md={6}>
+          <TextField
+            label="Number of Groups"
+            type="number"
+            value={numGroups}
+            onChange={handleNumGroupsChange}
+            fullWidth
+            sx={{ backgroundColor: '#FFFaf0', color: '#30203C' }}
+          />
         </Grid>
-        <Grid item xs={12} md={3}>
-          <Button variant="contained" color="secondary" sx={{ width: '100%' }} onClick={handleStartMatching}>
+        <Grid item xs={12} md={6} sx={{ textAlign: 'right' }}>
+          <Button
+            variant="contained"
+            sx={{
+              width: '100%',
+              backgroundColor: '#F26322',
+              color: '#FFFaf0',
+              '&:hover': { backgroundColor: '#FCBD94', color: '#30203C' },
+            }}
+            onClick={handleStartMatching}
+          >
             Start Matching
           </Button>
         </Grid>
-        <Grid item xs={12} md={3}>
-          <Button variant="contained" color="secondary" sx={{ width: '100%' }}>
-            Room Code: 12345
-          </Button>
+      </Grid>
+      <Grid container spacing={2} alignItems="center" sx={{ marginBottom: 4 }}>
+        <Grid item xs={12}>
+          <Typography variant="h6" sx={{ color: '#30203C', marginBottom: 2 }}>
+            No. of Participants Registered: {totalParticipants}
+          </Typography>
+          <Select
+            value={selectedParticipant}
+            onChange={handleParticipantChange}
+            displayEmpty
+            fullWidth
+            sx={{ backgroundColor: '#FFFaf0', color: '#30203C' }}
+          >
+            <MenuItem value="" disabled>
+              Select Participant
+            </MenuItem>
+            {Array.from({ length: totalParticipants }, (_, i) => (
+              <MenuItem key={i} value={`Participant ${i + 1}`}>
+                Participant {i + 1}
+              </MenuItem>
+            ))}
+          </Select>
         </Grid>
       </Grid>
       <Grid container spacing={2}>
         {groups.map((group, index) => (
           <Grid item xs={12} md={2} key={index}>
-            <Paper elevation={3} sx={{ padding: 2, backgroundColor: '#30203C', color: 'white' }}>
-              <Typography variant="h6" align="center" sx={{ textDecoration: 'underline' }}>
-                {group.name}
-              </Typography>
-              <Box sx={{ backgroundColor: 'white', color: 'black', padding: 1, marginTop: 2 }}>
+            <Paper elevation={3}>
+              <Box sx={{ backgroundColor: '#30203C', color: 'white', padding: 1 }}>
+                <Typography variant="h6" align="center" sx={{ textDecoration: 'underline' }}>
+                  {group.name}
+                </Typography>
+              </Box>
+              <Box sx={{ backgroundColor: '#FFFaf0', color: '#30203C', padding: 1 }}>
                 {group.members.length > 0 ? (
                   group.members.map((member, idx) => (
                     <Typography key={idx} variant="body1">
