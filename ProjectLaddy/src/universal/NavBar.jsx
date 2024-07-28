@@ -69,7 +69,7 @@ export default function NavBar() {
                   <li style={{ flexGrow: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <Button color="inherit" component={NavLink} to="/" style={{ color: '#000000', marginRight: '40px' }}>Home</Button>
-                      <Button color="inherit" href="#about-us" style={{ color: '#000000', marginRight: '40px' }}>About Us</Button>
+                      <Button color="inherit" component={NavLink} to="/about-us" style={{ color: '#000000', marginRight: '40px' }}>About Us</Button>
                       <Button color="inherit" component="a" href="https://forms.gle/PWsDFzBuRWWryAaA6" target="_blank" style={{ color: '#000000', marginRight: '40px' }}>Questionnaire</Button>
                       <Button color="inherit" component="a" href="mailto:projectladdy@gmail.com" style={{ color: '#000000', marginRight: '40px' }}>Contact Us</Button>
                     </div>
