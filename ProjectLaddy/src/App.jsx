@@ -5,6 +5,7 @@ import Coordinator from './dashboard/Coordinator';
 import Teams from './dashboard/Teams';
 import ProtectedRoute from './ProtectedRoute';
 import Unauthorised from './Unauthorised';
+import AboutUs from './landing/AboutUs';
 import './App.css';
 
 const user = {
@@ -18,6 +19,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Teams />} /> {/* Default route */}
         <Route path="/teams" element={<Teams />} />
+        <Route path="/about-us" element={<AboutUs />} /> {/* About Us route */}
         <Route path="/coordinator" element={<ProtectedRoute user={user} element={Coordinator} />} />
         <Route path="/unauthorised" element={<Unauthorised />} />
       </Routes>
