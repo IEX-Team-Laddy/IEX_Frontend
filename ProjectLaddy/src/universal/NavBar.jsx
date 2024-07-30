@@ -1,141 +1,111 @@
 import { Routes, Route, NavLink } from "react-router-dom";
-import { Button } from "@mui/material";
+import { AppBar, Toolbar, Button, IconButton, Drawer, List, ListItem, ListItemText, useMediaQuery, useTheme } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
+import { useState } from "react";
 import Landing from "../landing/Landing";
 import Auth from "../auth/Auth";
 import AdminMatch from "../universal/AdminMatch"; // Ensure this path is correct
-import { useState } from "react";
-import { supabase } from "../supabase";
 import logo from "../Assets/Asset1.png";
+import { supabase } from "../supabase";
 
 export default function NavBar() {
   const [dashboard, renderDashboard] = useState(false);
-  const [navBar, navBarOpen] = useState(true);
-  const [open, setOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = (e) => {
-    setOpen(true);
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
   };
 
-  function renderDashboardOnSignIn(session) {
+  const renderDashboardOnSignIn = (session) => {
     renderDashboard(session === null);
-  }
+  };
 
-  function hideDashboard() {
+  const hideDashboard = () => {
     renderDashboard(false);
-  }
+  };
 
-  function showDashboard() {
+  const showDashboard = () => {
     renderDashboard(true);
-  }
+  };
+
+  const menuItems = [
+    { text: "Home", to: "/" },
+    { text: "About Us", to: "/about-us" },
+    { text: "Questionnaire", to: "https://forms.gle/PWsDFzBuRWWryAaA6", external: true },
+    { text: "Contact Us", to: "mailto:projectladdy@gmail.com", external: true }
+  ];
+
+  const drawer = (
+    <div>
+      <List>
+        {menuItems.map((item, index) => (
+          <ListItem button key={index} component={item.external ? 'a' : NavLink} href={item.external ? item.to : undefined} to={item.external ? undefined : item.to} target={item.external ? '_blank' : undefined}>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+        <ListItem button component={NavLink} to="/auth">
+          <Button variant="contained" color="primary" fullWidth>
+            Get Started
+          </Button>
+        </ListItem>
+        <ListItem button component={NavLink} to="/auth">
+          <Button variant="contained" color="secondary" fullWidth>
+            Log In
+          </Button>
+        </ListItem>
+      </List>
+    </div>
+  );
 
   return (
     <>
-      {dashboard ? (
-        <></>
-      ) : (
-        <>
-          <div>
-            <nav
-              style={{ backgroundColor: "#fffaf0" }}
-              className="navbar navbar-expand-lg navbar-dark"
-            >
+      {dashboard ? null : (
+        <AppBar position="static" style={{ backgroundColor: "#fffaf0", boxShadow: 'none' }}>
+          <Toolbar style={{ padding: 0, justifyContent: 'space-between' }}>
+            <img src={logo} alt="Logo" style={{ width: 220, height: 40 }} />
+            {isMobile ? (
+              <>
+                <IconButton edge="end" color="inherit" aria-label="menu" onClick={handleDrawerToggle}>
+                  <MenuIcon />
+                </IconButton>
+                <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerToggle}>
+                  {drawer}
+                </Drawer>
+              </>
+            ) : (
+              <div style={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  {menuItems.map((item, index) => (
+                    <Button key={index} color="inherit" component={item.external ? 'a' : NavLink} href={item.external ? item.to : undefined} to={item.external ? undefined : item.to} target={item.external ? '_blank' : undefined} style={{ color: '#000000', marginRight: '40px' }}>
+                      {item.text}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            )}
+            {!isMobile && (
               <div>
-                <img src={logo} width={220} height={40} />
-              </div>
-              <div id="navbar-brand" className="navbar-brand-aria"></div>
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-                style={{
-                  backgroundColor: "#170F49",
-                }}
-              >
-                <span className="navbar-toggler-icon"></span>
-              </button>
-
-              <div
-                className="collapse navbar-collapse"
-                id="navbarSupportedContent"
-              >
-                <ul className="navbar-nav ml-auto" style={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'space-between' }}>
-                  <li style={{ flexGrow: 1 }}>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                      <Button color="inherit" component={NavLink} to="/" style={{ color: '#000000', marginRight: '40px' }}>Home</Button>
-                      <Button color="inherit" component={NavLink} to="/about-us" style={{ color: '#000000', marginRight: '40px' }}>About Us</Button>
-                      <Button color="inherit" component="a" href="https://forms.gle/PWsDFzBuRWWryAaA6" target="_blank" style={{ color: '#000000', marginRight: '40px' }}>Questionnaire</Button>
-                      <Button color="inherit" component="a" href="mailto:projectladdy@gmail.com" style={{ color: '#000000', marginRight: '40px' }}>Contact Us</Button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <li style={{ listStyleType: "none" }}>
-                <Button
-                  variant="contained"
-                  style={{
-                    backgroundColor: "#30203C",
-                    borderRadius: 20,
-                    padding: 9,
-                    fontWeight: "normal",
-                    marginRight: "30px",
-                  }}
-                >
-                  <NavLink
-                    id="profile-nav-link"
-                    to="/auth"
-                    style={{
-                      color: "White",
-                    }}
-                  >
-                    Get started
+                <Button variant="contained" style={{ backgroundColor: "#30203C", borderRadius: 20, padding: 9, fontWeight: "normal", marginRight: "30px" }}>
+                  <NavLink to="/auth" style={{ color: "white" }}>
+                    Get Started
                   </NavLink>
                 </Button>
-              </li>
-              <li style={{ listStyleType: "none" }}>
-                <Button
-                  variant="contained"
-                  style={{
-                    backgroundColor: "#FFFAF0",
-                    borderRadius: 20,
-                    padding: 9,
-                    marginRight: "40px",
-                  }}
-                >
-                  <NavLink
-                    id="profile-nav-link"
-                    to="/auth"
-                    style={{
-                      color: "Black",
-                    }}
-                  >
+                <Button variant="contained" style={{ backgroundColor: "#FFFAF0", borderRadius: 20, padding: 9, marginRight: "40px" }}>
+                  <NavLink to="/auth" style={{ color: "black" }}>
                     Log In
                   </NavLink>
                 </Button>
-              </li>
-            </nav>
-          </div>
-        </>
+              </div>
+            )}
+          </Toolbar>
+        </AppBar>
       )}
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route exact path="/languages" element={<Landing />} />
-        <Route
-          exact
-          path="/auth"
-          element={
-            <Auth
-              showDashboard={showDashboard}
-              hideDashboard={hideDashboard}
-            />
-          }
-        />
+        <Route exact path="/auth" element={<Auth showDashboard={showDashboard} hideDashboard={hideDashboard} />} />
         <Route exact path="/adminmatch" element={<AdminMatch />} />
       </Routes>
     </>
