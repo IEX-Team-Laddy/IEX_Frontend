@@ -37,7 +37,7 @@ const Coordinator = () => {
   };
 
   return (
-    <Container sx={{ backgroundColor: '#FFFaf0', padding: 4 }}>
+    <Container sx={{ backgroundColor: '#FFFaf0', padding: 4, fontFamily: 'Inter' }}>
       <Grid container spacing={2} alignItems="center" sx={{ marginBottom: 4 }}>
         <Grid item xs={12}>
           <Box
@@ -47,9 +47,10 @@ const Coordinator = () => {
               padding: 2,
               textAlign: 'center',
               borderRadius: 1,
+              fontFamily: 'Inter',
             }}
           >
-            <Typography variant="h6">Room Code: 12345</Typography>
+            <Typography variant="h6" sx={{ fontFamily: 'Inter' }}>Room Code: 12345</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -59,7 +60,7 @@ const Coordinator = () => {
             value={numGroups}
             onChange={handleNumGroupsChange}
             fullWidth
-            sx={{ backgroundColor: '#FFFaf0', color: '#30203C' }}
+            sx={{ backgroundColor: '#FFFaf0', color: '#30203C', fontFamily: 'Inter' }}
           />
         </Grid>
         <Grid item xs={12} md={6} sx={{ textAlign: 'right' }}>
@@ -70,6 +71,7 @@ const Coordinator = () => {
               backgroundColor: '#F26322',
               color: '#FFFaf0',
               '&:hover': { backgroundColor: '#FCBD94', color: '#30203C' },
+              fontFamily: 'Inter',
             }}
             onClick={handleStartMatching}
           >
@@ -79,7 +81,7 @@ const Coordinator = () => {
       </Grid>
       <Grid container spacing={2} alignItems="center" sx={{ marginBottom: 4 }}>
         <Grid item xs={12}>
-          <Typography variant="h6" sx={{ color: '#30203C', marginBottom: 2 }}>
+          <Typography variant="h6" sx={{ color: '#30203C', marginBottom: 2, fontFamily: 'Inter' }}>
             No. of Participants Registered: {totalParticipants}
           </Typography>
           <Select
@@ -87,13 +89,13 @@ const Coordinator = () => {
             onChange={handleParticipantChange}
             displayEmpty
             fullWidth
-            sx={{ backgroundColor: '#FFFaf0', color: '#30203C' }}
+            sx={{ backgroundColor: '#FFFaf0', color: '#30203C', fontFamily: 'Inter' }}
           >
             <MenuItem value="" disabled>
               Select Participant
             </MenuItem>
             {Array.from({ length: totalParticipants }, (_, i) => (
-              <MenuItem key={i} value={`Participant ${i + 1}`}>
+              <MenuItem key={i} value={`Participant ${i + 1}`} sx={{ fontFamily: 'Inter' }}>
                 Participant {i + 1}
               </MenuItem>
             ))}
@@ -104,20 +106,20 @@ const Coordinator = () => {
         {groups.map((group, index) => (
           <Grid item xs={12} md={2} key={index}>
             <Paper elevation={3}>
-              <Box sx={{ backgroundColor: '#30203C', color: 'white', padding: 1 }}>
-                <Typography variant="h6" align="center" sx={{ textDecoration: 'underline' }}>
+              <Box sx={{ backgroundColor: '#30203C', color: 'white', padding: 1, fontFamily: 'Inter' }}>
+                <Typography variant="h6" align="center" sx={{ textDecoration: 'underline', fontFamily: 'Inter' }}>
                   {group.name}
                 </Typography>
               </Box>
-              <Box sx={{ backgroundColor: '#FFFaf0', color: '#30203C', padding: 1 }}>
+              <Box sx={{ backgroundColor: '#FFFaf0', color: '#30203C', padding: 1, fontFamily: 'Inter' }}>
                 {group.members.length > 0 ? (
                   group.members.map((member, idx) => (
-                    <Typography key={idx} variant="body1">
+                    <Typography key={idx} variant="body1" sx={{ fontFamily: 'Inter' }}>
                       {member}
                     </Typography>
                   ))
                 ) : (
-                  <Typography variant="body1">No members</Typography>
+                  <Typography variant="body1" sx={{ fontFamily: 'Inter' }}>No members</Typography>
                 )}
               </Box>
             </Paper>

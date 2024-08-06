@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  max-width: 80rem; /* Converted 1280px to rem (1280/16 = 80rem) */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -11,7 +11,7 @@ body {
 }
 
 .nav--container {
-  font-family: "Montserrat";
+  font-family: "Inter";
 }
 
 .navbar-brand-aria {
@@ -21,7 +21,7 @@ body {
 
 .nav-item {
   /* margin-right: 5vw; */
-  font-family: "DM Sans";
+  font-family: "Inter";
   cursor: pointer;
 }
 
@@ -38,7 +38,7 @@ body {
 }
 
 li {
-  margin: 5px;
+  margin: 0.3125rem; /* Converted 5px to rem (5/16 = 0.3125rem) */
 }
 
 .error {
@@ -62,7 +62,7 @@ li {
 }
 
 .rotating-text-container {
-  height: 150px;
+  height: 9.375rem; /* Converted 150px to rem (150/16 = 9.375rem) */
   overflow: hidden;
   position: relative;
   display: flex;
@@ -89,4 +89,28 @@ li {
 
 .rotating-text.active {
   color: orange;
+}
+
+/* Mobile styles */
+@media only screen and (max-width: 600px) {
+  #root {
+    padding: 1rem; /* Adjust padding for smaller screens */
+  }
+
+  .navbar-brand-aria {
+    font-size: 2.5rem; /* Slightly smaller font size for smaller screens */
+  }
+
+  .nav-link {
+    font-size: 1.5rem; /* Slightly smaller font size for smaller screens */
+  }
+
+  .rotating-text-container {
+    height: 7.5rem; /* Adjust height for smaller screens */
+  }
+
+  .static-text,
+  .rotating-text {
+    font-size: 1.5rem; /* Slightly smaller font size for smaller screens */
+  }
 }
