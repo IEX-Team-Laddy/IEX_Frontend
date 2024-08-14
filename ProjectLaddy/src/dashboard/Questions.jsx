@@ -1515,12 +1515,12 @@ export default function Questions({
               label="Outdoor adventure / exercise e.g., hiking or rock climbing"
             />
             <FormControlLabel
-              value={0.25}
+              value={0.33}
               control={<Radio />}
               label="Social gatherings e.g., dinner or a game night"
             />
             <FormControlLabel
-              value={0.5}
+              value={0.66}
               control={<Radio />}
               label="Cultural/Event exploration e.g., food festivals, museums or exploring local cultural events"
             />
