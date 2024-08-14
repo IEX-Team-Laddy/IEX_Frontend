@@ -18,7 +18,7 @@ export default function Questions({
 }) {
   const [consentAnswer, setConsentAnswer] = useState("yes");
   const [gender, setGender] = useState(null);
-  const [faculty, setFaculty] = useState(null);
+  const [faculty, setFaculty] = useState("NA");
 
   // Not currently used in backend (tochange eventually)
   const [university, setUniversity] = useState(null);
@@ -217,7 +217,7 @@ export default function Questions({
       <br />
       <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
       <br />
-      <div style={{ textAlign: "left" }}>
+      {/* <div style={{ textAlign: "left" }}>
         <FormControl>
           <div>University</div>
           <br />
@@ -755,7 +755,7 @@ export default function Questions({
       </div>
       <br />
       <Divider sx={{ borderBottomWidth: 2, borderBottomColor: "black" }} />
-      <br />
+      <br /> */}
       <div style={{ textAlign: "left" }}>
         <FormControl>
           <div>As the meeting starts, how would you suggest initiating the brainstorming session?</div>
