@@ -129,12 +129,13 @@ export default function Teams({ userData }) {
                 to="/coordinator"
                 style={{ color: "inherit", textDecoration: "none" }}
               >
-                <h4 style={{ fontWeight: "bold", textDecoration: 'underline', marginBottom: '10px' }}>IEX</h4>
+                <h4 style={{ fontWeight: "bold", textDecoration: 'underline', marginBottom: '10px' }}>NST2046</h4>
               </NavLink>
-              <h6 style={{ margin: 0 }}>Dev Desai</h6>
+              <h6 style={{ margin: 0 }}></h6>
             </Container>
             <br />
-            <p>NUS College Impact Experience Course</p>
+            <p>Deus Ex Machina: Generative AI and Society</p>
+            <p>Click below to view the questionnaire</p>
             {!questionnaireOpen && !matchingStarted ? (
               <div
                 onClick={(e) => {
